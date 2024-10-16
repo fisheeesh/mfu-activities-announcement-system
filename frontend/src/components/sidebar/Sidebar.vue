@@ -25,7 +25,7 @@
 
         <div style="flex-grow: 1;"></div>
 
-        <div class="logout-button" @click="handleLogout">
+        <div class="logout-button">
             <i class="icon fas fa-sign-out-alt"></i>
             <span v-if="!collapsed">Logout</span>
         </div>
