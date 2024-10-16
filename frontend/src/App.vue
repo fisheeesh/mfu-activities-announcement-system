@@ -1,7 +1,7 @@
 <template>
   <div>
     <Sidebar></Sidebar>
-    <div :style="{ 'margin-left': `${parseInt(sidebarWidth) + 30}px`, 'margin-right': '20px' }">
+    <div style="transition: 0.3s linear; margin-right: 20px; overflow: hidden;" :style="{ 'margin-left': `${parseInt(sidebarWidth) + 30}px`}">
       <router-view />
     </div>
   </div>
