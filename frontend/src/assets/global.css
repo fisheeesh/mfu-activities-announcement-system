@@ -1,0 +1,11 @@
+:root {
+    --sidebar-bg-color: #ffffff;
+    --sidebar-item-hover: #ffc5c2;
+    --sidebar-item-active: #ffc5c2;
+    --sidebar-item-color : #760105;
+}
+/* :root {
+    --sidebar-bg-color: #2f855a;
+    --sidebar-item-hover: #38a169;
+    --sidebar-item-active: #276749;
+} */
