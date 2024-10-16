@@ -18,15 +18,24 @@
         </h1>
 
         <SidebarLink to="/dashboard" icon="fas fa-columns">Dashboard</SidebarLink>
-        <SidebarLink to="/analytics" icon="fas fa-calendar-alt">Upcoming Activities</SidebarLink>
-        <SidebarLink to="/friends" icon="fas fa-spinner">Ongoing Activities</SidebarLink>
-        <SidebarLink to="/image" icon="fas fa-history">Activities History</SidebarLink>
+        <SidebarLink to="/upcoming" icon="fas fa-calendar-alt">Upcoming Activities</SidebarLink>
+        <SidebarLink to="/ongoing" icon="fas fa-spinner">Ongoing Activities</SidebarLink>
+        <SidebarLink to="/history" icon="fas fa-history">Activities History</SidebarLink>
         <SidebarLink to="/create" icon="fas fa-add">Create Activity</SidebarLink>
+
+        <div style="flex-grow: 1;"></div>
+
+        <div class="logout-button" @click="handleLogout">
+            <i class="icon fas fa-sign-out-alt"></i>
+            <span v-if="!collapsed">Logout</span>
+        </div>
 
         <span :class="{ 'rotate-180': collapsed }" class="collapse-icon" :style="{ left: collapsed ? '55px' : '270px' }"
             @click="toggleSidebar">
             <i class="fas fa-angle-double-left"></i>
         </span>
+
+
     </div>
 </template>
 
@@ -42,6 +51,27 @@ export default {
 </script>
 
 <style scoped>
+.logout-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 13px 10px;
+    margin: 10px 0;
+    border-radius: 2rem;
+    color: white;
+    background-color: var(--button-color);
+    transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+    background-color: crimson;
+}
+
+.logout-button span {
+    margin-left: 15px;
+}
+
 .fade-enter-active,
 .fade-leave-active {
     transition: opacity 0.1s;
@@ -62,69 +92,62 @@ export default {
     left: 0;
     bottom: 0;
     padding: 0.5rem;
-    transition: 0.3s ease;
+    transition: 0.3s linear;
     display: flex;
     flex-direction: column;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .collapse-icon {
-    position: fixed;
+    position: absolute;
     top: 16%;
-    left: 183px;
+    right: -15px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.3rem;
-    color: #BA1E23;
-    transition: 0.2s linear;
+    width: 25px;
+    height: 25px;
+    color: var(--button-color);
+    transition: 0.3s linear;
     background: var(--sidebar-bg-color);
     border-radius: 50%;
     cursor: pointer;
     border: 1px solid rgb(224, 224, 224);
 }
 
+.logout {
+    background: var(--button-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    transition: 0.3s linear;
+    margin-top: auto;
+}
+
+.logout:hover {
+    background: rgb(173, 0, 0);
+}
 
 .rotate-180 {
     transform: rotate(180deg);
-    transition: 0.2s linear;
-}
-
-.logout {
-    position: absolute;
-    bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-}
-
-.logout button {
-    border: none;
-    border-radius: 5px;
-    outline: none;
-    margin-left: 10px;
-    padding: 10px 60px;
-    background: crimson;
-    color: white;
-    cursor: pointer;
-    transition: 2s ease;
+    transition: 0.3s linear;
 }
 
 .flexing {
     display: flex;
     justify-content: start;
     align-items: center;
-    margin-left: 10px;
-    white-space: nowrap; 
-    overflow: hidden; 
+    margin-left: 3px;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .flexing .act {
     margin-left: 10px;
     font-size: 10px;
     color: black;
-    font-weight: 100;
+    font-weight: 400;
     letter-spacing: 1px;
 }
 

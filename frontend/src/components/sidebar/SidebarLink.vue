@@ -28,7 +28,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .fade-enter-active,
 .fade-leave-active {
     transition: opacity 0.1s;
@@ -47,7 +47,7 @@ export default {
     font-weight: 400;
     user-select: none;
     margin: 0.3rem 0;
-    padding: 0.7rem 1rem 0.7rem 1.27rem;
+    padding: 0.7rem 1rem 0.7rem 1.14rem;
     border-radius: 2rem;
     height: 1.5rem;
     color: grey;
@@ -67,7 +67,8 @@ export default {
 
 .link .icon {
     flex-shrink: 0;
-    widows: 25px;
+    font-size: 1.2rem;
+    width: 1.2rem;
     margin-right: 15px;
 }
 </style>
