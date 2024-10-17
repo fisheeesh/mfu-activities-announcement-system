@@ -1,6 +1,6 @@
 <template>
-    <router-link :to="to" class="link py-4" :class="{ active: isActive }">
-        <i class="icon" :class="icon"></i>
+    <router-link :to="to" class="link py-4 d-flex align-items-center position-relative user-select-none text-decoration-none overflow-hidden" :class="{ active: isActive }">
+        <i class="icon flex-shrink-0 me-3" :class="icon"></i>
         <transition name="fade">
             <span v-if="!collapsed">
                 <slot />
@@ -40,20 +40,14 @@ export default {
 }
 
 .link {
-    display: flex;
-    align-items: center;
     cursor: pointer;
-    position: relative;
     font-weight: 400;
-    user-select: none;
     margin: 0.3rem 0;
     padding: 0.7rem 1rem 0.7rem 1.14rem;
     border-radius: 2rem;
     height: 1.5rem;
     color: grey;
-    text-decoration: none;
     white-space: nowrap;
-    overflow: hidden;
 }
 
 .link:hover {
@@ -66,9 +60,7 @@ export default {
 }
 
 .link .icon {
-    flex-shrink: 0;
     font-size: 1.2rem;
     width: 1.2rem;
-    margin-right: 15px;
 }
 </style>

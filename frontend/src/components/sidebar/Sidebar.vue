@@ -1,15 +1,16 @@
 <template>
-    <div class="sidebar" :style="{ width: sidebarWidth }">
-        <h1  class="mt-5 mb-4">
+    <div class="sidebar d-flex flex-column position-fixed top-0 left-0 bottom-0 float-start"
+        :style="{ width: sidebarWidth }">
+        <h1 class="mt-5 mb-4">
             <div v-if="collapsed">
-                <img style="margin-left: 3px;" src="@/assets/logo.png" alt="">
+                <img style="margin-left: 3px;" src="@/assets/logo.png" alt="mfu.logo">
             </div>
-            <div v-else class="flexing">
+            <div v-else class="flexing d-flex justify-content-start align-items-center overflow-hidden">
                 <div>
-                    <img src="@/assets/logo.png" alt="">
+                    <img src="@/assets/logo.png" alt="mfu.logo">
                 </div>
 
-                <div style="display: flex; flex-direction: column;">
+                <div class="d-flex flex-column">
                     <span class="mfu">MFU</span>
                     <span class="act">Activities Annoucement System</span>
                 </div>
@@ -23,15 +24,16 @@
         <SidebarLink to="/history" icon="fas fa-history">Activities History</SidebarLink>
         <SidebarLink to="/create" icon="fas fa-add">Create Activity</SidebarLink>
 
-        <div style="flex-grow: 1;"></div>
+        <div class="flex-grow-1"></div>
 
-        <div class="logout-button">
+        <div class="logout-button d-flex align-items-center justify-content-center text-white">
             <i class="icon fas fa-sign-out-alt"></i>
-            <span v-if="!collapsed">Logout</span>
+            <span class="ms-2" v-if="!collapsed">Logout</span>
         </div>
 
-        <span :class="{ 'rotate-180': collapsed }" class="collapse-icon" :style="{ left: collapsed ? '55px' : '270px' }"
-            @click="toggleSidebar">
+        <span :class="{ 'rotate-180': collapsed }"
+            class="collapse-icon position-absolute d-flex align-items-center justify-content-center"
+            :style="{ left: collapsed ? '55px' : '270px' }" @click="toggleSidebar">
             <i class="fas fa-angle-double-left"></i>
         </span>
 
@@ -51,27 +53,6 @@ export default {
 </script>
 
 <style scoped>
-.logout-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 2rem;
-    color: white;
-    background-color: var(--button-color);
-    transition: background-color 0.3s;
-}
-
-.logout-button:hover {
-    background-color: crimson;
-}
-
-.logout-button span {
-    margin-left: 15px;
-}
-
 .fade-enter-active,
 .fade-leave-active {
     transition: opacity 0.1s;
@@ -83,28 +64,15 @@ export default {
 }
 
 .sidebar {
-    color: white;
     background-color: var(--sidebar-bg-color);
-    float: left;
-    position: fixed;
     z-index: 1;
-    top: 0;
-    left: 0;
-    bottom: 0;
     padding: 0.5rem;
     transition: 0.3s linear;
-    display: flex;
-    flex-direction: column;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .collapse-icon {
-    position: absolute;
     top: 17%;
-    right: 100px !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 25px;
     height: 25px;
     color: var(--button-color);
@@ -121,12 +89,8 @@ export default {
 }
 
 .flexing {
-    display: flex;
-    justify-content: start;
-    align-items: center;
     margin-left: 3px;
     white-space: nowrap;
-    overflow: hidden;
 }
 
 .flexing .act {
@@ -143,5 +107,18 @@ export default {
     font-weight: 800;
     color: black;
     letter-spacing: 1px;
+}
+
+.logout-button {
+    cursor: pointer;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 2rem;
+    background-color: var(--button-color);
+    transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+    background-color: red;
 }
 </style>

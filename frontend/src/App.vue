@@ -1,7 +1,7 @@
 <template>
   <div>
     <Sidebar></Sidebar>
-    <div class="main" :style="{ 'margin-left': `${parseInt(sidebarWidth) + 30}px` }">
+    <div class="main me-2 overflow-hidden" :style="{ 'margin-left': `${parseInt(sidebarWidth) + 30}px` }">
       <router-view />
     </div>
   </div>
@@ -26,7 +26,5 @@ export default {
 
 .main {
   transition: 0.3s linear;
-  margin-right: 10px;
-  overflow: hidden;
 }
 </style>
