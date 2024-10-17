@@ -43,7 +43,7 @@ export default {
     cursor: pointer;
     font-weight: 400;
     margin: 0.3rem 0;
-    padding: 0.7rem 1rem 0.7rem 1.14rem;
+    padding: 0.7rem 1rem 0.7rem 1.1rem;
     border-radius: 2rem;
     height: 1.5rem;
     color: grey;

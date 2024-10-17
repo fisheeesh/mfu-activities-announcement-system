@@ -116,6 +116,8 @@ export default {
     border-radius: 2rem;
     background-color: var(--button-color);
     transition: background-color 0.3s;
+    width: 100%;
+    height: 40px;
 }
 
 .logout-button:hover {
