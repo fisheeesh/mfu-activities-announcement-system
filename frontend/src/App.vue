@@ -1,7 +1,7 @@
 <template>
   <div>
     <Sidebar></Sidebar>
-    <div style="transition: 0.3s linear; margin-right: 20px; overflow: hidden;" :style="{ 'margin-left': `${parseInt(sidebarWidth) + 30}px`}">
+    <div class="main" :style="{ 'margin-left': `${parseInt(sidebarWidth) + 30}px` }">
       <router-view />
     </div>
   </div>
@@ -22,5 +22,11 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+}
+
+.main {
+  transition: 0.3s linear;
+  margin-right: 10px;
+  overflow: hidden;
 }
 </style>

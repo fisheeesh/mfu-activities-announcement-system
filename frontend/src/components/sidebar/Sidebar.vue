@@ -1,6 +1,6 @@
 <template>
     <div class="sidebar" :style="{ width: sidebarWidth }">
-        <h1 style="margin-top: 50px">
+        <h1  class="mt-5 mb-4">
             <div v-if="collapsed">
                 <img style="margin-left: 3px;" src="@/assets/logo.png" alt="">
             </div>
@@ -56,7 +56,7 @@ export default {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    padding: 13px 10px;
+    padding: 10px;
     margin: 10px 0;
     border-radius: 2rem;
     color: white;
@@ -100,8 +100,8 @@ export default {
 
 .collapse-icon {
     position: absolute;
-    top: 16%;
-    right: -15px;
+    top: 17%;
+    right: 100px !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -113,20 +113,6 @@ export default {
     border-radius: 50%;
     cursor: pointer;
     border: 1px solid rgb(224, 224, 224);
-}
-
-.logout {
-    background: var(--button-color);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    transition: 0.3s linear;
-    margin-top: auto;
-}
-
-.logout:hover {
-    background: rgb(173, 0, 0);
 }
 
 .rotate-180 {
