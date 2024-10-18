@@ -18,11 +18,11 @@
             </div>
         </h1>
 
-        <SidebarLink to="/dashboard" icon="fas fa-columns">Dashboard</SidebarLink>
-        <SidebarLink to="/upcoming" icon="fas fa-calendar-alt">Upcoming Activities</SidebarLink>
-        <SidebarLink to="/ongoing" icon="fas fa-spinner">Ongoing Activities</SidebarLink>
-        <SidebarLink to="/history" icon="fas fa-history">Activities History</SidebarLink>
-        <SidebarLink to="/create" icon="fas fa-add">Create Activity</SidebarLink>
+        <SidebarLink to="/admin/dashboard" icon="fas fa-columns">Dashboard</SidebarLink>
+        <SidebarLink to="/admin/upcoming" icon="fas fa-calendar-alt">Upcoming Activities</SidebarLink>
+        <SidebarLink to="/admin/ongoing" icon="fas fa-spinner">Ongoing Activities</SidebarLink>
+        <SidebarLink to="/admin/history" icon="fas fa-history">Activities History</SidebarLink>
+        <SidebarLink to="/admin/create" icon="fas fa-add">Create Activity</SidebarLink>
 
         <div class="flex-grow-1"></div>
 

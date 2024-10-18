@@ -1,19 +1,12 @@
 <template>
   <div>
-    <Sidebar></Sidebar>
-    <div class="main me-2 overflow-hidden" :style="{ 'margin-left': `${parseInt(sidebarWidth) + 30}px` }">
-      <router-view />
-    </div>
+    <router-view />
   </div>
 </template>
 <script>
 import Sidebar from './components/sidebar/Sidebar'
-import { sidebarWidth } from './components/sidebar/sidebarState';
 export default {
   components: { Sidebar },
-  setup() {
-    return { sidebarWidth }
-  }
 }
 </script>
 <style>
@@ -22,9 +15,5 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-}
-
-.main {
-  transition: 0.3s linear;
 }
 </style>
