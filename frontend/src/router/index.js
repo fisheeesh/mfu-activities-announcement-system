@@ -6,11 +6,17 @@ import Create from '@/views/dashboard/Create.vue'
 import Ongoing from '@/views/dashboard/Ongoing.vue'
 import DashboardLayout from '@/views/dashboard/DashboardLayout.vue'
 import AdminLogin from '@/views/auth/AdminLogin.vue'
+import NotFound from '@/views/auth/NotFound.vue'
 
 const routes = [
   {
     path: '/',
     redirect: '/admin/login'
+  },
+  {
+    path: '/admin/login',
+    name: 'admin-login',
+    component: AdminLogin
   },
   {
     path: '/admin',
@@ -48,9 +54,9 @@ const routes = [
     ]
   },
   {
-    path: '/admin/login',
-    name: 'admin-login',
-    component: AdminLogin
+    path : '/:catchAll(.*)',
+    name : 'not-found',
+    component : NotFound
   }
 ];
 
