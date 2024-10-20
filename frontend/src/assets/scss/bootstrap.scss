@@ -1,4 +1,25 @@
-$primary : #BA1E23;
+// Colors
+$primary: #BA1E23;
+$secondary: #ffefef;
+$dark : #2b3041;
+$light : #f3f6f9;
+
+// Spacers
+$spacer: 1rem !default;
+$spacers: (
+  0: 0,
+  1: $spacer * .25,
+  2: $spacer * .5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+  6: $spacer * 6,
+  7: $spacer * 8,
+  8: $spacer * 12,
+) !default;
+
+// Box-shadow
+$box-shadow-sm: 0 0 10px rgba(0, 0, 0, 0.2) !default;
 
 
 @import '../../../node_modules/bootstrap/scss/bootstrap.scss';

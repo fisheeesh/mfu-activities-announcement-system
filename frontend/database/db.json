@@ -2,18 +2,33 @@
     "activities" : [
         {
             "id": 1,
-            "title": "Activity 1",
-            "description": "Activity 1 description"
+            "title": "International Student Orientiation",
+            "description": "Activity 1 description",
+            "date" : "October 10",
+            "duration" : "11:00 - 16:00",
+            "location" : "E4 Building",
+            "isCompleted": false,
+            "status" : "upcoming"
         },
         {
             "id": 2,
-            "title": "Activity 2",
-            "description": "Activity 2 description"
+            "title": "International Student Orientiation",
+            "description": "Activity 1 description",
+            "date" : "October 10",
+            "duration" : "11:00 - 16:00",
+            "location" : "E4 Building",
+            "isCompleted": false,
+            "status" : "ongoing"
         },
         {
             "id": 3,
-            "title": "Activity 3",
-            "description": "Activity 3 description"
+            "title": "International Student Orientiation",
+            "description": "Activity 1 description",
+            "date" : "October 10",
+            "duration" : "11:00 - 16:00",
+            "location" : "E4 Building",
+            "isCompleted": false,
+            "status" : "ongoing"
         }
     ]
 }

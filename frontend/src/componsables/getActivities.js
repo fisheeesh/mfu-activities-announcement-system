@@ -6,6 +6,7 @@ let getActivities = () => {
 
     let load = async () => {
         try {
+            await new Promise((resolve, _) => setTimeout(resolve, 2000))
             let res = await fetch('http://localhost:3000/activities')
             if (!res.ok) throw new Error('Not Found URL!')
             let data = await res.json()

@@ -11,7 +11,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import './assets/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 //darkmode
-import './assets/js/darkmodetoggle.js'
+// import './assets/js/darkmodetoggle.js'
 
 //global css
 import './assets/global.css'
