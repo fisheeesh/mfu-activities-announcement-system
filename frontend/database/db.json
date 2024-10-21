@@ -29,6 +29,126 @@
             "location" : "E4 Building",
             "isCompleted": false,
             "status" : "ongoing"
+        },
+        {
+            "id": 4,
+            "title": "International Student Orientiation",
+            "description": "Activity 1 description",
+            "date" : "October 10",
+            "duration" : "11:00 - 16:00",
+            "location" : "E4 Building",
+            "isCompleted": false,
+            "status" : "completed"
+        },
+        {
+            "id": 5,
+            "title": "International Student Orientiation",
+            "description": "Activity 1 description",
+            "date" : "October 10",
+            "duration" : "11:00 - 16:00",
+            "location" : "E4 Building",
+            "isCompleted": false,
+            "status" : "completed"
+        },
+        {
+            "id": 6,
+            "title": "International Student Orientiation",
+            "description": "Activity 1 description",
+            "date" : "October 10",
+            "duration" : "11:00 - 16:00",
+            "location" : "E4 Building",
+            "isCompleted": false,
+            "status" : "completed"
+        },
+        {
+            "id": 7,
+            "title": "International Student Orientiation",
+            "description": "Activity 1 description",
+            "date" : "October 10",
+            "duration" : "11:00 - 16:00",
+            "location" : "E4 Building",
+            "isCompleted": false,
+            "status" : "ongoing"
+        },
+        {
+            "id": 8,
+            "title": "International Student Orientiation",
+            "description": "Activity 1 description",
+            "date" : "October 10",
+            "duration" : "11:00 - 16:00",
+            "location" : "E4 Building",
+            "isCompleted": false,
+            "status" : "ongoing"
+        },
+        {
+            "id": 9,
+            "title": "International Student Orientiation",
+            "description": "Activity 1 description",
+            "date" : "October 10",
+            "duration" : "11:00 - 16:00",
+            "location" : "E4 Building",
+            "isCompleted": false,
+            "status" : "ongoing"
+        },
+        {
+            "id": 10,
+            "title": "International Student Orientiation",
+            "description": "Activity 1 description",
+            "date" : "October 10",
+            "duration" : "11:00 - 16:00",
+            "location" : "E4 Building",
+            "isCompleted": false,
+            "status" : "ongoing"
+        },
+        {
+            "id": 11,
+            "title": "International Student Orientiation",
+            "description": "Activity 1 description",
+            "date" : "October 10",
+            "duration" : "11:00 - 16:00",
+            "location" : "E4 Building",
+            "isCompleted": false,
+            "status" : "upcoming"
+        },
+        {
+            "id": 12,
+            "title": "International Student Orientiation",
+            "description": "Activity 1 description",
+            "date" : "October 10",
+            "duration" : "11:00 - 16:00",
+            "location" : "E4 Building",
+            "isCompleted": false,
+            "status" : "upcoming"
+        },
+        {
+            "id": 13,
+            "title": "International Student Orientiation",
+            "description": "Activity 1 description",
+            "date" : "October 10",
+            "duration" : "11:00 - 16:00",
+            "location" : "E4 Building",
+            "isCompleted": false,
+            "status" : "upcoming"
+        },
+        {
+            "id": 14,
+            "title": "International Student Orientiation",
+            "description": "Activity 1 description",
+            "date" : "October 10",
+            "duration" : "11:00 - 16:00",
+            "location" : "E4 Building",
+            "isCompleted": false,
+            "status" : "upcoming"
+        },
+        {
+            "id": 15,
+            "title": "International Student Orientiation",
+            "description": "Activity 1 description",
+            "date" : "October 10",
+            "duration" : "11:00 - 16:00",
+            "location" : "E4 Building",
+            "isCompleted": false,
+            "status" : "upcoming"
         }
     ]
 }

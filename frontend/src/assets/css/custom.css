@@ -1,1 +1,8 @@
+body {
+  overflow-y: auto;
+}
 
+.container {
+  max-height: 85vh;
+  overflow-y: auto;
+}

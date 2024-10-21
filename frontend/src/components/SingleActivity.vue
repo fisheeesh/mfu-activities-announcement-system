@@ -1,5 +1,5 @@
 <template>
-    <div class="card mt-2 mb-3 ps-2 border-start border-5 border-warning shadow-sm border-0 rounded-3">
+    <div :class="['card mt-2 mb-3 ps-2 shadow-sm border-0 rounded-3', dynamicBorderClass]">
         <div class="card-body d-flex flex-column justify-content-center align-items-start">
             <h4 class="fw-bold">{{ activity.title }}</h4>
             <div class="d-flex gap-2 mt-2 flex-wrap">
@@ -15,10 +15,22 @@
 </template>
 
 <script>
+import { computed } from 'vue';
+
 export default {
     props: [
         'activity'
-    ]
+    ],
+    setup(props) {
+        // Set border-color dynamically based on activity status
+        let dynamicBorderClass = computed(() => {
+            if (props.activity.status === 'ongoing') return 'border-start border-5 border-info';
+            else if (props.activity.status === 'upcoming') return 'border-start border-5 border-warning';
+            else return 'border-start border-5 border-success';
+        })
+
+        return { dynamicBorderClass }
+    }
 }
 </script>
 
