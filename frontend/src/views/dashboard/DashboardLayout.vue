@@ -1,7 +1,7 @@
 <template>
     <div class="dashboard-layout">
         <Sidebar></Sidebar>
-        <div class="main w-100 me-2 overflow-hidden" :style="{ 'margin-left': `${parseInt(sidebarWidth) + 30}px` }">
+        <div class="main w-100 me-2 overflow-hidden" :style="{ 'margin-left': `${parseInt(sidebarWidth) + 10}px` }">
             <router-view />
         </div>
     </div>
