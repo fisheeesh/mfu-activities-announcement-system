@@ -11,11 +11,7 @@ import NotFound from '@/views/auth/NotFound.vue'
 const routes = [
   {
     path: '/',
-    redirect: '/admin/login'
-  },
-  {
-    path: '/admin/login',
-    name: 'admin-login',
+    name: 'login',
     component: AdminLogin
   },
   {
