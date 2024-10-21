@@ -11,8 +11,12 @@
                         <div class="mb-3">
                             <input type="email" placeholder="name@mfu.ac.th" class="form-control form-control-lg">
                         </div>
-                        <div class="mb-3">
-                            <input type="password" placeholder="password" class="form-control form-control-lg">
+                        <div class="password mb-3">
+                            <input :type="isVisible ? 'text' : 'password'" placeholder="password"
+                                class="form-control form-control-lg">
+                            <span @click="isVisible = !isVisible" class="material-symbols-outlined eye">
+                                {{ isVisible ? 'visibility' : 'visibility_off' }}
+                            </span>
                         </div>
                         <div class="d-grid mt-4">
                             <button class="btn btn-primary text-white btn-lg">Log In</button>
@@ -25,23 +29,22 @@
 </template>
 
 <script>
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 export default {
     setup() {
         const router = useRouter(); //this.$router
+        let isVisible = ref(false)
         let signIn = () => {
             router.push({ name: 'dashboard' });
         }
 
-        return { signIn }
+        return { signIn, isVisible }
     }
 }
 </script>
 
 <style>
-.form-control:focus {
-    outline: none;
-    box-shadow: none
-}
+
 </style>

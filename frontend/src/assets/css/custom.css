@@ -13,3 +13,20 @@ body {
   max-height: 85vh;
   overflow-y: auto;
 }
+
+/* 
+Controlling eye button for hide or show password   
+*/
+.password {
+  position: relative;
+}
+
+.eye {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 25px;
+  color: #aaa;
+}
