@@ -37,7 +37,7 @@
 <script>
 import Placeholder from '@/components/Placeholder.vue';
 import SingleActivity from '@/components/SingleActivity.vue';
-import getActivities from '@/componsables/getActivities';
+import getActivities from '@/composables/getActivities';
 import { ref } from 'vue';
 
 export default {
@@ -56,6 +56,4 @@ export default {
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

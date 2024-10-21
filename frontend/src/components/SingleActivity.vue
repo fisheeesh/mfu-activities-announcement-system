@@ -18,9 +18,12 @@
 import { computed } from 'vue';
 
 export default {
-    props: [
-        'activity'
-    ],
+    props: {
+        activity: {
+            type: Object,
+            required: true
+        }
+    },
     setup(props) {
         // Set border-color dynamically based on activity status
         let dynamicBorderClass = computed(() => {

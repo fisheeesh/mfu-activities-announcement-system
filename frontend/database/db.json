@@ -7,7 +7,6 @@
             "date" : "October 10",
             "duration" : "11:00 - 16:00",
             "location" : "E4 Building",
-            "isCompleted": false,
             "status" : "upcoming"
         },
         {
@@ -17,7 +16,6 @@
             "date" : "October 10",
             "duration" : "11:00 - 16:00",
             "location" : "E4 Building",
-            "isCompleted": false,
             "status" : "ongoing"
         },
         {
@@ -27,7 +25,6 @@
             "date" : "October 10",
             "duration" : "11:00 - 16:00",
             "location" : "E4 Building",
-            "isCompleted": false,
             "status" : "ongoing"
         },
         {
@@ -37,7 +34,6 @@
             "date" : "October 10",
             "duration" : "11:00 - 16:00",
             "location" : "E4 Building",
-            "isCompleted": false,
             "status" : "completed"
         },
         {
@@ -47,7 +43,6 @@
             "date" : "October 10",
             "duration" : "11:00 - 16:00",
             "location" : "E4 Building",
-            "isCompleted": false,
             "status" : "completed"
         },
         {
@@ -57,7 +52,6 @@
             "date" : "October 10",
             "duration" : "11:00 - 16:00",
             "location" : "E4 Building",
-            "isCompleted": false,
             "status" : "completed"
         },
         {
@@ -67,7 +61,6 @@
             "date" : "October 10",
             "duration" : "11:00 - 16:00",
             "location" : "E4 Building",
-            "isCompleted": false,
             "status" : "ongoing"
         },
         {
@@ -77,7 +70,6 @@
             "date" : "October 10",
             "duration" : "11:00 - 16:00",
             "location" : "E4 Building",
-            "isCompleted": false,
             "status" : "ongoing"
         },
         {
@@ -87,7 +79,6 @@
             "date" : "October 10",
             "duration" : "11:00 - 16:00",
             "location" : "E4 Building",
-            "isCompleted": false,
             "status" : "ongoing"
         },
         {
@@ -97,7 +88,6 @@
             "date" : "October 10",
             "duration" : "11:00 - 16:00",
             "location" : "E4 Building",
-            "isCompleted": false,
             "status" : "ongoing"
         },
         {
@@ -107,7 +97,6 @@
             "date" : "October 10",
             "duration" : "11:00 - 16:00",
             "location" : "E4 Building",
-            "isCompleted": false,
             "status" : "upcoming"
         },
         {
@@ -117,7 +106,6 @@
             "date" : "October 10",
             "duration" : "11:00 - 16:00",
             "location" : "E4 Building",
-            "isCompleted": false,
             "status" : "upcoming"
         },
         {
@@ -127,7 +115,6 @@
             "date" : "October 10",
             "duration" : "11:00 - 16:00",
             "location" : "E4 Building",
-            "isCompleted": false,
             "status" : "upcoming"
         },
         {
@@ -137,7 +124,6 @@
             "date" : "October 10",
             "duration" : "11:00 - 16:00",
             "location" : "E4 Building",
-            "isCompleted": false,
             "status" : "upcoming"
         },
         {
@@ -147,7 +133,6 @@
             "date" : "October 10",
             "duration" : "11:00 - 16:00",
             "location" : "E4 Building",
-            "isCompleted": false,
             "status" : "upcoming"
         }
     ]

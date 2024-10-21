@@ -14,7 +14,5 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 //darkmode
 // import './assets/js/darkmodetoggle.js'
 
-//global css
-import './assets/global.css'
 
 createApp(App).use(router).mount('#app')

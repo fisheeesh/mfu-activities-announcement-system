@@ -1,6 +1,12 @@
 body {
     overflow-y: auto;
 }
+:root {
+    --sidebar-bg-color: #ffffff;
+    --sidebar-item-active: #ffc5c2;
+    --sidebar-item-color : #760105;
+    --button-color: #BA1E23;
+}
 .container {
     max-height: 85vh;
     overflow-y: auto;

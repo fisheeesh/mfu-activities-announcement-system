@@ -35,7 +35,7 @@
 <script>
 import SingleActivity from '../../components/SingleActivity'
 import Placeholder from '../../components/Placeholder'
-import getActivities from '@/componsables/getActivities';
+import getActivities from '@/composables/getActivities';
 import { computed, ref } from 'vue';
 
 export default {
