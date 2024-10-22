@@ -3,10 +3,13 @@
         <div class="container py-6 text-center">
             <div class="row">
                 <div class="col-6 offset-3">
+                    <!-- MFU Logo -->
                     <div class="image-container d-flex justify-content-center">
                         <img src="@/assets/logo.png" alt="logo.png" width="100">
                     </div>
+                    <!-- Title -->
                     <h3 class="fst-italic fw-bolder mt-3 mb-4">MFU Activities Annoucement System</h3>
+                    <!-- Login Form -->
                     <form @submit.prevent="signIn">
                         <div class="mb-3">
                             <input type="email" placeholder="name@mfu.ac.th" class="form-control form-control-lg">
