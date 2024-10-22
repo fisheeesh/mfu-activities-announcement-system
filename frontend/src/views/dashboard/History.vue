@@ -23,7 +23,8 @@
                             <div v-else>
                                 <!-- Activity List -->
                                 <div v-for="activity in activities" :key="activity.id">
-                                    <SingleActivity :activity="activity"></SingleActivity>
+                                    <SingleActivity @deleteActivity="handleDelete" :activity="activity">
+                                    </SingleActivity>
                                 </div>
                             </div>
                         </div>
@@ -35,7 +36,7 @@
 </template>
 
 <script>
-import Placeholder from '@/components/Placeholder.vue';
+import Placeholder from '@/components/loaders/Placeholder.vue';
 import SingleActivity from '@/components/SingleActivity.vue';
 import getActivities from '@/composables/getActivities';
 import { ref } from 'vue';
@@ -51,7 +52,11 @@ export default {
 
         load().then(() => loading.value = false)
 
-        return { error, activities, loading }
+        let handleDelete = (id) => {
+            activities.value = activities.value.filter(activity => activity.id !== id);
+        }
+
+        return { error, activities, loading, handleDelete }
     }
 }
 </script>

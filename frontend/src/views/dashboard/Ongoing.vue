@@ -22,7 +22,8 @@
                             <!-- If not, that means we got data -->
                             <div v-else>
                                 <div v-for="activity in filteredActivities" :key="activity.id">
-                                    <SingleActivity :activity="activity"></SingleActivity>
+                                    <SingleActivity @deleteActivity="handleDelete" :activity="activity">
+                                    </SingleActivity>
                                 </div>
                             </div>
                         </div>
@@ -34,7 +35,7 @@
 </template>
 
 <script>
-import Placeholder from '@/components/Placeholder.vue';
+import Placeholder from '@/components/loaders/Placeholder.vue';
 import SingleActivity from '@/components/SingleActivity.vue';
 import getActivities from '@/composables/getActivities';
 import { computed, ref } from 'vue';
@@ -51,8 +52,11 @@ export default {
         load().then(() => loading.value = false)
 
         let filteredActivities = computed(() => activities.value.filter(activity => activity.status === 'ongoing'))
+        let handleDelete = (id) => {
+            activities.value = activities.value.filter(activity => activity.id !== id);
+        }
 
-        return { error, activities, filteredActivities, loading }
+        return { error, activities, filteredActivities, loading, handleDelete }
     }
 }
 </script>

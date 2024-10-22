@@ -1,8 +1,8 @@
 <template>
     <section class="create">
         <div class="container-lg">
-            <h1 class="fs-4 fw-bold text-center mt-5">Create a new activity</h1>
-            <form @submit.prevent="createActivity">
+            <h1 class="fs-4 fw-bold text-center mt-5">Edit activity</h1>
+            <form @submit.prevent="editActivity">
                 <div class="row mt-4">
                     <div class="col-md-6">
                         <!-- Title -->
@@ -64,7 +64,7 @@
                 <div class="btns d-flex hstack gap-4 justify-content-center align-items-center mt-2">
                     <button class="cancel btn btn-light px-5 text-white fw-bold"
                         @click="router.push({ name: 'dashboard' })">Cancel</button>
-                    <button class="btn btn-success px-5 text-white fw-bold">Create</button>
+                    <button class="btn btn-success px-5 text-white fw-bold">Edit</button>
                 </div>
             </form>
         </div>
@@ -72,11 +72,14 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 export default {
-    setup() {
+    props: [
+        'id'
+    ],
+    setup(props) {
         const router = useRouter();
         let title = ref('')
         let description = ref('')
@@ -86,10 +89,21 @@ export default {
         let start_date = ref('')
         let status = ref('')
 
-        let createActivity = async () => {
-            // console.log(title.value, description.value, school.value, time.value, location.value, start_date.value)
-            await fetch('http://localhost:3000/activities', {
-                method: "POST",
+        onMounted(async () => {
+            let res = await fetch(`http://localhost:3000/activities/${props.id}`)
+            let data = await res.json()
+            title.value = data.title
+            description.value = data.description
+            school.value = data.school
+            time.value = data.duration
+            location.value = data.location
+            start_date.value = data.start_date
+            status.value = data.status
+        })
+
+        let editActivity = async () => {
+            await fetch(`http://localhost:3000/activities/${props.id}`, {
+                method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     title: title.value,
@@ -104,13 +118,9 @@ export default {
             router.push({ name: 'dashboard' });
         }
 
-        return { title, description, school, time, location, start_date, status, createActivity, router }
+        return { router, editActivity, title, description, school, time, location, start_date, status }
     }
 }
 </script>
 
-<style>
-.form-title {
-    margin-top: 100px;
-}
-</style>
+<style></style>

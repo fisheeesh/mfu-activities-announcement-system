@@ -7,6 +7,7 @@ import Ongoing from '@/views/dashboard/Ongoing.vue'
 import DashboardLayout from '@/views/dashboard/DashboardLayout.vue'
 import AdminLogin from '@/views/auth/AdminLogin.vue'
 import NotFound from '@/views/auth/NotFound.vue'
+import Edit from '@/views/dashboard/Edit.vue'
 
 const routes = [
   {
@@ -46,6 +47,12 @@ const routes = [
         path: 'history',
         name: 'history',
         component: History
+      },
+      {
+        path : 'edit/:id',
+        name : 'edit',
+        component : Edit,
+        props : true
       }
     ]
   },

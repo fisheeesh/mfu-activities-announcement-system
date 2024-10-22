@@ -14,6 +14,11 @@ body {
   overflow-y: auto;
 }
 
+.container-lg {
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
 /* 
 Controlling eye button for hide or show password   
 */
@@ -29,4 +34,29 @@ Controlling eye button for hide or show password
   cursor: pointer;
   font-size: 25px;
   color: #aaa;
+}
+
+.description {
+  cursor: pointer;
+  white-space: pre-line;
+}
+
+input, select {
+  padding: 10px 15px !important;
+}
+
+.cancel {
+  background-color: grey !important;
+}
+
+.delete:hover {
+  color: red;
+}
+
+.edit:hover {
+  color: blue !important;
+}
+
+.delete, .edit {
+  cursor: pointer;
 }
