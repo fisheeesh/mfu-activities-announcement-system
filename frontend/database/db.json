@@ -1,139 +1,74 @@
 {
-    "activities" : [
-        {
-            "id": 1,
-            "title": "International Student Orientiation",
-            "description": "Activity 1 description",
-            "date" : "October 10",
-            "duration" : "11:00 - 16:00",
-            "location" : "E4 Building",
-            "status" : "upcoming"
-        },
-        {
-            "id": 2,
-            "title": "International Student Orientiation",
-            "description": "Activity 1 description",
-            "date" : "October 10",
-            "duration" : "11:00 - 16:00",
-            "location" : "E4 Building",
-            "status" : "ongoing"
-        },
-        {
-            "id": 3,
-            "title": "International Student Orientiation",
-            "description": "Activity 1 description",
-            "date" : "October 10",
-            "duration" : "11:00 - 16:00",
-            "location" : "E4 Building",
-            "status" : "ongoing"
-        },
-        {
-            "id": 4,
-            "title": "International Student Orientiation",
-            "description": "Activity 1 description",
-            "date" : "October 10",
-            "duration" : "11:00 - 16:00",
-            "location" : "E4 Building",
-            "status" : "completed"
-        },
-        {
-            "id": 5,
-            "title": "International Student Orientiation",
-            "description": "Activity 1 description",
-            "date" : "October 10",
-            "duration" : "11:00 - 16:00",
-            "location" : "E4 Building",
-            "status" : "completed"
-        },
-        {
-            "id": 6,
-            "title": "International Student Orientiation",
-            "description": "Activity 1 description",
-            "date" : "October 10",
-            "duration" : "11:00 - 16:00",
-            "location" : "E4 Building",
-            "status" : "completed"
-        },
-        {
-            "id": 7,
-            "title": "International Student Orientiation",
-            "description": "Activity 1 description",
-            "date" : "October 10",
-            "duration" : "11:00 - 16:00",
-            "location" : "E4 Building",
-            "status" : "ongoing"
-        },
-        {
-            "id": 8,
-            "title": "International Student Orientiation",
-            "description": "Activity 1 description",
-            "date" : "October 10",
-            "duration" : "11:00 - 16:00",
-            "location" : "E4 Building",
-            "status" : "ongoing"
-        },
-        {
-            "id": 9,
-            "title": "International Student Orientiation",
-            "description": "Activity 1 description",
-            "date" : "October 10",
-            "duration" : "11:00 - 16:00",
-            "location" : "E4 Building",
-            "status" : "ongoing"
-        },
-        {
-            "id": 10,
-            "title": "International Student Orientiation",
-            "description": "Activity 1 description",
-            "date" : "October 10",
-            "duration" : "11:00 - 16:00",
-            "location" : "E4 Building",
-            "status" : "ongoing"
-        },
-        {
-            "id": 11,
-            "title": "International Student Orientiation",
-            "description": "Activity 1 description",
-            "date" : "October 10",
-            "duration" : "11:00 - 16:00",
-            "location" : "E4 Building",
-            "status" : "upcoming"
-        },
-        {
-            "id": 12,
-            "title": "International Student Orientiation",
-            "description": "Activity 1 description",
-            "date" : "October 10",
-            "duration" : "11:00 - 16:00",
-            "location" : "E4 Building",
-            "status" : "upcoming"
-        },
-        {
-            "id": 13,
-            "title": "International Student Orientiation",
-            "description": "Activity 1 description",
-            "date" : "October 10",
-            "duration" : "11:00 - 16:00",
-            "location" : "E4 Building",
-            "status" : "upcoming"
-        },
-        {
-            "id": 14,
-            "title": "International Student Orientiation",
-            "description": "Activity 1 description",
-            "date" : "October 10",
-            "duration" : "11:00 - 16:00",
-            "location" : "E4 Building",
-            "status" : "upcoming"
-        },
-        {
-            "id": 15,
-            "title": "International Student Orientiation",
-            "description": "Activity 1 description",
-            "date" : "October 10",
-            "duration" : "11:00 - 16:00",
-            "location" : "E4 Building",
-            "status" : "upcoming"
-        }
-    ]
+  "activities": [
+    {
+      "id": 1,
+      "title": "International Student Orientiation",
+      "description": "Activity 1 description",
+      "start_date": "October 10",
+      "duration": "11:00 - 16:00",
+      "location": "E4 Building",
+      "school": "School of Information Technology",
+      "status": "upcoming"
+    },
+    {
+      "id": 2,
+      "title": "International Student Orientiation",
+      "description": "Activity 1 description",
+      "start_date": "October 10",
+      "duration": "11:00 - 16:00",
+      "location": "E4 Building",
+      "school": "School of Information Technology",
+      "status": "ongoing"
+    },
+    {
+      "id": 3,
+      "title": "International Student Orientiation",
+      "description": "Activity 1 description",
+      "start_date": "October 10",
+      "duration": "11:00 - 16:00",
+      "location": "E4 Building",
+      "school": "School of Information Technology",
+      "status": "ongoing"
+    },
+    {
+      "id": 4,
+      "title": "International Student Orientiation",
+      "description": "Activity 1 description",
+      "start_date": "October 10",
+      "duration": "11:00 - 16:00",
+      "location": "E4 Building",
+      "school": "School of Information Technology",
+      "status": "completed"
+    },
+    {
+      "id": 5,
+      "title": "International Student Orientiation",
+      "description": "Activity 1 description",
+      "start_date": "October 10",
+      "duration": "11:00 - 16:00",
+      "location": "E4 Building",
+      "school": "School of Information Technology",
+      "status": "completed"
+    },
+    {
+      "id": "7bbc",
+      "title": "Halloween (Horror Night)",
+      "description": "See you guyssss tomorrow 🤍 take care all\n\nJoin us if you dare! 🎃\n\nYou are invited to join our Halloween Booth in MFU Music Festival 2022 on Monday, 31 October 2022 starting at 18.00 hrs. at HRH Princess Srinagarindra Statue (Landao).\n\nHighlights of this activity you can't miss:\n- \"Ghost\" Photo Exhibition  😈👹\n- Halloween Makeup 👄💄\n- D.I.Y. Halloween Cookies 🍪\n- Halloween Photo Booth & Costume Contest 🎃\n\nCome and get free Halloween Cookies 🍪 at our booth!! (First come first serve for 100 visitors) \n\nFor students who would like to join Halloween costume contest, please walk in to register at the booth during 18.00-18.45 hrs.",
+      "start_date": "2024-10-31",
+      "duration": "18:00",
+      "location": "HRH Princess Srinagarindra Statue (Landao)",
+      "school": "BA",
+      "status": "upcoming"
+    },
+    {
+      "id": "f8d2",
+      "title": "MFU Music Festival 2024",
+      "description": "🗣️Ahhhhh.. It's not a big job for sure!! ️\n🔊In addition to concerts and appointment cards, we also have fun zone for everyone to come and enjoy.🎪\n\nIn the music festival “MFU Music Festival 2022 Angem Phase 2”❤️ 🔥\n🗓On 31 October 2565, time 18:00 onward.\n📍 At Landao",
+      "start_date": "2024-10-31",
+      "duration": "20:00",
+      "location": "Landao",
+      "school": "LAWS",
+      "status": "upcoming"
+    }
+  ]
 }

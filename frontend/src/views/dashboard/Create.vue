@@ -1,21 +1,105 @@
 <template>
-    <div class="container">
-        <h3 class="fs-4 form-title fw-bold text-center mb-2">Create a new activity</h3>
-        <div class="row">
-            <div class="col-md-6">col 1</div>
-            <div class="col-md-6">col 2</div>
+    <section class="create">
+        <div class="container-lg">
+            <h1 class="fs-4 fw-bold text-center mt-5">Create a new activity</h1>
+            <form @submit.prevent="createActivity">
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <!-- Title -->
+                        <div class="mb-3">
+                            <div class="form-label">Title <span class="text-danger">*</span></div>
+                            <input v-model="title" type="text" placeholder="Activity Title"
+                                class="form-control bg-light border-0">
+                        </div>
+                        <!-- Description -->
+                        <div class="mb-3">
+                            <div class="form-label">Description <span class="text-danger">*</span></div>
+                            <textarea v-model="description" style="resize: none;" name="" id=""
+                                class="form-control bg-light border-0" rows="3"
+                                placeholder="Activity Description"></textarea>
+                        </div>
+                        <!-- School -->
+                        <div class="mb-3">
+                            <div class="form-label">School <span class="text-danger">*</span></div>
+                            <select v-model="school" class="form-select border-0 bg-light">
+                                <option value="" selected disabled>Choose School</option>
+                                <option value="IT">School of Information Technology</option>
+                                <option value="BA">School of Management</option>
+                                <option value="CS">School of Cosemtice Science</option>
+                                <option value="LAWS">School of Laws</option>
+                            </select>
+                        </div>
+                        <!-- Time -->
+                        <div class="mb-3">
+                            <div class="form-label">Time <span class="text-danger">*</span></div>
+                            <input v-model="time" type="time" placeholder="00 : 00"
+                                class="form-control bg-light border-0">
+                        </div>
+                        <!-- Location -->
+                        <div class="mb-3">
+                            <div class="form-label">Location <span class="text-danger">*</span></div>
+                            <input v-model="location" type="text" placeholder="Indoor Stadium"
+                                class="form-control bg-light border-0">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <!-- Start Date -->
+                        <div class="mb-3">
+                            <div class="form-label">Date <span class="text-danger">*</span></div>
+                            <input v-model="start_date" type="date" class="form-control bg-light border-0">
+                        </div>
+                    </div>
+                </div>
+                <!-- Buttons -->
+                <div class="btns d-flex hstack gap-4 justify-content-center align-items-center mt-2">
+                    <button class="cancel btn btn-light px-5 text-white fw-bold"
+                        @click="router.push({ name: 'dashboard' })">Cancel</button>
+                    <button class="btn btn-success px-5 text-white fw-bold">Create</button>
+                </div>
+            </form>
         </div>
-    </div>
+    </section>
 </template>
 
 <script>
-export default {
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
+export default {
+    setup() {
+        const router = useRouter();
+        let title = ref('')
+        let description = ref('')
+        let school = ref('')
+        let time = ref('')
+        let location = ref('')
+        let start_date = ref('')
+
+        let createActivity = async () => {
+            // console.log(title.value, description.value, school.value, time.value, location.value, start_date.value)
+            await fetch('http://localhost:3000/activities', {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    title: title.value,
+                    description: description.value,
+                    start_date: start_date.value,
+                    duration: time.value,
+                    location: location.value,
+                    school: school.value,
+                    status: "upcoming"
+                })
+            })
+            router.push({ name: 'dashboard' });
+        }
+
+        return { title, description, school, time, location, start_date, createActivity, router }
+    }
 }
 </script>
 
 <style>
-.form-title{
+.form-title {
     margin-top: 100px;
 }
 </style>
