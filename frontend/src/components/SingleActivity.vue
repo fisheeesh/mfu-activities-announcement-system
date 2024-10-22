@@ -60,6 +60,9 @@ export default {
                 method: "DELETE"
             })
             console.log(res)
+            /**
+             * We have to emit a custom event to the parent component to ensure that activity is deleted from the UI
+             */
             context.emit('deleteActivity', props.activity.id)
         }
 
