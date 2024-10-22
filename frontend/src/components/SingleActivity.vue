@@ -24,7 +24,9 @@
                 <div class="px-4 py-2 bg-white rounded-5 border border-1">
                     <i class="fas fa-map-marker-alt text-primary me-1"></i> {{ activity.location }}
                 </div>
-
+                <div class="px-4 py-2 bg-white rounded-5 border border-1">
+                    <i class="fas fa-building-columns text-black me-1"></i> {{ activity.school }}
+                </div>
             </div>
         </div>
     </div>

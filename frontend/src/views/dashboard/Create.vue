@@ -23,10 +23,11 @@
                             <div class="form-label">School <span class="text-danger">*</span></div>
                             <select v-model="school" class="form-select border-0 bg-light">
                                 <option value="" selected disabled>Choose School</option>
-                                <option value="IT">School of Information Technology</option>
-                                <option value="BA">School of Management</option>
-                                <option value="CS">School of Cosemtice Science</option>
-                                <option value="LAWS">School of Laws</option>
+                                <option value="School of Information Technology">School of Information Technology
+                                </option>
+                                <option value="School of Management">School of Management</option>
+                                <option value="School of Cosemtice Science">School of Cosemtice Science</option>
+                                <option value="School of Laws">School of Laws</option>
                             </select>
                         </div>
                         <!-- Time -->
