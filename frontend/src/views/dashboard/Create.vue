@@ -48,6 +48,15 @@
                             <div class="form-label">Date <span class="text-danger">*</span></div>
                             <input v-model="start_date" type="date" class="form-control bg-light border-0">
                         </div>
+                        <!-- Status -->
+                        <div class="mb-3">
+                            <div class="form-label">Status <span class="text-danger">*</span></div>
+                            <select v-model="status" class="form-select border-0 bg-light">
+                                <option value="" selected disabled>Choose Status</option>
+                                <option value="upcoming">Upcoming</option>
+                                <option value="ongoing">Ongoing</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <!-- Buttons -->
@@ -74,6 +83,7 @@ export default {
         let time = ref('')
         let location = ref('')
         let start_date = ref('')
+        let status = ref('')
 
         let createActivity = async () => {
             // console.log(title.value, description.value, school.value, time.value, location.value, start_date.value)
@@ -87,13 +97,13 @@ export default {
                     duration: time.value,
                     location: location.value,
                     school: school.value,
-                    status: "upcoming"
+                    status: status.value
                 })
             })
             router.push({ name: 'dashboard' });
         }
 
-        return { title, description, school, time, location, start_date, createActivity, router }
+        return { title, description, school, time, location, start_date, status, createActivity, router }
     }
 }
 </script>

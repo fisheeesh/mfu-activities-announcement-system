@@ -48,6 +48,15 @@
                             <div class="form-label">Date <span class="text-danger">*</span></div>
                             <input v-model="start_date" type="date" class="form-control bg-light border-0">
                         </div>
+                        <!-- Status -->
+                        <div class="mb-3">
+                            <div class="form-label">Status <span class="text-danger">*</span></div>
+                            <select v-model="status" class="form-select border-0 bg-light">
+                                <option value="" selected disabled>Choose Status</option>
+                                <option value="upcoming">Upcoming</option>
+                                <option value="ongoing">Ongoing</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <!-- Buttons -->
@@ -77,6 +86,7 @@ export default {
         let time = ref('')
         let location = ref('')
         let start_date = ref('')
+        let status = ref('')
 
         onMounted(async () => {
             let res = await fetch(`http://localhost:3000/activities/${props.id}`)
@@ -87,6 +97,7 @@ export default {
             time.value = data.duration
             location.value = data.location
             start_date.value = data.start_date
+            status.value = data.status
         })
 
         let editActivity = async () => {
@@ -100,12 +111,13 @@ export default {
                     duration: time.value,
                     location: location.value,
                     school: school.value,
+                    status: status.value
                 })
             })
             router.push({ name: 'dashboard' });
         }
 
-        return { router, editActivity, title, description, school, time, location, start_date }
+        return { router, editActivity, title, description, school, time, location, start_date, status }
     }
 }
 </script>

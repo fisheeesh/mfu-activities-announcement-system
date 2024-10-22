@@ -50,7 +50,7 @@ export default {
         })
 
         let cutBodyDescription = computed(() => {
-            return props.activity.description.substring(0, 30) + '... See more'
+            return props.activity.description.substring(0, 52) + '... See more'
         })
 
         let deleteActivity = async () => {

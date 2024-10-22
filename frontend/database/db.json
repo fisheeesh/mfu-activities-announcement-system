@@ -8,7 +8,19 @@
       "duration": "20:00",
       "location": "Landao",
       "school": "LAWS",
-      "status": "upcoming"
+      "status": "upcoming",
+      "isCompleted" : true
+    },
+    {
+      "id": "1e80",
+      "title": "Halloween (Horror Night)",
+      "description": "See you guys 🤍 take care all\n\nJoin us if you dare! 🎃\n\nYou are invited to join our Halloween Booth in MFU Music Festival 2022 on Monday, 31 October 2022 starting at 18.00 hrs. at HRH Princess Srinagarindra Statue (Landao).\n\nHighlights of this activity you can't miss:\n- \"Ghost\" Photo Exhibition  😈👹\n- Halloween Makeup 👄💄\n- D.I.Y. Halloween Cookies 🍪\n- Halloween Photo Booth & Costume Contest 🎃\n\nCome and get free Halloween Cookies 🍪 at our booth!! (First come first serve for 100 visitors) \n\nFor students who would like to join Halloween costume contest, please walk in to register at the booth during 18.00-18.45 hrs.",
+      "start_date": "2024-10-31",
+      "duration": "18:00",
+      "location": "HRH Princess Srinagarindra Statue (Landao)",
+      "school": "BA",
+      "status": "ongoing",
+      "isCompleted" : false
     }
   ]
 }
