@@ -44,3 +44,15 @@ input, select {
 .cancel{
     background-color: grey!important;
 }
+
+.delete:hover{
+    color : red;
+}
+
+.edit:hover{
+    color : blue !important;
+}
+
+.delete, .edit{
+    cursor: pointer;
+}

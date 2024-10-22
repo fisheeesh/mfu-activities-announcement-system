@@ -3,11 +3,11 @@
         :style="{ width: sidebarWidth }">
         <h1 class="mt-5 mb-4">
             <div v-if="collapsed">
-                <img class="ms-1" style="margin-left: 3px;" src="@/assets/logo.png" alt="mfu.logo">
+                <img class="ms-1" style="margin-left: 3px;" src="@/assets/logo_mfu.png" alt="mfu.logo">
             </div>
             <div v-else class="flexing ms-1 d-flex justify-content-start align-items-center overflow-hidden">
                 <div>
-                    <img src="@/assets/logo.png" alt="mfu.logo">
+                    <img src="@/assets/logo_mfu.png" alt="mfu.logo">
                 </div>
 
                 <div class="d-flex flex-column ms-2">
