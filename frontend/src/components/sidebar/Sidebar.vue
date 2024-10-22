@@ -26,7 +26,8 @@
 
         <div class="flex-grow-1"></div>
 
-        <div class="logout-button bg-primary w-100 d-flex align-items-center justify-content-center text-white">
+        <div @click="logout"
+            class="logout-button bg-primary w-100 d-flex align-items-center justify-content-center text-white">
             <i class="icon fas fa-sign-out-alt"></i>
             <span class="ms-2" v-if="!collapsed">Logout</span>
         </div>
@@ -42,12 +43,17 @@
 </template>
 
 <script>
+import { useRouter } from 'vue-router'
 import SidebarLink from './SidebarLink'
 import { collapsed, toggleSidebar, sidebarWidth } from './sidebarState'
 export default {
     components: { SidebarLink },
     setup() {
-        return { collapsed, toggleSidebar, sidebarWidth }
+        const router = useRouter()
+        let logout = () => {
+            router.push({ name: 'login' })
+        }
+        return { collapsed, toggleSidebar, sidebarWidth, logout }
     }
 }
 </script>

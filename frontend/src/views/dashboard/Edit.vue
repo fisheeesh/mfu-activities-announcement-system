@@ -15,7 +15,7 @@
                         <div class="mb-3">
                             <div class="form-label">Description <span class="text-danger">*</span></div>
                             <textarea v-model="description" style="resize: none;" name="" id=""
-                                class="form-control bg-light border-0" rows="3"
+                                class="form-control bg-light border-0" rows="4"
                                 placeholder="Activity Description"></textarea>
                         </div>
                         <!-- School -->
