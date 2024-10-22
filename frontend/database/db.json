@@ -7,9 +7,8 @@
       "start_date": "2024-10-31",
       "duration": "20:00",
       "location": "Landao",
-      "school": "School of Laws",
-      "status": "upcoming",
-      "isCompleted" : true
+      "school": "School of Cosemtice Science",
+      "status": "upcoming"
     },
     {
       "id": "1e80",
@@ -19,8 +18,7 @@
       "duration": "18:00",
       "location": "HRH Princess Srinagarindra Statue (Landao)",
       "school": "School of Management",
-      "status": "ongoing",
-      "isCompleted" : false
+      "status": "ongoing"
     }
   ]
 }
