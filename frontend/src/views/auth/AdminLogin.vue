@@ -8,7 +8,11 @@
                         <img src="@/assets/logo_mfu.png" alt="logo.png" width="100">
                     </div>
                     <!-- Title -->
-                    <h4 class="fst-italic fw-bolder mt-3 mb-4 text-center">MFU Activities Annoucement System</h4>
+                    <h4 class="fst-italic fw-bolder mt-3 text-center">MFU Activities Annoucement System</h4>
+                    <div class="text-muted d-flex justify-content-center gap-3 mb-4">
+                        <span>Email - admin@mfu.ac.th</span>
+                        <span>Password - password</span>
+                    </div>
                     <!-- Login Form -->
                     <form @submit.prevent="signIn">
                         <div class="mb-3">
@@ -29,6 +33,7 @@
                         </div>
                         <p class="text-danger text-center fw-bold mt-3" v-if="error">{{ error }}</p>
                     </form>
+
                 </div>
             </div>
         </div>
