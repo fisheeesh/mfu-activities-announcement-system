@@ -20,7 +20,7 @@ export default {
         const { user } = getUser();
 
         /**
-         * ? As soon as user logout, we want to redirect to login as for the user experienec
+         * ? As soon as user logout, we want to redirect to login as for the user experience
          * ? not let user to stay or show the dashboard page all the time, so we handled it by watcing user states
          */
         watch(user, () => {
