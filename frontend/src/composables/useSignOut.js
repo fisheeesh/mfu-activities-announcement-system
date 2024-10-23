@@ -1,12 +1,12 @@
 import { auth } from "@/firebase/config"
 
-let logOut = async() => {
+let signOut = async() => {
     await auth.signOut()
     console.log('User Logged Out.')
 }
 
 let useSignOut = () =>{
-    return { logOut }
+    return { signOut }
 }
 
 export default useSignOut
