@@ -19,7 +19,7 @@
             <!-- Activity details -->
             <div class="d-flex gap-2 mt-3 flex-wrap">
                 <div class="px-4 py-2 bg-secondary rounded-5">
-                    <i class="fas fa-clock text-black me-1"></i> {{ activity.start_date }} | {{ activity.duration }}
+                    <i class="fas fa-clock text-black me-1"></i> {{ activity.date }} | {{ activity.start_time }} - {{ activity.end_time }}
                 </div>
                 <div class="px-4 py-2 bg-white rounded-5 border border-1">
                     <i class="fas fa-map-marker-alt text-primary me-1"></i> {{ activity.location }}

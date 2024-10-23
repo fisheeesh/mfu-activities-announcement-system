@@ -44,9 +44,20 @@
                         </div>
                         <!-- Time -->
                         <div class="mb-3">
-                            <div class="form-label">Time <span class="text-danger">*</span></div>
-                            <input v-model="time" type="time" :class="{ 'is-invalid': showError('time') }"
-                                class="form-control bg-light border-1" required>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="start_time">Start Time</label>
+                                    <input v-model="start_time" type="time"
+                                        :class="{ 'is-invalid': showError('start_time') }"
+                                        class="form-control bg-light border-1" required>
+                                </div>
+                                <div class="col-6">
+                                    <label for="end_time">End Time</label>
+                                    <input v-model="end_time" type="time"
+                                        :class="{ 'is-invalid': showError('end_time') }"
+                                        class="form-control bg-light border-1" required>
+                                </div>
+                            </div>
                             <div class="invalid-feedback">
                                 Please select a time.
                             </div>
@@ -66,23 +77,10 @@
                         <!-- Start Date -->
                         <div class="mb-3">
                             <div class="form-label">Date <span class="text-danger">*</span></div>
-                            <input v-model="start_date" type="date" :class="{ 'is-invalid': showError('start_date') }"
+                            <input v-model="date" type="date" :class="{ 'is-invalid': showError('date') }"
                                 class="form-control bg-light border-1" required>
                             <div class="invalid-feedback">
                                 Please select a date.
-                            </div>
-                        </div>
-                        <!-- Status -->
-                        <div class="mb-3">
-                            <div class="form-label">Status <span class="text-danger">*</span></div>
-                            <select v-model="status" :class="{ 'is-invalid': showError('status') }"
-                                class="form-select border-1 bg-light" required>
-                                <option value="" selected disabled>Choose Status</option>
-                                <option value="upcoming">Upcoming</option>
-                                <option value="ongoing">Ongoing</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Please select a status.
                             </div>
                         </div>
                     </div>
@@ -105,13 +103,13 @@ import { useRouter } from 'vue-router';
 export default {
     setup() {
         const router = useRouter();
-        let title = ref('');
-        let description = ref('');
-        let school = ref('');
-        let time = ref('');
-        let location = ref('');
-        let start_date = ref('');
-        let status = ref('');
+        let title = ref();
+        let description = ref();
+        let school = ref();
+        let location = ref();
+        let date = ref();
+        let start_time = ref();
+        let end_time = ref();
 
         // To track if a field has been touched
         let touchedFields = ref({});
@@ -126,32 +124,33 @@ export default {
                 title: true,
                 description: true,
                 school: true,
-                time: true,
                 location: true,
-                start_date: true,
-                status: true
+                date: true,
+                start_time: true,
+                end_time: true
             };
 
             // Validate the form
-            if (title.value && description.value && school.value && time.value && location.value && start_date.value && status.value) {
+            if (title.value && description.value && school.value && start_time.value && end_time.value && location.value && date.value) {
                 await fetch('http://localhost:3000/activities', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         title: title.value,
                         description: description.value,
-                        start_date: start_date.value,
-                        duration: time.value,
+                        date: date.value,
+                        start_time: start_time.value,
+                        end_time: end_time.value,
                         location: location.value,
                         school: school.value,
-                        status: status.value
+                        status: "upcoming"
                     }),
                 });
                 router.push({ name: 'dashboard' });
             }
         };
 
-        return { title, description, school, time, location, start_date, status, createActivity, showError, router };
+        return { title, description, school, location, date, start_time, end_time, createActivity, showError, router };
     },
 };
 </script>

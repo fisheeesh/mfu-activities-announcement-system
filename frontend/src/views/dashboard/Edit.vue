@@ -32,9 +32,21 @@
                         </div>
                         <!-- Time -->
                         <div class="mb-3">
-                            <div class="form-label">Time <span class="text-danger">*</span></div>
-                            <input v-model="time" type="time" placeholder="00 : 00"
-                                class="form-control bg-light border-0">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="start_time">Start Time</label>
+                                    <input v-model="start_time" type="time" class="form-control bg-light border-1"
+                                        required>
+                                </div>
+                                <div class="col-6">
+                                    <label for="end_time">End Time</label>
+                                    <input v-model="end_time" type="time" class="form-control bg-light border-1"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="invalid-feedback">
+                                Please select a time.
+                            </div>
                         </div>
                         <!-- Location -->
                         <div class="mb-3">
@@ -47,16 +59,7 @@
                         <!-- Start Date -->
                         <div class="mb-3">
                             <div class="form-label">Date <span class="text-danger">*</span></div>
-                            <input v-model="start_date" type="date" class="form-control bg-light border-0">
-                        </div>
-                        <!-- Status -->
-                        <div class="mb-3">
-                            <div class="form-label">Status <span class="text-danger">*</span></div>
-                            <select v-model="status" class="form-select border-0 bg-light">
-                                <option value="" selected disabled>Choose Status</option>
-                                <option value="upcoming">Upcoming</option>
-                                <option value="ongoing">Ongoing</option>
-                            </select>
+                            <input v-model="date" type="date" class="form-control bg-light border-0">
                         </div>
                     </div>
                 </div>
@@ -81,13 +84,13 @@ export default {
     ],
     setup(props) {
         const router = useRouter();
-        let title = ref('')
-        let description = ref('')
-        let school = ref('')
-        let time = ref('')
-        let location = ref('')
-        let start_date = ref('')
-        let status = ref('')
+        let title = ref()
+        let description = ref()
+        let school = ref()
+        let start_time = ref()
+        let end_time = ref()
+        let location = ref()
+        let date = ref()
 
         onMounted(async () => {
             let res = await fetch(`http://localhost:3000/activities/${props.id}`)
@@ -95,10 +98,10 @@ export default {
             title.value = data.title
             description.value = data.description
             school.value = data.school
-            time.value = data.duration
+            start_time.value = data.start_time
+            end_time.value = data.end_time
             location.value = data.location
-            start_date.value = data.start_date
-            status.value = data.status
+            date.value = data.date
         })
 
         let editActivity = async () => {
@@ -108,17 +111,17 @@ export default {
                 body: JSON.stringify({
                     title: title.value,
                     description: description.value,
-                    start_date: start_date.value,
-                    duration: time.value,
+                    start_time: start_time.value,
+                    end_time: end_time.value,
+                    date: date.value,
                     location: location.value,
                     school: school.value,
-                    status: status.value
                 })
             })
             router.push({ name: 'dashboard' });
         }
 
-        return { router, editActivity, title, description, school, time, location, start_date, status }
+        return { router, editActivity, title, description, school, start_time, end_time, location, date }
     }
 }
 </script>
