@@ -8,16 +8,35 @@ import DashboardLayout from '@/views/dashboard/DashboardLayout.vue'
 import AdminLogin from '@/views/auth/AdminLogin.vue'
 import NotFound from '@/views/auth/NotFound.vue'
 import Edit from '@/views/dashboard/Edit.vue'
+import { auth } from '@/firebase/config'
 
 const routes = [
   {
     path: '/',
     name: 'login',
-    component: AdminLogin
+    component: AdminLogin,
+    beforeEnter(to, from, next) {
+      let user = auth.currentUser
+      if (!user) {
+        next()
+      }
+      else {
+        next('/admin/dashboard')
+      }
+    }
   },
   {
     path: '/admin',
     component: DashboardLayout, 
+    beforeEnter(to, from, next) {
+      let user = auth.currentUser
+      if (user) {
+        next()
+      }
+      else {
+        next('/')
+      }
+    },
     children: [
       {
         path: '',

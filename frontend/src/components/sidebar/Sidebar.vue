@@ -26,11 +26,11 @@
 
         <div class="flex-grow-1"></div>
 
-        <div @click="logout"
-            class="logout-button bg-primary w-100 d-flex align-items-center justify-content-center text-white">
+        <button @click="logout"
+            class="logout-button btn btn-primary w-100 d-flex align-items-center justify-content-center text-white">
             <i class="icon fas fa-sign-out-alt"></i>
             <span class="ms-2" v-if="!collapsed">Logout</span>
-        </div>
+        </button>
 
         <span :class="{ 'rotate-180': collapsed }"
             class="collapse-icon text-primary rounded-circle bg-white position-absolute d-flex align-items-center justify-content-center"
@@ -51,7 +51,7 @@ export default {
     setup() {
         const router = useRouter()
         let logout = () => {
-            router.push({ name: 'login' })
+            alert('Logout')
         }
         return { collapsed, toggleSidebar, sidebarWidth, logout }
     }
@@ -112,7 +112,4 @@ export default {
     height: 40px;
 }
 
-.logout-button:hover {
-    background-color: red;
-}
 </style>

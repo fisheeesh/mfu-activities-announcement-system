@@ -1,21 +1,24 @@
 <template>
     <div>
-        <div class="container py-6 text-center">
+        <div class="container py-5">
             <div class="row">
-                <div class="col-6 offset-3">
+                <div class="col-5 offset-4">
                     <!-- MFU Logo -->
                     <div class="image-container d-flex justify-content-center">
                         <img src="@/assets/logo_mfu.png" alt="logo.png" width="100">
                     </div>
                     <!-- Title -->
-                    <h3 class="fst-italic fw-bolder mt-3 mb-4">MFU Activities Annoucement System</h3>
+                    <h4 class="fst-italic fw-bolder mt-3 mb-4 text-center">MFU Activities Annoucement System</h4>
                     <!-- Login Form -->
                     <form @submit.prevent="signIn">
                         <div class="mb-3">
-                            <input type="email" placeholder="name@mfu.ac.th" class="form-control form-control-lg">
+                            <label class="form-label">Email</label>
+                            <input type="email" v-model="email" placeholder="name@mfu.ac.th"
+                                class="form-control form-control-lg">
                         </div>
                         <div class="password mb-3">
-                            <input :type="isVisible ? 'text' : 'password'" placeholder="password"
+                            <label class="form-label">Password</label>
+                            <input v-model="password" :type="isVisible ? 'text' : 'password'" placeholder="password"
                                 class="form-control form-control-lg">
                             <span @click="isVisible = !isVisible" class="material-symbols-outlined eye">
                                 {{ isVisible ? 'visibility' : 'visibility_off' }}
@@ -24,6 +27,7 @@
                         <div class="d-grid mt-4">
                             <button class="btn btn-primary text-white btn-lg">Log In</button>
                         </div>
+                        <p class="text-danger text-center fw-bold mt-3" v-if="error">{{ error }}</p>
                     </form>
                 </div>
             </div>
@@ -32,22 +36,32 @@
 </template>
 
 <script>
+import useSignIn from '@/composables/useSignIn';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 export default {
     setup() {
         const router = useRouter(); //this.$router
+
+        let email = ref('');
+        let password = ref('');
         let isVisible = ref(false)
-        let signIn = () => {
-            router.push({ name: 'dashboard' });
+
+        let { error, logIn } = useSignIn()
+
+        let signIn = async () => {
+            let res = await logIn(email.value, password.value)
+
+            if (res) {
+                console.log('Logged In Successfully!', res.user.displayName)
+                router.push('/admin')
+            }
         }
 
-        return { signIn, isVisible }
+        return { signIn, isVisible, email, password, error }
     }
 }
 </script>
 
-<style>
-
-</style>
+<style></style>
