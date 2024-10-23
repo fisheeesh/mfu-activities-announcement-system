@@ -9,7 +9,6 @@ import AdminLogin from '@/views/auth/AdminLogin.vue'
 import NotFound from '@/views/auth/NotFound.vue'
 import Edit from '@/views/dashboard/Edit.vue'
 import { auth } from '@/firebase/config'
-import Nth from '@/views/Nth.vue'
 
 const routes = [
   {
@@ -80,10 +79,6 @@ const routes = [
     path : '/:catchAll(.*)',
     name : 'not-found',
     component : NotFound
-  },
-  {
-    path : '/nth',
-    component : Nth
   }
 ];
 
