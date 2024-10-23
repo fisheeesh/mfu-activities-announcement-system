@@ -1,8 +1,8 @@
 // Colors
 $primary: #BA1E23;
 $secondary: #ffefef;
-$dark : #2b3041;
-$light : #f3f6f9;
+$dark: #2b3041;
+$light: #f3f6f9;
 
 // Spacers
 $spacer: 1rem !default;
@@ -21,5 +21,15 @@ $spacers: (
 // Box-shadow
 $box-shadow-sm: 0 0 10px rgba(0, 0, 0, 0.2) !default;
 
+// Custom input focus styles
+input.form-control,
+textarea.form-control,
+select.form-select {
+  &:focus {
+    border-color: $light !important;
+    box-shadow: 0 0 0 1px $light !important; // Optional: Add a softer box-shadow with primary color
+  }
+}
 
+// Import Bootstrap SCSS after custom styles to ensure overrides
 @import '../../../node_modules/bootstrap/scss/bootstrap.scss';
