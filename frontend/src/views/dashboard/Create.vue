@@ -77,8 +77,10 @@
                         <!-- Start Date -->
                         <div class="mb-3">
                             <div class="form-label">Date <span class="text-danger">*</span></div>
-                            <input v-model="date" type="date" :class="{ 'is-invalid': showError('date') }"
-                                class="form-control bg-light border-1" required>
+                            <!-- <input v-model="date" type="date" :class="{ 'is-invalid': showError('date') }"
+                                class="form-control bg-light border-1" required> -->
+                            <v-date-picker v-model="date" :class="{ 'is-invalid': showError('date') }" color="primary"
+                                elevation="1"></v-date-picker>
                             <div class="invalid-feedback">
                                 Please select a date.
                             </div>

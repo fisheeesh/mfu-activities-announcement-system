@@ -2,6 +2,31 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
+// Vuetify
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+
+
+const vuetify = createVuetify({
+    theme: {
+        defaultTheme: 'light',
+        themes: {
+          light: {
+            colors: {
+              primary: '#BA1E23',
+              secondary: '#ffefef',
+              accent: '#82B1FF',
+              error: '#FF5252',
+            },
+          },
+        },
+      },
+  components,
+  directives,
+})
+
 //fontawesome
 import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all'
@@ -24,5 +49,5 @@ let app;
  * ? So the system wlll push the user to login page
  */
 auth.onAuthStateChanged(() => {
-    if (!app) app = createApp(App).use(router).mount('#app')
+    if (!app) app = createApp(App).use(vuetify).use(router).mount('#app')
 })

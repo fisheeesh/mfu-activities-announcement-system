@@ -1,26 +1,26 @@
 {
   "activities": [
     {
-      "id": "f8d2",
+      "id": "810d",
       "title": "MFU Music Festival 2024 (edited)",
       "description": "🗣️Ahhhhh.. It's not a big job for sure!! ️\n🔊In addition to concerts and appointment cards, we also have fun zone for everyone to come and enjoy.🎪\n\nIn the music festival “MFU Music Festival 2022 Angem Phase 2”❤️ 🔥\n🗓On 31 October 2565, time 18:00 onward.\n📍 At Landao",
-      "date": "2024-10-31",
+      "date": "2024-10-29T17:00:00.000Z",
       "start_time": "18:00",
       "end_time": "23:00",
       "location": "Landao",
-      "school": "School of Management",
+      "school": "School of Laws",
       "status": "upcoming"
     },
     {
-      "id": "1e80",
+      "id": "1ca9",
       "title": "Halloween (Horror Night)",
-      "description": "See you guys 🤍 take care all\n\nJoin us if you dare! 🎃\n\nYou are invited to join our Halloween Booth in MFU Music Festival 2022 on Monday, 31 October 2022 starting at 18.00 hrs. at HRH Princess Srinagarindra Statue (Landao).\n\nHighlights of this activity you can't miss:\n- \"Ghost\" Photo Exhibition  😈👹\n- Halloween Makeup 👄💄\n- D.I.Y. Halloween Cookies 🍪\n- Halloween Photo Booth & Costume Contest 🎃\n\nCome and get free Halloween Cookies 🍪 at our booth!! (First come first serve for 100 visitors) \n\nFor students who would like to join Halloween costume contest, please walk in to register at the booth during 18.00-18.45 hrs.",
-      "date": "2024-10-31",
+      "description": "Join us if you dare! 🎃\n\nYou are invited to join our Halloween Booth in MFU Music Festival 2022 on Monday, 31 October 2022 starting at 18.00 hrs. at HRH Princess Srinagarindra Statue (Landao).\n\n\nHighlights of this activity you can't miss:\n- \"Ghost\" Photo Exhibition  😈👹\n- Halloween Makeup 👄💄\n- D.I.Y. Halloween Cookies 🍪\n- Halloween Photo Booth & Costume Contest 🎃\n\n\nCome and get free Halloween Cookies 🍪 at our booth!! (First come first serve for 100 visitors) \n\n\nFor students who would like to join Halloween costume contest, please walk in to register at the booth during 18.00-18.45 hrs.",
+      "date": "2024-10-30T17:00:00.000Z",
       "start_time": "18:00",
-      "end_time": "23:00",
+      "end_time": "12:00",
       "location": "HRH Princess Srinagarindra Statue (Landao)",
-      "school": "School of Cosemtice Science",
-      "status": "ongoing"
+      "school": "School of Management",
+      "status": "upcoming"
     }
   ]
 }
