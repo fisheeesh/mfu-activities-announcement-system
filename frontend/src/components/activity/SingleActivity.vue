@@ -8,12 +8,12 @@
                 </div>
                 <!-- Delete and Edit icons -->
                 <div v-if="isEditable">
-                    <!-- Conditionally disable delete icon -->
+                    <!-- ? if activity is completed, we will disable delete and edit icon-buttons -->
                     <span @click="deleteActivity"
                         :class="['material-symbols-outlined', 'me-2', 'delete', { 'disabled-icon': activity.status === 'completed' }]">
                         delete
                     </span>
-                    <!-- Conditionally disable edit icon -->
+                    <!-- ? if activity is completed, we will disable delete and edit icon-buttons -->
                     <router-link v-if="activity.status !== 'completed'"
                         :to="{ name: 'edit', params: { id: activity.id } }">
                         <span class="material-symbols-outlined edit text-black">edit</span>
@@ -60,7 +60,6 @@ export default {
     },
     setup(props, context) {
         let isShow = ref(false);
-        const now = ref(new Date());
 
         // Set dynamic border color class based on activity status
         let dynamicBorderClass = computed(() => {
@@ -69,7 +68,6 @@ export default {
             else return 'border-start border-5 border-success';
         });
 
-        // Utility function to update activity status
         const updateActivityStatus = async (updatedStatus) => {
             await fetch(`http://localhost:3000/activities/${props.activity.id}`, {
                 method: "PATCH",
@@ -79,7 +77,10 @@ export default {
             context.emit('updated', props.activity.id, updatedStatus);
         };
 
-        // Function to check and update the status based on time
+        /**
+         * ? Check activity data and time and compare with current date and time
+         * ? If activity date and time is before/after/same as current date and time, update activity status
+         */
         const checkStatus = () => {
             const current = new Date();
             const activityDate = new Date(props.activity.date);
@@ -87,6 +88,10 @@ export default {
             const endTime = parse(props.activity.end_time, 'HH:mm', activityDate);
 
             if (isSameDay(current, activityDate)) {
+                /**
+                 * ? We dun want to have abuse api calls, we check with inner if to prevent server loads
+                 * ? We only updated the status only when the activity current status is not the condition one
+                 */
                 if (isBefore(current, startTime)) {
                     if (props.activity.status !== 'upcoming') {
                         updateActivityStatus('upcoming');
@@ -103,32 +108,43 @@ export default {
             }
         };
 
-        // Check status on mounted
+        /**
+         * ? Mounted hook works when the component is set/created.
+         * ? As soon as our SingleActivity component is mounted, we check activity's date and time and then update its status
+         * ? 
+        */
         onMounted(() => {
             checkStatus();
-            // Set interval to check status periodically (e.g., every 10 seconds)
+            /**
+             * * To enhace real-time data, we made the check status process every 1 second
+             * * It will repeat until activity's status is changed
+             */
             const interval = setInterval(() => {
                 checkStatus();
-            }, 1000); // 10 seconds
+            }, 1000);
 
-            // Clear interval when component is unmounted
+            /**
+             * * When the status is changed, the actitivity has to go to its respective page (depends on its status)
+             * * And it has to remove from current page. Before that remove time, beforeunmonted hook will work and stop the status checking process
+             * * Then the activity will be moved to its respective page and the status checking process will start again
+             */
             onBeforeUnmount(() => {
                 clearInterval(interval);
             });
         });
 
-        // Computed for shortened description
+        // Cut description cuz it is too long to display
         let cutBodyDescription = computed(() => {
             return props.activity.description.substring(0, 52) + '... See more';
         });
 
-        // Format times
+        // format time in a format of AM/PM
         const formatTime = (time) => {
             const date = parse(time, 'HH:mm', new Date());
             return format(date, 'h:mm a');
         };
 
-        // Computed properties for formatted start and end times
+        // Format date in a format of MMM d, yyyy eg. Oct 31, 2024
         let formattedStartTime = computed(() => formatTime(props.activity.start_time));
         let formattedEndTime = computed(() => formatTime(props.activity.end_time));
         const formattedDate = format(new Date(props.activity.date), 'MMM d, yyyy');
@@ -139,7 +155,11 @@ export default {
                 method: "DELETE"
             });
             console.log(res);
-            // Emit delete event to parent component
+            /**
+             * ? We need to emit an event to delete activity from parent component
+             * ? if not, it will not be deleted in UI and we have to refresh UI to delete
+             * ? That's goona be a problem for our SPA application.
+             */
             context.emit('deleteActivity', props.activity.id);
         };
 
