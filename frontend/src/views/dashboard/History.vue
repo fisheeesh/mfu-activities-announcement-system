@@ -37,8 +37,8 @@
 
 <script>
 import Placeholder from '@/components/loaders/Placeholder.vue';
-import SingleActivity from '@/components/SingleActivity.vue';
-import getActivities from '@/composables/getActivities';
+import SingleActivity from '@/components/activity/SingleActivity.vue';
+import getActivities from '@/composables/controller/getActivities';
 import { ref } from 'vue';
 
 export default {

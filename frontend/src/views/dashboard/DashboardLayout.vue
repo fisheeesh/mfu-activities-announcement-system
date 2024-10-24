@@ -10,7 +10,7 @@
 <script>
 import { sidebarWidth } from '@/components/sidebar/sidebarState';
 import Sidebar from '../../components/sidebar/Sidebar'
-import getUser from '@/composables/getUser';
+import getUser from '@/composables/auth/getUser';
 import { useRouter } from 'vue-router';
 import { watch } from 'vue';
 export default {

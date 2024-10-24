@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import useSignIn from '@/composables/useSignIn';
+import useSignIn from '@/composables/auth/useSignIn';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 

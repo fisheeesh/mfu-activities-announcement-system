@@ -62,10 +62,10 @@
 </template>
 
 <script>
-import getUser from '@/composables/getUser';
+import getUser from '@/composables/auth/getUser';
 import SidebarLink from './SidebarLink'
 import { collapsed, toggleSidebar, sidebarWidth } from './sidebarState'
-import useSignOut from '@/composables/useSignOut';
+import useSignOut from '@/composables/auth/useSignOut';
 
 export default {
     components: { SidebarLink },
