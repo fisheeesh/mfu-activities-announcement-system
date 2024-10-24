@@ -105,7 +105,6 @@
 
 <script>
 import Spinner from '@/components/loaders/Spinner.vue';
-import { format } from 'date-fns';
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -148,7 +147,6 @@ export default {
 
             // Validate the form
             if (title.value && description.value && school.value && start_time.value && end_time.value && location.value && date.value) {
-                const formattedDate = format(new Date(date.value), 'MMM d, yyyy');
 
                 await fetch('http://localhost:3000/activities', {
                     method: 'POST',
@@ -156,7 +154,7 @@ export default {
                     body: JSON.stringify({
                         title: title.value,
                         description: description.value,
-                        date: formattedDate,
+                        date: date.value,
                         start_time: start_time.value,
                         end_time: end_time.value,
                         location: location.value,

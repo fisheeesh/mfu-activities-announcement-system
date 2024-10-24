@@ -77,7 +77,6 @@
 </template>
 
 <script>
-import { format } from 'date-fns';
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -108,7 +107,6 @@ export default {
         })
 
         let editActivity = async () => {
-            const formattedDate = format(new Date(date.value), 'MMM d, yyyy');
 
             await fetch(`http://localhost:3000/activities/${props.id}`, {
                 method: "PATCH",
@@ -118,7 +116,7 @@ export default {
                     description: description.value,
                     start_time: start_time.value,
                     end_time: end_time.value,
-                    date: formattedDate,
+                    date: date.value,
                     location: location.value,
                     school: school.value,
                 })

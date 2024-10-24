@@ -10,7 +10,7 @@
                 <div v-if="isEditable">
                     <!-- Conditionally disable delete icon -->
                     <span
-                        @click="!activity.isCompleted && deleteActivity"
+                        @click="deleteActivity"
                         :class="['material-symbols-outlined', 'me-2', 'delete', { 'disabled-icon': activity.isCompleted }]"
                     >
                         delete
@@ -29,7 +29,7 @@
             <!-- Activity details -->
             <div class="d-flex gap-2 mt-3 flex-wrap">
                 <div class="px-4 py-2 bg-secondary rounded-5">
-                    <i class="fas fa-clock text-black me-1"></i> {{ activity.date }} | {{ formattedStartTime }} - {{ formattedEndTime }}
+                    <i class="fas fa-clock text-black me-1"></i> {{ formattedDate }} | {{ formattedStartTime }} - {{ formattedEndTime }}
                 </div>
                 <div class="px-4 py-2 bg-white rounded-5 border border-1">
                     <i class="fas fa-map-marker-alt text-primary me-1"></i> {{ activity.location }}
@@ -79,6 +79,8 @@ export default {
         let formattedStartTime = computed(() => formatTime(props.activity.start_time));
         let formattedEndTime = computed(() => formatTime(props.activity.end_time));
 
+        const formattedDate = format(new Date(props.activity.date), 'MMM d, yyyy');
+
 
         let deleteActivity = async () => {
             let res = await fetch(`http://localhost:3000/activities/${props.activity.id}`, {
@@ -86,12 +88,12 @@ export default {
             })
             console.log(res)
             /**
-             * We have to emit a custom event to the parent component to ensure that activity is deleted from the UI
+             * ? We have to emit a custom event to the parent component to ensure that activity is deleted from the UI
              */
             context.emit('deleteActivity', props.activity.id)
         }
 
-        return { dynamicBorderClass, isShow, cutBodyDescription, deleteActivity, formattedStartTime, formattedEndTime }
+        return { dynamicBorderClass, isShow, cutBodyDescription, deleteActivity, formattedStartTime, formattedEndTime, formattedDate }
     }
 }
 </script>
