@@ -59,7 +59,7 @@
                         <!-- Start Date -->
                         <div class="mb-3">
                             <div class="form-label">Date <span class="text-danger">*</span></div>
-                            <input v-model="date" type="date" class="form-control bg-light border-0">
+                            <v-date-picker v-model="date" color="primary" elevation="1"></v-date-picker>
                         </div>
                     </div>
                 </div>
@@ -101,10 +101,12 @@ export default {
             start_time.value = data.start_time
             end_time.value = data.end_time
             location.value = data.location
-            date.value = data.date
+            date.value = new Date(data.date);
         })
 
         let editActivity = async () => {
+            const formattedDate = new Date(date.value);
+
             await fetch(`http://localhost:3000/activities/${props.id}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
@@ -113,7 +115,7 @@ export default {
                     description: description.value,
                     start_time: start_time.value,
                     end_time: end_time.value,
-                    date: date.value,
+                    date: formattedDate,
                     location: location.value,
                     school: school.value,
                 })
