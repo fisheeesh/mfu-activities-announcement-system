@@ -5,7 +5,7 @@
                 <div class="col-5 offset-4">
                     <!-- MFU Logo -->
                     <div class="image-container d-flex justify-content-center">
-                        <img src="@/assets/logo_mfu.png" alt="logo.png" width="100">
+                        <img src="@/assets/images/logo_mfu.png" alt="logo.png" width="100">
                     </div>
                     <!-- Title -->
                     <h4 class="fst-italic fw-bolder mt-3 text-center">MFU Activities Annoucement System</h4>

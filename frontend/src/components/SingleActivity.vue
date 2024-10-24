@@ -86,9 +86,5 @@ export default {
 </script>
 
 <style>
-.disabled-icon {
-    pointer-events: none;
-    opacity: 0.5;
-    cursor: not-allowed;
-}
+
 </style>
