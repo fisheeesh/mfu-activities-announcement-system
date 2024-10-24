@@ -99,6 +99,7 @@
 </template>
 
 <script>
+import { format } from 'date-fns';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -134,13 +135,15 @@ export default {
 
             // Validate the form
             if (title.value && description.value && school.value && start_time.value && end_time.value && location.value && date.value) {
+                const formattedDate = format(new Date(date.value), 'MMM d, yyyy');
+
                 await fetch('http://localhost:3000/activities', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         title: title.value,
                         description: description.value,
-                        date: date.value,
+                        date: formattedDate,
                         start_time: start_time.value,
                         end_time: end_time.value,
                         location: location.value,

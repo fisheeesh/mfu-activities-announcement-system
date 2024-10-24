@@ -66,7 +66,7 @@
                 <!-- Buttons -->
                 <div class="btns d-flex hstack gap-4 justify-content-center align-items-center mt-2">
                     <button class="cancel btn btn-light px-5 text-white fw-bold"
-                        @click="router.push({ name: 'dashboard' })">Cancel</button>
+                        @click.prevent="router.push({ name: 'dashboard' })">Cancel</button>
                     <button class="btn btn-success px-5 text-white fw-bold">Edit</button>
                 </div>
             </form>
@@ -75,6 +75,7 @@
 </template>
 
 <script>
+import { format } from 'date-fns';
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -105,7 +106,7 @@ export default {
         })
 
         let editActivity = async () => {
-            const formattedDate = new Date(date.value);
+            const formattedDate = format(new Date(date.value), 'MMM d, yyyy');
 
             await fetch(`http://localhost:3000/activities/${props.id}`, {
                 method: "PATCH",
