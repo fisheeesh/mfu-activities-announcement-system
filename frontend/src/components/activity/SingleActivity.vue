@@ -29,7 +29,7 @@
             <!-- Activity details -->
             <div class="d-flex gap-2 mt-3 flex-wrap">
                 <div class="px-4 py-2 bg-secondary rounded-5">
-                    <i class="fas fa-clock text-black me-1"></i> {{ activity.date }} | {{ activity.start_time }} - {{ activity.end_time }}
+                    <i class="fas fa-clock text-black me-1"></i> {{ activity.date }} | {{ formattedStartTime }} - {{ formattedEndTime }}
                 </div>
                 <div class="px-4 py-2 bg-white rounded-5 border border-1">
                     <i class="fas fa-map-marker-alt text-primary me-1"></i> {{ activity.location }}
@@ -44,6 +44,7 @@
 
 <script>
 import { computed, ref } from 'vue';
+import { format, parse } from 'date-fns';
 
 export default {
     props: {
@@ -69,6 +70,16 @@ export default {
             return props.activity.description.substring(0, 52) + '... See more'
         })
 
+        const formatTime = (time) => {
+            const date = parse(time, 'HH:mm', new Date()); // Parse the time
+            return format(date, 'h:mm a'); // Format to 12-hour with AM/PM
+        };
+
+        // Computed properties for formatted times
+        let formattedStartTime = computed(() => formatTime(props.activity.start_time));
+        let formattedEndTime = computed(() => formatTime(props.activity.end_time));
+
+
         let deleteActivity = async () => {
             let res = await fetch(`http://localhost:3000/activities/${props.activity.id}`, {
                 method: "DELETE"
@@ -80,7 +91,7 @@ export default {
             context.emit('deleteActivity', props.activity.id)
         }
 
-        return { dynamicBorderClass, isShow, cutBodyDescription, deleteActivity }
+        return { dynamicBorderClass, isShow, cutBodyDescription, deleteActivity, formattedStartTime, formattedEndTime }
     }
 }
 </script>

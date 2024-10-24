@@ -28,6 +28,8 @@
                                 <option value="School of Management">School of Management</option>
                                 <option value="School of Cosemtice Science">School of Cosemtice Science</option>
                                 <option value="School of Laws">School of Laws</option>
+                                <option value="School of Sinology">School of Sinology</option>
+                                <option value="Mae-Fah-Luang University">Mae-Fah-Luang University</option>
                             </select>
                         </div>
                         <!-- Time -->

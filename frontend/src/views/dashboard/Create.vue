@@ -40,6 +40,8 @@
                                 <option value="School of Management">School of Management</option>
                                 <option value="School of Cosmetic Science">School of Cosmetic Science</option>
                                 <option value="School of Laws">School of Laws</option>
+                                <option value="School of Sinology">School of Sinology</option>
+                                <option value="Mae-Fah-Luang University">Mae-Fah-Luang University</option>
                             </select>
                             <div class="invalid-feedback">
                                 Please select a school.
