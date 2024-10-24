@@ -6,16 +6,26 @@
                 <div>
                     <h4 class="fw-bold">{{ activity.title }}</h4>
                 </div>
-                <div>
-                    <span @click="deleteActivity" class="material-symbols-outlined me-2 delete">delete</span>
-                    <router-link :to="{ name: 'edit', params: { id: activity.id } }">
+                <!-- Delete and Edit icons -->
+                <div v-if="isEditable">
+                    <!-- Conditionally disable delete icon -->
+                    <span
+                        @click="!activity.isCompleted && deleteActivity"
+                        :class="['material-symbols-outlined', 'me-2', 'delete', { 'disabled-icon': activity.isCompleted }]"
+                    >
+                        delete
+                    </span>
+                    <!-- Conditionally disable edit icon -->
+                    <router-link v-if="!activity.isCompleted" :to="{ name: 'edit', params: { id: activity.id } }">
                         <span class="material-symbols-outlined edit text-black">edit</span>
                     </router-link>
+                    <span v-else class="material-symbols-outlined edit text-muted disabled-icon">edit</span>
                 </div>
             </div>
+
             <!-- Activity description -->
-            <p @click="isShow = !isShow" class="text-muted description mt-3">{{ isShow ? activity.description :
-                cutBodyDescription }}</p>
+            <p @click="isShow = !isShow" class="text-muted description mt-3">{{ isShow ? activity.description : cutBodyDescription }}</p>
+
             <!-- Activity details -->
             <div class="d-flex gap-2 mt-3 flex-wrap">
                 <div class="px-4 py-2 bg-secondary rounded-5">
@@ -37,6 +47,10 @@ import { computed, ref } from 'vue';
 
 export default {
     props: {
+        isEditable: {
+            type: Boolean,
+            default: false
+        },
         activity: {
             type: Object,
             required: true
@@ -71,4 +85,10 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.disabled-icon {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+</style>

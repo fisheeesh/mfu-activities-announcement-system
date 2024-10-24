@@ -23,7 +23,7 @@
                             <div v-else>
                                 <!-- Activity List -->
                                 <div v-for="activity in activities" :key="activity.id">
-                                    <SingleActivity @deleteActivity="handleDelete" :activity="activity">
+                                    <SingleActivity :isEditable="true" @deleteActivity="handleDelete" :activity="activity">
                                     </SingleActivity>
                                 </div>
                             </div>

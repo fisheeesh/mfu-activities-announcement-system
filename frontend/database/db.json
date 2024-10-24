@@ -9,7 +9,8 @@
       "end_time": "23:00",
       "location": "Landao",
       "school": "School of Laws",
-      "status": "upcoming"
+      "status": "upcoming",
+      "isCompleted": false
     },
     {
       "id": "1ca9",
@@ -19,6 +20,18 @@
       "start_time": "18:00",
       "end_time": "12:00",
       "location": "HRH Princess Srinagarindra Statue (Landao)",
+      "school": "School of Management",
+      "status": "ongoing",
+      "isCompleted": true
+    },
+    {
+      "id": "a0d2",
+      "title": "Chinese & English Corner",
+      "description": "You're invited!!!\n\n🀄🎉 欢迎来到 Chinese & English Corner at MFU! 🎉🀄\n\nReady to dive into the world of Chinese & English language and culture? 🌏\n\n✨ Join us for a fun and engaging \"Chinese Corner\" activity where you can practice your Mandarin, learn about Chinese traditions, and make new friends! 🗣️🤝\n📅 Date: October 20, 2024 🕒 Time: 11:00 AM - 1:00 PM 📍 Location: Study Room no 6, Chinese Language Center, Mae Fah Luang University\n\nWhether you're a beginner or a fluent speaker, there's something for everyone. Let's explore the beauty of the Chinese culture together! 🇨🇳🌸\n\nSee you there! 😃 ",
+      "date": "Nov 20, 2024",
+      "start_time": "11:00",
+      "end_time": "13:00",
+      "location": "Study Room no 6, Chinese Language Center, Mae Fah Luang University",
       "school": "School of Management",
       "status": "upcoming"
     }

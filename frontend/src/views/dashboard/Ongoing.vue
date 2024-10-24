@@ -22,7 +22,7 @@
                             <!-- If not, that means we got data -->
                             <div v-else>
                                 <div v-for="activity in filteredActivities" :key="activity.id">
-                                    <SingleActivity @deleteActivity="handleDelete" :activity="activity">
+                                    <SingleActivity :isEditable="true" @deleteActivity="handleDelete" :activity="activity">
                                     </SingleActivity>
                                 </div>
                             </div>
