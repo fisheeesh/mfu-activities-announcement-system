@@ -1,6 +1,9 @@
 <template>
     <section class="create">
-        <div class="container-lg">
+        <div v-if="loading" class="text-center mt-8">
+            <Spinner/>
+        </div>
+        <div v-else class="container-lg">
             <h1 class="fs-4 fw-bold text-center mt-5">Create a new activity</h1>
             <form @submit.prevent="createActivity" novalidate>
                 <div class="row mt-4">
@@ -99,11 +102,15 @@
 </template>
 
 <script>
+import Spinner from '@/components/loaders/Spinner.vue';
 import { format } from 'date-fns';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 export default {
+    components: {
+        Spinner
+    },
     setup() {
         const router = useRouter();
         let title = ref();
@@ -113,6 +120,10 @@ export default {
         let date = ref();
         let start_time = ref();
         let end_time = ref();
+
+        let loading = ref(true)
+
+        onMounted(() => setTimeout(() => loading.value = false, 500))
 
         // To track if a field has been touched
         let touchedFields = ref({});
@@ -155,7 +166,7 @@ export default {
             }
         };
 
-        return { title, description, school, location, date, start_time, end_time, createActivity, showError, router };
+        return { title, description, school, location, date, start_time, end_time, createActivity, showError, router, loading };
     },
 };
 </script>

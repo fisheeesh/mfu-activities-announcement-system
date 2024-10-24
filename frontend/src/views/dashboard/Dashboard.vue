@@ -1,6 +1,9 @@
 <template>
   <section class="dashboard">
-    <div class="container">
+    <div v-if="loading" class="text-center mt-8">
+            <Spinner/>
+        </div>
+    <div v-else v class="container">
       <div class="row">
         <div class="col-12 d-flex flex-column justify-content-center align-items-center mt-6">
           <div class="image-container">
@@ -16,9 +19,19 @@
 </template>
 
 <script>
-
+import Spinner from '@/components/loaders/Spinner.vue';
+import { onMounted, ref } from 'vue';
 
 export default {
+  components: {
+    Spinner
+  },
+  setup(){
+    let loading = ref(true)
 
+    onMounted(() => setTimeout(() => loading.value = false, 1000))
+
+    return { loading }
+  }
 }
 </script>
