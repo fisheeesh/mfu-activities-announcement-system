@@ -23,7 +23,8 @@
                             <div v-else>
                                 <!-- Activity List -->
                                 <div v-for="activity in activities" :key="activity.id">
-                                    <SingleActivity :isEditable="true" @deleteActivity="handleDelete" :activity="activity">
+                                    <SingleActivity @updated="handleUpdate" :isEditable="true"
+                                        @deleteActivity="handleDelete" :activity="activity">
                                     </SingleActivity>
                                 </div>
                             </div>
@@ -56,7 +57,11 @@ export default {
             activities.value = activities.value.filter(activity => activity.id !== id);
         }
 
-        return { error, activities, loading, handleDelete }
+        let handleUpdate = (id, status) => {
+            let findedActivity = activities.value.find(activity => activity.id === id)
+            findedActivity.status = status
+        }
+        return { error, activities, loading, handleDelete, handleUpdate }
     }
 }
 </script>

@@ -21,7 +21,8 @@
                             <!-- If not, that means we got data -->
                             <div v-else>
                                 <div v-for="activity in filteredActivities" :key="activity.id">
-                                    <SingleActivity :isEditable="true" @deleteActivity="handleDelete" :activity="activity"></SingleActivity>
+                                    <SingleActivity @updated="handleUpdate" :isEditable="true"
+                                        @deleteActivity="handleDelete" :activity="activity"></SingleActivity>
                                 </div>
                             </div>
                         </div>
@@ -49,11 +50,17 @@ export default {
         load().then(() => loading.value = false)
 
         let filteredActivities = computed(() => activities.value.filter(activity => activity.status === 'upcoming'))
+
         let handleDelete = (id) => {
             activities.value = activities.value.filter(activity => activity.id !== id);
         }
 
-        return { error, activities, filteredActivities, loading, handleDelete }
+        let handleUpdate = (id, status) => {
+            let findedActivity = activities.value.find(activity => activity.id === id)
+            findedActivity.status = status
+        }
+
+        return { error, activities, filteredActivities, loading, handleDelete, handleUpdate }
     }
 }
 </script>

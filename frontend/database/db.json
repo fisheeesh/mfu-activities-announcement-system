@@ -4,13 +4,12 @@
       "id": "810d",
       "title": "MFU Music Festival 2024 (edited)",
       "description": "🗣️Ahhhhh.. It's not a big job for sure!! ️\n🔊In addition to concerts and appointment cards, we also have fun zone for everyone to come and enjoy.🎪\n\nIn the music festival “MFU Music Festival 2024 Angem Phase 2”❤️ 🔥\n🗓On 31 October 2567, time 18:00 onward.\n📍 At Landao",
-      "date": "Oct 31, 2024",
+      "date": "2024-10-30T17:00:00.000Z",
       "start_time": "18:00",
       "end_time": "23:00",
       "location": "Landao",
       "school": "Mae-Fah-Luang University",
-      "status": "upcoming",
-      "isCompleted": false
+      "status": "upcoming"
     },
     {
       "id": "1ca9",
@@ -21,8 +20,7 @@
       "end_time": "12:00",
       "location": "HRH Princess Srinagarindra Statue (Landao)",
       "school": "School of Management",
-      "status": "ongoing",
-      "isCompleted": false
+      "status": "upcoming"
     },
     {
       "id": "a0d2",
@@ -45,6 +43,39 @@
       "location": "Indoor Stadium",
       "school": "Mae-Fah-Luang University",
       "status": "upcoming"
+    },
+    {
+      "id": "bba9",
+      "title": "test",
+      "description": "test",
+      "date": "2024-10-23T17:00:00.000Z",
+      "start_time": "23:34",
+      "end_time": "23:38",
+      "location": "test",
+      "school": "School of Management",
+      "status": "completed"
+    },
+    {
+      "id": "cfa0",
+      "title": "test",
+      "description": "test",
+      "date": "2024-10-24T17:00:00.000Z",
+      "start_time": "08:30",
+      "end_time": "13:30",
+      "location": "test",
+      "school": "School of Management",
+      "status": "upcoming"
+    },
+    {
+      "id": "42d3",
+      "title": "test",
+      "description": "test",
+      "date": "2024-10-23T17:00:00.000Z",
+      "start_time": "23:46",
+      "end_time": "23:48",
+      "location": "test",
+      "school": "School of Information Technology",
+      "status": "completed"
     }
   ]
 }
