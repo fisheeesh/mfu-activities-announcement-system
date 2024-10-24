@@ -70,10 +70,10 @@ import useSignOut from '@/composables/auth/useSignOut';
 export default {
     components: { SidebarLink },
     setup() {
-        let { signOut } = useSignOut()
-        let { user } = getUser()
+        const { signOut } = useSignOut()
+        const { user } = getUser()
 
-        let logout = async () => {
+        const logout = async () => {
             await signOut()
 
         }

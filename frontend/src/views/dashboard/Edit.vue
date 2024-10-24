@@ -36,12 +36,12 @@
                         <div class="mb-3">
                             <div class="row">
                                 <div class="col-6">
-                                    <label for="start_time">Start Time</label>
+                                    <label for="start_time">Start Time <span class="text-danger">*</span></label>
                                     <input v-model="start_time" type="time" class="form-control bg-light border-1"
                                         required>
                                 </div>
                                 <div class="col-6">
-                                    <label for="end_time">End Time</label>
+                                    <label for="end_time">End Time <span class="text-danger">*</span></label>
                                     <input v-model="end_time" type="time" class="form-control bg-light border-1"
                                         required>
                                 </div>

@@ -62,7 +62,7 @@ export default {
         let isShow = ref(false);
 
         // Set dynamic border color class based on activity status
-        let dynamicBorderClass = computed(() => {
+        const dynamicBorderClass = computed(() => {
             if (props.activity.status === 'ongoing') return 'border-start border-5 border-info';
             else if (props.activity.status === 'upcoming') return 'border-start border-5 border-warning';
             else return 'border-start border-5 border-success';
@@ -134,7 +134,7 @@ export default {
         });
 
         // Cut description cuz it is too long to display
-        let cutBodyDescription = computed(() => {
+        const cutBodyDescription = computed(() => {
             return props.activity.description.substring(0, 52) + '... See more';
         });
 
@@ -144,13 +144,16 @@ export default {
             return format(date, 'h:mm a');
         };
 
-        // Format date in a format of MMM d, yyyy eg. Oct 31, 2024
-        let formattedStartTime = computed(() => formatTime(props.activity.start_time));
-        let formattedEndTime = computed(() => formatTime(props.activity.end_time));
+        /**
+         * ! We use computed property cus we want a new data based on original data 
+         * ! which is formatted time in a format of AM/PM
+         */
+        const formattedStartTime = computed(() => formatTime(props.activity.start_time));
+        const formattedEndTime = computed(() => formatTime(props.activity.end_time));
         const formattedDate = format(new Date(props.activity.date), 'MMM d, yyyy');
 
         // Delete activity function
-        let deleteActivity = async () => {
+        const deleteActivity = async () => {
             let res = await fetch(`http://localhost:3000/activities/${props.activity.id}`, {
                 method: "DELETE"
             });

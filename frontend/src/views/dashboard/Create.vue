@@ -51,13 +51,13 @@
                         <div class="mb-3">
                             <div class="row">
                                 <div class="col-6">
-                                    <label for="start_time">Start Time</label>
+                                    <label for="start_time">Start Time <span class="text-danger">*</span></label>
                                     <input v-model="start_time" type="time"
                                         :class="{ 'is-invalid': showError('start_time') }"
                                         class="form-control bg-light border-1" required>
                                 </div>
                                 <div class="col-6">
-                                    <label for="end_time">End Time</label>
+                                    <label for="end_time">End Time <span class="text-danger">*</span></label>
                                     <input v-model="end_time" type="time"
                                         :class="{ 'is-invalid': showError('end_time') }"
                                         class="form-control bg-light border-1" required>
@@ -82,8 +82,6 @@
                         <!-- Start Date -->
                         <div class="mb-3">
                             <div class="form-label">Date <span class="text-danger">*</span></div>
-                            <!-- <input v-model="date" type="date" :class="{ 'is-invalid': showError('date') }"
-                                class="form-control bg-light border-1" required> -->
                             <v-date-picker v-model="date" :class="{ 'is-invalid': showError('date') }" color="primary"
                                 elevation="1"></v-date-picker>
                             <div class="invalid-feedback">
