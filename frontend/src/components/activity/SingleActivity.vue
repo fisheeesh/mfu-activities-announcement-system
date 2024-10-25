@@ -23,8 +23,13 @@
             </div>
 
             <!-- Activity description -->
-            <p @click="isShow = !isShow" class="text-muted description mt-3">{{ isShow ? activity.description :
-                cutBodyDescription }}</p>
+            <div>
+                <p v-if="activity.description.length > 52" @click="isShow = !isShow"
+                    class="text-muted description mt-3">
+                    {{ isShow ? activity.description : cutBodyDescription }}
+                </p>
+                <p v-else class="text-muted mt-3">{{ activity.description }}</p>
+            </div>
 
             <!-- Activity details -->
             <div class="d-flex gap-2 mt-3 flex-wrap">
@@ -135,17 +140,17 @@ export default {
         onMounted(() => {
             checkStatus();
             /**
-             * * To enhace real-time data, we made the check status process every 1 second
-             * * It will repeat until activity's status is changed
+             * ? To enhace real-time data, we made the check status process every 1 second
+             * ? It will repeat until activity's status is changed
              */
             const interval = setInterval(() => {
                 checkStatus();
             }, 500);
 
             /**
-             * * When the status is changed, the actitivity has to go to its respective page (depends on its status)
-             * * And it has to remove from current page. Before that remove time, beforeunmonted hook will work and stop the status checking process
-             * * Then the activity will be moved to its respective page and the status checking process will start again
+             * ? When the status is changed, the actitivity has to go to its respective page (depends on its status)
+             * ? And it has to remove from current page. Before that remove time, beforeunmonted hook will work and stop the status checking process
+             * ? Then the activity will be moved to its respective page and the status checking process will start again
              */
             onBeforeUnmount(() => {
                 clearInterval(interval);
@@ -171,7 +176,7 @@ export default {
         const formattedEndTime = computed(() => formatTime(props.activity.end_time));
         const formattedDate = format(new Date(props.activity.date), 'MMM d, yyyy');
 
-        // Delete activity function
+        // Delete activity by id
         const deleteActivity = async () => {
             let res = await fetch(`http://localhost:3000/activities/${props.activity.id}`, {
                 method: "DELETE"
