@@ -48,17 +48,19 @@
                             <div class="row">
                                 <div class="col-6">
                                     <label for="start_time">Start Time <span class="text-danger">*</span></label>
-                                    <input v-model="start_time" :class="{ 'is-invalid': showError('start_time') }"
-                                        type="time" class="form-control bg-light border-1" required>
+                                    <input v-model="start_time" type="time"
+                                        :class="{ 'is-invalid': showError('start_time') }"
+                                        class="form-control bg-light border-1" required>
                                 </div>
                                 <div class="col-6">
                                     <label for="end_time">End Time <span class="text-danger">*</span></label>
-                                    <input v-model="end_time" :class="{ 'is-invalid': showError('end_time') }"
-                                        type="time" class="form-control bg-light border-1" required>
+                                    <input v-model="end_time" type="time"
+                                        :class="{ 'is-invalid': showError('end_time') || !isEndTimeValid }"
+                                        class="form-control bg-light border-1" required>
+                                    <div v-if="!isEndTimeValid" class="invalid-feedback">
+                                        End time must be later than start time.
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="invalid-feedback">
-                                Please select a time.
                             </div>
                         </div>
                         <!-- Location -->
@@ -96,7 +98,7 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 export default {
@@ -116,6 +118,13 @@ export default {
         const touchedFields = ref({})
 
         const showError = field => touchedFields.value[field] && !eval(field).value
+
+        // To ensure end time is later than start time
+        const isEndTimeValid = computed(() => {
+            // Check both fields are filled or not
+            if (!start_time.value || !end_time.value) return true;
+            return end_time.value > start_time.value;
+        });
 
         onMounted(async () => {
             let res = await fetch(`http://localhost:3000/activities/${props.id}`)
@@ -141,7 +150,7 @@ export default {
                 end_time: true
             };
 
-            if (title.value && description.value && school.value && start_time.value && end_time.value && location.value && date.value) {
+            if (title.value && description.value && school.value && start_time.value && end_time.value && location.value && date.value && isEndTimeValid.value) {
                 await fetch(`http://localhost:3000/activities/${props.id}`, {
                     method: "PATCH",
                     headers: { "Content-Type": "application/json" },
@@ -159,7 +168,7 @@ export default {
             }
         }
 
-        return { router, editActivity, title, description, school, start_time, end_time, location, date, showError }
+        return { router, editActivity, title, description, school, start_time, end_time, location, date, showError, isEndTimeValid }
     }
 }
 </script>

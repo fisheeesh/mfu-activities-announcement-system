@@ -1,7 +1,7 @@
 <template>
     <section class="create">
         <div v-if="loading" class="text-center mt-8">
-            <Spinner/>
+            <Spinner />
         </div>
         <div v-else class="container-lg">
             <h1 class="fs-4 fw-bold text-center mt-5">Create a new activity</h1>
@@ -59,12 +59,12 @@
                                 <div class="col-6">
                                     <label for="end_time">End Time <span class="text-danger">*</span></label>
                                     <input v-model="end_time" type="time"
-                                        :class="{ 'is-invalid': showError('end_time') }"
+                                        :class="{ 'is-invalid': showError('end_time') || !isEndTimeValid }"
                                         class="form-control bg-light border-1" required>
+                                    <div v-if="!isEndTimeValid" class="invalid-feedback">
+                                        End time must be later than start time.
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="invalid-feedback">
-                                Please select a time.
                             </div>
                         </div>
                         <!-- Location -->
@@ -103,7 +103,7 @@
 
 <script>
 import Spinner from '@/components/loaders/Spinner.vue';
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 export default {
@@ -143,8 +143,15 @@ export default {
             return touchedFields.value[field] && !eval(field).value;
         };
 
+        // To ensure end time is later than start time
+        const isEndTimeValid = computed(() => {
+            // Check both fields are filled or not
+            if (!start_time.value || !end_time.value) return true;
+            return end_time.value > start_time.value;
+        });
+
         let createActivity = async () => {
-            
+
             /**
              * ? Marked all the fields are touched by default which means it will be known as touched fields 
              * ? and erors checking process is always set
@@ -159,9 +166,8 @@ export default {
                 end_time: true
             };
 
-            // If only all the fields are not empty, let the user to create an activity
-            if (title.value && description.value && school.value && start_time.value && end_time.value && location.value && date.value) {
-
+            // Check if all fields are filled and end time is valid
+            if (title.value && description.value && school.value && start_time.value && end_time.value && location.value && date.value && isEndTimeValid.value) {
                 await fetch('http://localhost:3000/activities', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -180,7 +186,7 @@ export default {
             }
         };
 
-        return { title, description, school, location, date, start_time, end_time, createActivity, showError, router, loading };
+        return { title, description, school, location, date, start_time, end_time, createActivity, showError, router, loading, isEndTimeValid };
     },
 };
 </script>

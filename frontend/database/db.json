@@ -26,7 +26,7 @@
       "id": "a0d2",
       "title": "Chinese & English Corner",
       "description": "You're invited!!!\n\n🀄🎉 欢迎来到 Chinese & English Corner at MFU! 🎉🀄\n\nReady to dive into the world of Chinese & English language and culture? 🌏\n\n✨ Join us for a fun and engaging \"Chinese Corner\" activity where you can practice your Mandarin, learn about Chinese traditions, and make new friends! 🗣️🤝\n📅 Date: November 20, 2024 \n🕒 Time: 11:00 AM - 1:00 PM \n📍 Location: Study Room no 6, Chinese Language Center, Mae Fah Luang University\n\nWhether you're a beginner or a fluent speaker, there's something for everyone. Let's explore the beauty of the Chinese culture together! 🇨🇳🌸\n\nSee you there! 😃 ",
-      "date": "Nov 20, 2024",
+      "date": "2024-11-10T17:00:00.000Z",
       "start_time": "11:00",
       "end_time": "13:00",
       "location": "Study Room no 6, Chinese Language Center, Mae Fah Luang University",
@@ -56,23 +56,12 @@
       "status": "completed"
     },
     {
-      "id": "cfa0",
+      "id": "c282",
       "title": "test",
       "description": "test",
       "date": "2024-10-24T17:00:00.000Z",
-      "start_time": "08:30",
-      "end_time": "13:30",
-      "location": "test",
-      "school": "School of Management",
-      "status": "completed"
-    },
-    {
-      "id": "42d3",
-      "title": "test",
-      "description": "test",
-      "date": "2024-10-23T17:00:00.000Z",
-      "start_time": "23:46",
-      "end_time": "23:48",
+      "start_time": "00:09",
+      "end_time": "00:15",
       "location": "test",
       "school": "School of Information Technology",
       "status": "completed"

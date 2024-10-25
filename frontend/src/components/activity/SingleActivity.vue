@@ -106,6 +106,25 @@ export default {
                     }
                 }
             }
+            /**
+             * ? If it is not on the same day, check if the current date is before the activity date, then update status to upcoming
+             * ? It seems like it is not a big deal to check else if and else blocks
+             * ? If we not check it, its's gonna be a problem in editing an acitivity whcih status is ongoing
+             * ? Like changing from ongoing to upcoming or ongoing to completed
+             */
+            else if (isBefore(current, activityDate)) {
+                if (props.activity.status !== 'upcoming') {
+                    updateActivityStatus('upcoming');
+                }
+            }
+            /**
+             * * If all the above condition are not met, update status to completed
+             */
+            else {
+                if (props.activity.status !== 'completed') {
+                    updateActivityStatus('completed');
+                }
+            }
         };
 
         /**
@@ -121,7 +140,7 @@ export default {
              */
             const interval = setInterval(() => {
                 checkStatus();
-            }, 1000);
+            }, 500);
 
             /**
              * * When the status is changed, the actitivity has to go to its respective page (depends on its status)
