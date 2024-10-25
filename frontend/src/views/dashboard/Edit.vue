@@ -2,26 +2,34 @@
     <section class="create">
         <div class="container-lg">
             <h1 class="fs-4 fw-bold text-center mt-5">Edit activity</h1>
-            <form @submit.prevent="editActivity">
+            <form @submit.prevent="editActivity" novalidate>
                 <div class="row mt-4">
                     <div class="col-md-6">
                         <!-- Title -->
                         <div class="mb-3">
                             <div class="form-label">Title <span class="text-danger">*</span></div>
-                            <input v-model="title" type="text" placeholder="Activity Title"
-                                class="form-control bg-light border-0">
+                            <input @keydown.enter.prevent required v-model="title"
+                                :class="{ 'is-invalid': showError('title') }" type="text" placeholder="Activity Title"
+                                class="form-control bg-light border-1">
+                            <div class="invalid-feedback">
+                                Please provide a title.
+                            </div>
                         </div>
                         <!-- Description -->
                         <div class="mb-3">
                             <div class="form-label">Description <span class="text-danger">*</span></div>
-                            <textarea v-model="description" style="resize: none;" name="" id=""
-                                class="form-control bg-light border-0" rows="4"
+                            <textarea required v-model="description" :class="{ 'is-invalid': showError('description') }"
+                                style="resize: none;" name="" id="" class="form-control bg-light border-1" rows="4"
                                 placeholder="Activity Description"></textarea>
+                            <div class="invalid-feedback">
+                                Please provide a description.
+                            </div>
                         </div>
                         <!-- School -->
                         <div class="mb-3">
                             <div class="form-label">School <span class="text-danger">*</span></div>
-                            <select v-model="school" class="form-select border-0 bg-light">
+                            <select required v-model="school" :class="{ 'is-invalid': showError('school') }"
+                                class="form-select border-1 bg-light">
                                 <option value="" selected disabled>Choose School</option>
                                 <option value="School of Information Technology">School of Information Technology
                                 </option>
@@ -31,19 +39,22 @@
                                 <option value="School of Sinology">School of Sinology</option>
                                 <option value="Mae-Fah-Luang University">Mae-Fah-Luang University</option>
                             </select>
+                            <div class="invalid-feedback">
+                                Please select a school.
+                            </div>
                         </div>
                         <!-- Time -->
                         <div class="mb-3">
                             <div class="row">
                                 <div class="col-6">
                                     <label for="start_time">Start Time <span class="text-danger">*</span></label>
-                                    <input v-model="start_time" type="time" class="form-control bg-light border-1"
-                                        required>
+                                    <input v-model="start_time" :class="{ 'is-invalid': showError('start_time') }"
+                                        type="time" class="form-control bg-light border-1" required>
                                 </div>
                                 <div class="col-6">
                                     <label for="end_time">End Time <span class="text-danger">*</span></label>
-                                    <input v-model="end_time" type="time" class="form-control bg-light border-1"
-                                        required>
+                                    <input v-model="end_time" :class="{ 'is-invalid': showError('end_time') }"
+                                        type="time" class="form-control bg-light border-1" required>
                                 </div>
                             </div>
                             <div class="invalid-feedback">
@@ -53,15 +64,23 @@
                         <!-- Location -->
                         <div class="mb-3">
                             <div class="form-label">Location <span class="text-danger">*</span></div>
-                            <input v-model="location" type="text" placeholder="Indoor Stadium"
-                                class="form-control bg-light border-0">
+                            <input @keydown.enter.prevent required v-model="location"
+                                :class="{ 'is-invalid': showError('location') }" type="text"
+                                placeholder="Indoor Stadium" class="form-control bg-light border-1">
+                            <div class="invalid-feedback">
+                                Please provide a location.
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <!-- Start Date -->
                         <div class="mb-3">
                             <div class="form-label">Date <span class="text-danger">*</span></div>
-                            <v-date-picker v-model="date" color="primary" elevation="1"></v-date-picker>
+                            <v-date-picker v-model="date" :class="{ 'is-invalid': showError('date') }" color="primary"
+                                elevation="1"></v-date-picker>
+                        </div>
+                        <div class="invalid-feedback">
+                            Please select a date.
                         </div>
                     </div>
                 </div>
@@ -94,6 +113,10 @@ export default {
         let location = ref()
         let date = ref()
 
+        const touchedFields = ref({})
+
+        const showError = field => touchedFields.value[field] && !eval(field).value
+
         onMounted(async () => {
             let res = await fetch(`http://localhost:3000/activities/${props.id}`)
             let data = await res.json()
@@ -108,23 +131,35 @@ export default {
 
         let editActivity = async () => {
 
-            await fetch(`http://localhost:3000/activities/${props.id}`, {
-                method: "PATCH",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    title: title.value,
-                    description: description.value,
-                    start_time: start_time.value,
-                    end_time: end_time.value,
-                    date: date.value,
-                    location: location.value,
-                    school: school.value,
+            touchedFields.value = {
+                title: true,
+                description: true,
+                school: true,
+                location: true,
+                date: true,
+                start_time: true,
+                end_time: true
+            };
+
+            if (title.value && description.value && school.value && start_time.value && end_time.value && location.value && date.value) {
+                await fetch(`http://localhost:3000/activities/${props.id}`, {
+                    method: "PATCH",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        title: title.value,
+                        description: description.value,
+                        start_time: start_time.value,
+                        end_time: end_time.value,
+                        date: date.value,
+                        location: location.value,
+                        school: school.value,
+                    })
                 })
-            })
-            router.push({ name: 'dashboard' });
+                router.push({ name: 'dashboard' });
+            }
         }
 
-        return { router, editActivity, title, description, school, start_time, end_time, location, date }
+        return { router, editActivity, title, description, school, start_time, end_time, location, date, showError }
     }
 }
 </script>

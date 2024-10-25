@@ -2,7 +2,7 @@
   "activities": [
     {
       "id": "810d",
-      "title": "MFU Music Festival 2024 (edited)",
+      "title": "MFU Music Festival 2024",
       "description": "🗣️Ahhhhh.. It's not a big job for sure!! ️\n🔊In addition to concerts and appointment cards, we also have fun zone for everyone to come and enjoy.🎪\n\nIn the music festival “MFU Music Festival 2024 Angem Phase 2”❤️ 🔥\n🗓On 31 October 2567, time 18:00 onward.\n📍 At Landao",
       "date": "2024-10-30T17:00:00.000Z",
       "start_time": "18:00",
@@ -64,7 +64,7 @@
       "end_time": "13:30",
       "location": "test",
       "school": "School of Management",
-      "status": "upcoming"
+      "status": "completed"
     },
     {
       "id": "42d3",

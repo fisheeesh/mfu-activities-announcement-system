@@ -124,15 +124,31 @@ export default {
 
         onMounted(() => setTimeout(() => loading.value = false, 500))
 
-        // To track if a field has been touched
+        /**
+         * ? To track which form fields have been touched by user
+         * ? When user touched a field, it will be marked as true which means we will start checking for errors on it
+         */
         let touchedFields = ref({});
 
+        /**
+         * ? If 2 coniditons are met, showError functin will be activated
+         * ? Condi -> touchedFields.value[field] which means check the field whether it is touched by user or not
+         * ? In our case, we set default as true so the form fields are marked as alwasy touched by default and the condi 1 is always true
+         * ? Condi 2 -> to check form fields are empty or not. eval() return the actual value of its para
+         * ? In our case, if title input is empty string and it value is fasle but we chec wit ! so it will return true
+         * ? After 2 condi are met it will invoke showError() function to respective input
+         * 
+         */
         const showError = (field) => {
             return touchedFields.value[field] && !eval(field).value;
         };
 
         let createActivity = async () => {
-            // Mark all fields as touched
+            
+            /**
+             * ? Marked all the fields are touched by default which means it will be known as touched fields 
+             * ? and erors checking process is always set
+             */
             touchedFields.value = {
                 title: true,
                 description: true,
@@ -143,7 +159,7 @@ export default {
                 end_time: true
             };
 
-            // Validate the form
+            // If only all the fields are not empty, let the user to create an activity
             if (title.value && description.value && school.value && start_time.value && end_time.value && location.value && date.value) {
 
                 await fetch('http://localhost:3000/activities', {
