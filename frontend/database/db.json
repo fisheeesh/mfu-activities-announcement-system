@@ -45,26 +45,59 @@
       "status": "upcoming"
     },
     {
-      "id": "bba9",
+      "id": "3e8d",
       "title": "test",
       "description": "test",
       "date": "2024-10-23T17:00:00.000Z",
-      "start_time": "23:34",
-      "end_time": "23:38",
+      "start_time": "00:55",
+      "end_time": "01:24",
       "location": "test",
-      "school": "School of Management",
+      "school": "School of Laws",
       "status": "completed"
     },
     {
-      "id": "c282",
+      "id": "0127",
+      "title": "Fantastic 4 Group-meeting",
+      "description": "We will discuss about what questions to ask when we have to meet with ATA IT Company. And also we will design Dashboard.",
+      "date": "2024-10-25T17:00:00.000Z",
+      "start_time": "14:30",
+      "end_time": "15:30",
+      "location": "Library, Study Room - 3",
+      "school": "School of Information Technology",
+      "status": "completed"
+    },
+    {
+      "id": "8d77",
       "title": "test",
       "description": "test",
-      "date": "2024-10-24T17:00:00.000Z",
-      "start_time": "00:09",
-      "end_time": "00:15",
+      "date": "2024-10-25T17:00:00.000Z",
+      "start_time": "16:01",
+      "end_time": "16:03",
       "location": "test",
       "school": "School of Information Technology",
       "status": "completed"
+    },
+    {
+      "id": "d74b",
+      "title": "test",
+      "description": "test",
+      "date": "2024-10-25T17:00:00.000Z",
+      "start_time": "16:06",
+      "end_time": "16:07",
+      "location": "tst",
+      "school": "School of Information Technology",
+      "status": "completed"
+    },
+    {
+      "id": "da94",
+      "title": "Meeting with ATA.IT",
+      "description": "Get impression from them and advisor. Describe what u have created and show your ideas. Get feedback from them.",
+      "date": "2024-10-29T17:00:00.000Z",
+      "start_time": "15:00",
+      "end_time": "16:00",
+      "location": "Library, Study Room - 5",
+      "school": "School of Information Technology",
+      "status": "upcoming"
     }
   ]
 }
