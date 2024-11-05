@@ -73,6 +73,9 @@ export default {
             else return 'border-start border-5 border-success';
         });
 
+        /**
+         * ! @todo - Change Database with Firebase firestore
+         */
         const updateActivityStatus = async (updatedStatus) => {
             await fetch(`http://localhost:3000/activities/${props.activity.id}`, {
                 method: "PATCH",

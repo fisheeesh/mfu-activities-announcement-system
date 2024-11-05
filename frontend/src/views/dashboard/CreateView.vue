@@ -109,6 +109,7 @@ import { useRouter } from 'vue-router';
 import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue';
 import RiseLoader from 'vue-spinner/src/RiseLoader.vue';
 import { useToast } from 'vue-toastification';
+import { db, timeStamp } from '@/firebase/config';
 
 export default {
     components: {
@@ -124,13 +125,13 @@ export default {
     setup() {
         const toast = useToast();
         const router = useRouter();
-        let title = ref();
-        let description = ref();
-        let school = ref();
-        let location = ref();
+        let title = ref(null);
+        let description = ref(null);
+        let school = ref(null);
+        let location = ref(null);
         let date = ref(null);
-        let start_time = ref();
-        let end_time = ref();
+        let start_time = ref(null);
+        let end_time = ref(null);
 
         let loading = ref(true)
 
@@ -181,20 +182,39 @@ export default {
             // Check if all fields are filled and end time is valid
             if (title.value && description.value && school.value && start_time.value && end_time.value && location.value && date.value && isEndTimeValid.value) {
                 try {
-                    await fetch('http://localhost:3000/activities', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            title: title.value,
-                            description: description.value,
-                            date: date.value,
-                            start_time: start_time.value,
-                            end_time: end_time.value,
-                            location: location.value,
-                            school: school.value,
-                            status: "upcoming"
-                        }),
-                    });
+                    /**
+                     * ? With json-server
+                     */
+                    // await fetch('http://localhost:3000/activities', {
+                    //     method: 'POST',
+                    //     headers: { 'Content-Type': 'application/json' },
+                    //     body: JSON.stringify({
+                    //         title: title.value,
+                    //         description: description.value,
+                    //         date: date.value,
+                    //         start_time: start_time.value,
+                    //         end_time: end_time.value,
+                    //         location: location.value,
+                    //         school: school.value,
+                    //         status: "upcoming"
+                    //     }),
+                    // });
+
+                    /**
+                     * ? With firebase firestore
+                     */
+                    let newActivity = {
+                        title: title.value,
+                        description: description.value,
+                        date: date.value,
+                        start_time: start_time.value,
+                        end_time: end_time.value,
+                        location: location.value,
+                        school: school.value,
+                        status: "upcoming",
+                        created_at: timeStamp()
+                    }
+                    await db.collection('activities').add(newActivity)
                     toast.success('Activity Created Successfully!');
                     router.push({ name: 'dashboard' });
                 }

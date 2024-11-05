@@ -47,8 +47,8 @@ Controlling eye button for hide or show password
 }
 
 .description {
-  cursor: pointer;
-  white-space: pre-line;
+  cursor: pointer !important;
+  white-space: pre-line !important;
 }
 
 input, select {

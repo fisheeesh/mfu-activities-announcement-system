@@ -116,13 +116,13 @@ export default {
     setup(props) {
         const toast = useToast();
         const router = useRouter();
-        let title = ref()
-        let description = ref()
-        let school = ref()
-        let start_time = ref()
-        let end_time = ref()
-        let location = ref()
-        let date = ref()
+        let title = ref(null)
+        let description = ref(null)
+        let school = ref(null)
+        let start_time = ref(null)
+        let end_time = ref(null)
+        let location = ref(null)
+        let date = ref(null)
 
         const isLoading = ref(true)
 
@@ -139,6 +139,9 @@ export default {
 
         onMounted(async () => {
             try {
+                /**
+                 * ! @todo - change databae with firebase firestore
+                 */
                 await new Promise((resolve, _) => setTimeout(() => resolve(), 1000))
                 let res = await fetch(`http://localhost:3000/activities/${props.id}`)
                 let data = await res.json()
