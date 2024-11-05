@@ -126,7 +126,7 @@ export default {
         let description = ref();
         let school = ref();
         let location = ref();
-        let date = ref();
+        let date = ref(null);
         let start_time = ref();
         let end_time = ref();
 

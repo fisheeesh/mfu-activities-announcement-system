@@ -20,7 +20,8 @@
     "sass": "^1.80.1",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
-    "vue-spinner": "^1.0.4"
+    "vue-spinner": "^1.0.4",
+    "vuetify": "^3.7.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~5.0.0",
