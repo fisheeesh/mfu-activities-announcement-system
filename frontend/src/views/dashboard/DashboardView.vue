@@ -1,8 +1,8 @@
 <template>
   <section class="dashboard">
-    <div v-if="loading" class="text-center mt-8">
-            <Spinner/>
-        </div>
+    <div v-if="loading" class="text-center mt-8 py-7">
+      <ScaleLoader :color="'#BA1E23'" />
+    </div>
     <div v-else v class="container">
       <div class="row">
         <div class="col-12 d-flex flex-column justify-content-center align-items-center mt-6">
@@ -21,12 +21,14 @@
 <script>
 import Spinner from '@/components/loaders/Spinner.vue';
 import { onMounted, ref } from 'vue';
+import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue';
 
 export default {
   components: {
-    Spinner
+    Spinner,
+    ScaleLoader
   },
-  setup(){
+  setup() {
     let loading = ref(true)
 
     onMounted(() => setTimeout(() => loading.value = false, 1000))

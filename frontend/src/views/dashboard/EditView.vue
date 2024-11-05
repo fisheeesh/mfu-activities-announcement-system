@@ -1,5 +1,8 @@
 <template>
-    <section class="create">
+    <div v-if="isLoading" class="m-auto text-center mt-8 py-7">
+        <ScaleLoader :color="'#BA1E23'" />
+    </div>
+    <section v-else class="create">
         <div class="container-lg">
             <h1 class="fs-4 fw-bold text-center mt-5">Edit activity</h1>
             <form @submit.prevent="editActivity" novalidate>
@@ -100,8 +103,12 @@
 <script>
 import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue';
 
 export default {
+    components: {
+        ScaleLoader
+    },
     props: [
         'id'
     ],
@@ -115,6 +122,8 @@ export default {
         let location = ref()
         let date = ref()
 
+        const isLoading = ref(true)
+
         const touchedFields = ref({})
 
         const showError = field => touchedFields.value[field] && !eval(field).value
@@ -127,15 +136,24 @@ export default {
         });
 
         onMounted(async () => {
-            let res = await fetch(`http://localhost:3000/activities/${props.id}`)
-            let data = await res.json()
-            title.value = data.title
-            description.value = data.description
-            school.value = data.school
-            start_time.value = data.start_time
-            end_time.value = data.end_time
-            location.value = data.location
-            date.value = new Date(data.date);
+            try {
+                await new Promise((resolve, _) => setTimeout(() => resolve(), 1000))
+                let res = await fetch(`http://localhost:3000/activities/${props.id}`)
+                let data = await res.json()
+                title.value = data.title
+                description.value = data.description
+                school.value = data.school
+                start_time.value = data.start_time
+                end_time.value = data.end_time
+                location.value = data.location
+                date.value = new Date(data.date);
+            }
+            catch (err) {
+                console.err('Error Fetcing Specific Activity', err)
+            }
+            finally {
+                isLoading.value = false
+            }
         })
 
         let editActivity = async () => {
@@ -168,7 +186,7 @@ export default {
             }
         }
 
-        return { router, editActivity, title, description, school, start_time, end_time, location, date, showError, isEndTimeValid }
+        return { router, editActivity, title, description, school, start_time, end_time, location, date, showError, isEndTimeValid, isLoading }
     }
 }
 </script>

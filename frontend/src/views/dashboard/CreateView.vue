@@ -1,7 +1,8 @@
 <template>
     <section class="create">
-        <div v-if="loading" class="text-center mt-8">
-            <Spinner />
+        <div v-if="loading" class="m-auto text-center mt-8 py-7">
+            <!-- <RiseLoader :color="'#BA1E23'" /> -->
+            <ScaleLoader :color="'#BA1E23'" />
         </div>
         <div v-else class="container-lg">
             <h1 class="fs-4 fw-bold text-center mt-5">Create a new activity</h1>
@@ -105,10 +106,19 @@
 import Spinner from '@/components/loaders/Spinner.vue';
 import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue';
+import RiseLoader from 'vue-spinner/src/RiseLoader.vue';
 
 export default {
     components: {
-        Spinner
+        Spinner,
+        ScaleLoader,
+        RiseLoader,
+    },
+    data() {
+        return {
+            loading: true
+        }
     },
     setup() {
         const router = useRouter();
@@ -122,7 +132,7 @@ export default {
 
         let loading = ref(true)
 
-        onMounted(() => setTimeout(() => loading.value = false, 500))
+        onMounted(() => setTimeout(() => loading.value = false, 800))
 
         /**
          * ? To track which form fields have been touched by user

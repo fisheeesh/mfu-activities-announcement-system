@@ -49,5 +49,5 @@ let app;
  * ? So the system wlll push the user to login page
  */
 auth.onAuthStateChanged(() => {
-    if (!app) app = createApp(App).use(PrimeVue).use(vuetify).use(router).mount('#app')
+    if (!app) app = createApp(App).use(vuetify).use(PrimeVue).use(router).mount('#app')
 })
