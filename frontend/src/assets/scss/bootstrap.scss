@@ -26,7 +26,7 @@ input.form-control,
 textarea.form-control,
 select.form-select {
   &:focus {
-    border-color: $light !important;
+    border-color: $primary !important;
     box-shadow: 0 0 0 1px $light !important; // Optional: Add a softer box-shadow with primary color
   }
 }

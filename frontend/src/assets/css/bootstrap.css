@@ -2,7 +2,7 @@
 input.form-control:focus,
 textarea.form-control:focus,
 select.form-select:focus {
-  border-color: #f3f6f9 !important;
+  border-color: #BA1E23 !important;
   box-shadow: 0 0 0 1px #f3f6f9 !important;
 }
 
