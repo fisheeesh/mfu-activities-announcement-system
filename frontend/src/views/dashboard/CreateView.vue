@@ -108,6 +108,7 @@ import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue';
 import RiseLoader from 'vue-spinner/src/RiseLoader.vue';
+import { useToast } from 'vue-toastification';
 
 export default {
     components: {
@@ -121,6 +122,7 @@ export default {
         }
     },
     setup() {
+        const toast = useToast();
         const router = useRouter();
         let title = ref();
         let description = ref();
@@ -178,21 +180,28 @@ export default {
 
             // Check if all fields are filled and end time is valid
             if (title.value && description.value && school.value && start_time.value && end_time.value && location.value && date.value && isEndTimeValid.value) {
-                await fetch('http://localhost:3000/activities', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        title: title.value,
-                        description: description.value,
-                        date: date.value,
-                        start_time: start_time.value,
-                        end_time: end_time.value,
-                        location: location.value,
-                        school: school.value,
-                        status: "upcoming"
-                    }),
-                });
-                router.push({ name: 'dashboard' });
+                try {
+                    await fetch('http://localhost:3000/activities', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            title: title.value,
+                            description: description.value,
+                            date: date.value,
+                            start_time: start_time.value,
+                            end_time: end_time.value,
+                            location: location.value,
+                            school: school.value,
+                            status: "upcoming"
+                        }),
+                    });
+                    toast.success('Activity Created Successfully!');
+                    router.push({ name: 'dashboard' });
+                }
+                catch (err) {
+                    console.err('Error Creating Activity: ', err)
+                    toast.error('Error Creating Activity');
+                }
             }
         };
 

@@ -104,6 +104,7 @@
 import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue';
+import { useToast } from 'vue-toastification';
 
 export default {
     components: {
@@ -113,6 +114,7 @@ export default {
         'id'
     ],
     setup(props) {
+        const toast = useToast();
         const router = useRouter();
         let title = ref()
         let description = ref()
@@ -169,20 +171,27 @@ export default {
             };
 
             if (title.value && description.value && school.value && start_time.value && end_time.value && location.value && date.value && isEndTimeValid.value) {
-                await fetch(`http://localhost:3000/activities/${props.id}`, {
-                    method: "PATCH",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        title: title.value,
-                        description: description.value,
-                        start_time: start_time.value,
-                        end_time: end_time.value,
-                        date: date.value,
-                        location: location.value,
-                        school: school.value,
+                try {
+                    await fetch(`http://localhost:3000/activities/${props.id}`, {
+                        method: "PATCH",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            title: title.value,
+                            description: description.value,
+                            start_time: start_time.value,
+                            end_time: end_time.value,
+                            date: date.value,
+                            location: location.value,
+                            school: school.value,
+                        })
                     })
-                })
-                router.push({ name: 'dashboard' });
+                    toast.success('Activity Edited Successfully')
+                    router.push({ name: 'dashboard' });
+                }
+                catch (err) {
+                    console.error('Error Editing Activity', err)
+                    toast.error('Error Editing Activity')
+                }
             }
         }
 
