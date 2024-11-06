@@ -104,7 +104,7 @@
 
 <script>
 import axios from 'axios';
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue';
 import { useToast } from 'vue-toastification';
@@ -126,6 +126,7 @@ export default {
         let end_time = ref(null)
         let location = ref(null)
         let date = ref(null)
+        let type = ref(null)
 
         const delay = ref(true)
         const isLoading = ref(false)
@@ -144,14 +145,16 @@ export default {
         onMounted(async () => {
             try {
                 let res = await axios.get(`http://localhost:1337/api/activities/${props.id}`)
-                const activity = res.data.data
-                title.value = activity.title
-                description.value = activity.description
-                school.value = activity.school
-                start_time.value = activity.start_time
-                end_time.value = activity.end_time
-                location.value = activity.location
-                date.value = new Date(activity.date);
+                console.log(res.data.data)
+
+                title.value = res.data.data.title
+                description.value = res.data.data.description
+                school.value = res.data.data.school
+                start_time.value = res.data.data.start_time.substring(0, 5)
+                end_time.value = res.data.data.end_time.substring(0, 5)
+                location.value = res.data.data.location
+                date.value = new Date(res.data.data.date);
+                type.value = res.data.data.type
             }
             catch (err) {
                 console.error('Error Fetcing Specific Activity', err)
@@ -162,7 +165,6 @@ export default {
         })
 
         let editActivity = async () => {
-
             touchedFields.value = {
                 title: true,
                 description: true,
@@ -175,30 +177,38 @@ export default {
 
             if (title.value && description.value && school.value && start_time.value && end_time.value && location.value && date.value && isEndTimeValid.value) {
                 try {
-                    isLoading.value = true
-                    await fetch(`http://localhost:1337/api/activities/${props.id}`, {
-                        method: "PATCH",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
+                    isLoading.value = true;
+
+                    // Format the date and times correctly
+                    const formattedDate = new Date(date.value).toLocaleDateString('en-CA');
+                    let formattedStartTime = `${start_time.value}:00.000`; // Format as HH:mm:ss.SSS
+                    let formattedEndTime = `${end_time.value}:00.000`; // Format as HH:mm:ss.SSS
+
+                    let res = await axios.put(`http://localhost:1337/api/activities/${props.id}`, {
+                        data: {
                             title: title.value,
                             description: description.value,
-                            start_time: start_time.value,
-                            end_time: end_time.value,
-                            date: date.value,
                             location: location.value,
-                            school: school.value,
-                        })
-                    })
-                    toast.success('Activity Edited Successfully')
+                            type: type.value,
+                            date: formattedDate, // Date in YYYY-MM-DD
+                            start_time: `${start_time.value}:00.000`, // Start time in HH:mm:ss.SSS
+                            end_time: `${end_time.value}:00.000`, // End time in HH:mm:ss.SSS
+                            school: school.value
+                        }
+                    });
+
+                    console.log(res, "Activity edited successfully", formattedStartTime, formattedEndTime, formattedDate);
+                    toast.success('Activity Edited Successfully');
                     router.push({ name: 'dashboard' });
-                    isLoading.value = false
-                }
-                catch (err) {
-                    toast.error('Error Editing Activity')
-                    isLoading.value = false
+                    isLoading.value = false;
+                } catch (err) {
+                    // Log detailed error information
+                    console.error('Error Editing Activity:', err.response?.data || err.message);
+                    toast.error('Error Editing Activity');
+                    isLoading.value = false;
                 }
             }
-        }
+        };
 
         return { router, editActivity, title, description, school, start_time, end_time, location, date, showError, isEndTimeValid, delay, isLoading }
     }

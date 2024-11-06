@@ -187,10 +187,10 @@ export default {
                 try {
                     isLoading.value = true
                     // Format the date and times to ISO format
-                    const formattedDate = new Date(date.value).toISOString().split('T')[0]; // Format: YYYY-MM-DD
+                    const formattedDate = new Date(date.value).toLocaleDateString('en-CA');
                     const formattedStartTime = `${start_time.value}:00`; // Append seconds to the time
                     const formattedEndTime = `${end_time.value}:00`; // Append seconds to the time
-                    
+
                     const newActivity = {
                         title: title.value,
                         description: description.value,

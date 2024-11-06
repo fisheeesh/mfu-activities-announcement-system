@@ -78,12 +78,12 @@ export default {
          * ! @todo - Change Database with Firebase firestore
          */
         const updateActivityStatus = async (updatedStatus) => {
-            await fetch(`http://localhost:1337/api/activities/${props.activity.documentId}`, {
-                method: "PATCH",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ type: updatedStatus })
-            });
-            context.emit('updated', props.activity.id, updatedStatus);
+            // await fetch(`http://localhost:1337/api/activities/${props.activity.documentId}`, {
+            //     method: "PUT",
+            //     headers: { "Content-Type": "application/json" },
+            //     body: JSON.stringify({ type: updatedStatus })
+            // });
+            // context.emit('updated', props.activity.id, updatedStatus);
         };
 
         /**
