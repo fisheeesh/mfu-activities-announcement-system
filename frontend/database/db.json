@@ -53,7 +53,29 @@
       "end_time": "19:30",
       "location": "ณ ลานกิจกรรม ชั้น 5 อาคารพลเอก สำเภา ชูศรี (E4) มหาวิทยาลัยแม่ฟ้าหลวง",
       "school": "Mae-Fah-Luang University",
-      "status": "upcoming"
+      "status": "ongoing"
+    },
+    {
+      "id": "28fd",
+      "title": "test",
+      "description": "test",
+      "date": "2024-11-05T17:00:00.000Z",
+      "start_time": "14:24",
+      "end_time": "14:25",
+      "location": "test",
+      "school": "School of Information Technology",
+      "status": "completed"
+    },
+    {
+      "id": "3572",
+      "title": "testing",
+      "description": "test",
+      "date": "2024-11-05T17:00:00.000Z",
+      "start_time": "14:30",
+      "end_time": "14:31",
+      "location": "test",
+      "school": "School of Information Technology",
+      "status": "completed"
     }
   ]
 }

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="isLoading" class="m-auto text-center mt-8 py-7">
+    <div v-if="delay" class="m-auto text-center mt-8 py-7">
         <ScaleLoader :color="'#BA1E23'" />
     </div>
     <section v-else class="create">
@@ -93,7 +93,9 @@
                 <div class="btns d-flex hstack gap-4 justify-content-center align-items-center mt-2">
                     <button class="cancel btn btn-light px-5 text-white fw-bold"
                         @click.prevent="router.push({ name: 'dashboard' })">Cancel</button>
-                    <button class="btn btn-success px-5 text-white fw-bold">Edit</button>
+                    <button class="btn btn-success px-5 text-white fw-bold">
+                        <span v-if="isLoading" class="spinner-border text-white spinner-border-sm me-3" role="status"
+                            aria-hidden="true"></span>Edit</button>
                 </div>
             </form>
         </div>
@@ -124,7 +126,8 @@ export default {
         let location = ref(null)
         let date = ref(null)
 
-        const isLoading = ref(true)
+        const delay = ref(true)
+        const isLoading = ref(false)
 
         const touchedFields = ref({})
 
@@ -157,7 +160,7 @@ export default {
                 console.err('Error Fetcing Specific Activity', err)
             }
             finally {
-                isLoading.value = false
+                delay.value = false
             }
         })
 
@@ -175,6 +178,7 @@ export default {
 
             if (title.value && description.value && school.value && start_time.value && end_time.value && location.value && date.value && isEndTimeValid.value) {
                 try {
+                    isLoading.value = true
                     await fetch(`http://localhost:3000/activities/${props.id}`, {
                         method: "PATCH",
                         headers: { "Content-Type": "application/json" },
@@ -190,15 +194,17 @@ export default {
                     })
                     toast.success('Activity Edited Successfully')
                     router.push({ name: 'dashboard' });
+                    isLoading.value = false
                 }
                 catch (err) {
                     console.error('Error Editing Activity', err)
                     toast.error('Error Editing Activity')
+                    isLoading.value = false
                 }
             }
         }
 
-        return { router, editActivity, title, description, school, start_time, end_time, location, date, showError, isEndTimeValid, isLoading }
+        return { router, editActivity, title, description, school, start_time, end_time, location, date, showError, isEndTimeValid, delay, isLoading }
     }
 }
 </script>

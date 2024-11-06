@@ -1,6 +1,6 @@
 <template>
     <section class="create">
-        <div v-if="loading" class="m-auto text-center mt-8 py-7">
+        <div v-if="delay" class="m-auto text-center mt-8 py-7">
             <!-- <RiseLoader :color="'#BA1E23'" /> -->
             <ScaleLoader :color="'#BA1E23'" />
         </div>
@@ -95,7 +95,9 @@
                 <div class="btns d-flex hstack gap-4 justify-content-center align-items-center mt-2">
                     <button class="cancel btn btn-light px-5 text-white fw-bold"
                         @click="router.push({ name: 'dashboard' })">Cancel</button>
-                    <button type="submit" class="btn btn-success px-5 text-white fw-bold">Create</button>
+                    <button type="submit" class="btn btn-success px-5 text-white fw-bold">
+                        <span v-if="isLoading" class="spinner-border text-white spinner-border-sm me-3" role="status"
+                            aria-hidden="true"></span>Create</button>
                 </div>
             </form>
         </div>
@@ -109,7 +111,6 @@ import { useRouter } from 'vue-router';
 import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue';
 import RiseLoader from 'vue-spinner/src/RiseLoader.vue';
 import { useToast } from 'vue-toastification';
-import { db, timeStamp } from '@/firebase/config';
 
 export default {
     components: {
@@ -119,7 +120,7 @@ export default {
     },
     data() {
         return {
-            loading: true
+            delay: true
         }
     },
     setup() {
@@ -133,9 +134,10 @@ export default {
         let start_time = ref(null);
         let end_time = ref(null);
 
-        let loading = ref(true)
+        let delay = ref(true)
+        const isLoading = ref(false)
 
-        onMounted(() => setTimeout(() => loading.value = false, 800))
+        onMounted(() => setTimeout(() => delay.value = false, 800))
 
         /**
          * ? To track which form fields have been touched by user
@@ -182,50 +184,37 @@ export default {
             // Check if all fields are filled and end time is valid
             if (title.value && description.value && school.value && start_time.value && end_time.value && location.value && date.value && isEndTimeValid.value) {
                 try {
+                    isLoading.value = true
                     /**
                      * ? With json-server
                      */
-                    // await fetch('http://localhost:3000/activities', {
-                    //     method: 'POST',
-                    //     headers: { 'Content-Type': 'application/json' },
-                    //     body: JSON.stringify({
-                    //         title: title.value,
-                    //         description: description.value,
-                    //         date: date.value,
-                    //         start_time: start_time.value,
-                    //         end_time: end_time.value,
-                    //         location: location.value,
-                    //         school: school.value,
-                    //         status: "upcoming"
-                    //     }),
-                    // });
-
-                    /**
-                     * ? With firebase firestore
-                     */
-                    let newActivity = {
-                        title: title.value,
-                        description: description.value,
-                        date: date.value,
-                        start_time: start_time.value,
-                        end_time: end_time.value,
-                        location: location.value,
-                        school: school.value,
-                        status: "upcoming",
-                        created_at: timeStamp()
-                    }
-                    await db.collection('activities').add(newActivity)
+                    await fetch('http://localhost:3000/activities', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            title: title.value,
+                            description: description.value,
+                            date: date.value,
+                            start_time: start_time.value,
+                            end_time: end_time.value,
+                            location: location.value,
+                            school: school.value,
+                            status: "upcoming"
+                        }),
+                    });
                     toast.success('Activity Created Successfully!');
                     router.push({ name: 'dashboard' });
+                    isLoading.value = false
                 }
                 catch (err) {
                     console.err('Error Creating Activity: ', err)
                     toast.error('Error Creating Activity');
+                    isLoading.value = false
                 }
             }
         };
 
-        return { title, description, school, location, date, start_time, end_time, createActivity, showError, router, loading, isEndTimeValid };
+        return { title, description, school, location, date, start_time, end_time, createActivity, showError, router, delay, isEndTimeValid, isLoading };
     },
 };
 </script>

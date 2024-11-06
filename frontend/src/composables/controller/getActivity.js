@@ -10,16 +10,10 @@ let getActivity = (id) =>{
             /**
              * ?With Local Database (json-server, Mock REST API)
              */
-            // let res = await fetch(`http://localhost:3000/activities/${id}`)
-            // if(!res.ok) throw new Error('Not Found URL!')
-            // let data = await res.json()
-            // activity.value = data
-            
-            /**
-             * ? With Firebase Database
-             */
-            let doc = await db.collection('posts').doc(id).get()
-            activity.value = {...doc.data(), id : doc.id}
+            let res = await fetch(`http://localhost:3000/activities/${id}`)
+            if(!res.ok) throw new Error('Not Found URL!')
+            let data = await res.json()
+            activity.value = data
         }
         catch(err){
             error.value = err.message
