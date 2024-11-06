@@ -103,6 +103,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue';
@@ -142,22 +143,18 @@ export default {
 
         onMounted(async () => {
             try {
-                /**
-                 * ! @todo - change databae with firebase firestore
-                 */
-                await new Promise((resolve, _) => setTimeout(() => resolve(), 1000))
-                let res = await fetch(`http://localhost:3000/activities/${props.id}`)
-                let data = await res.json()
-                title.value = data.title
-                description.value = data.description
-                school.value = data.school
-                start_time.value = data.start_time
-                end_time.value = data.end_time
-                location.value = data.location
-                date.value = new Date(data.date);
+                let res = await axios.get(`http://localhost:1337/api/activities/${props.id}`)
+                const activity = res.data.data
+                title.value = activity.title
+                description.value = activity.description
+                school.value = activity.school
+                start_time.value = activity.start_time
+                end_time.value = activity.end_time
+                location.value = activity.location
+                date.value = new Date(activity.date);
             }
             catch (err) {
-                console.err('Error Fetcing Specific Activity', err)
+                console.error('Error Fetcing Specific Activity', err)
             }
             finally {
                 delay.value = false
@@ -179,7 +176,7 @@ export default {
             if (title.value && description.value && school.value && start_time.value && end_time.value && location.value && date.value && isEndTimeValid.value) {
                 try {
                     isLoading.value = true
-                    await fetch(`http://localhost:3000/activities/${props.id}`, {
+                    await fetch(`http://localhost:1337/api/activities/${props.id}`, {
                         method: "PATCH",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
@@ -197,7 +194,6 @@ export default {
                     isLoading.value = false
                 }
                 catch (err) {
-                    console.error('Error Editing Activity', err)
                     toast.error('Error Editing Activity')
                     isLoading.value = false
                 }

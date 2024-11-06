@@ -9,7 +9,7 @@ import AdminLogin from '@/views/dashboard/AdminLoginView.vue'
 import NotFound from '@/views/404/NotFoundView.vue'
 import Edit from '@/views/dashboard/EditView.vue'
 import { auth } from '@/firebase/config'
-import Test from '@/views/Test.vue'
+import Test from '@/views/Test/Test.vue'
 
 const routes = [
   {

@@ -10,12 +10,12 @@
                 <div v-if="isEditable">
                     <!-- ? if activity is completed, we will disable delete and edit icon-buttons -->
                     <span @click="deleteActivity"
-                        :class="['material-symbols-outlined', 'me-2', 'delete', { 'disabled-icon': activity.status === 'completed' }]">
+                        :class="['material-symbols-outlined', 'me-2', 'delete', { 'disabled-icon': activity.type === 'completed' }]">
                         delete
                     </span>
                     <!-- ? if activity is completed, we will disable delete and edit icon-buttons -->
-                    <router-link v-if="activity.status !== 'completed'"
-                        :to="{ name: 'edit', params: { id: activity.id } }">
+                    <router-link v-if="activity.type !== 'completed'"
+                        :to="{ name: 'edit', params: { id: activity.documentId } }">
                         <span class="material-symbols-outlined edit text-black">edit</span>
                     </router-link>
                     <span v-else class="material-symbols-outlined edit text-muted disabled-icon">edit</span>
@@ -51,6 +51,7 @@
 <script>
 import { computed, onMounted, onBeforeUnmount, ref } from 'vue';
 import { format, isSameDay, isBefore, isAfter, parse } from 'date-fns';
+import axios from 'axios';
 
 export default {
     props: {
@@ -77,12 +78,12 @@ export default {
          * ! @todo - Change Database with Firebase firestore
          */
         const updateActivityStatus = async (updatedStatus) => {
-            // await fetch(`http://localhost:3000/activities/${props.activity.id}`, {
-            //     method: "PATCH",
-            //     headers: { "Content-Type": "application/json" },
-            //     body: JSON.stringify({ status: updatedStatus })
-            // });
-            // context.emit('updated', props.activity.id, updatedStatus);
+            await fetch(`http://localhost:1337/api/activities/${props.activity.documentId}`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ type: updatedStatus })
+            });
+            context.emit('updated', props.activity.id, updatedStatus);
         };
 
         /**
@@ -101,15 +102,15 @@ export default {
                  * ? We only updated the status only when the activity current status is not the condition one
                  */
                 if (isBefore(current, startTime)) {
-                    if (props.activity.status !== 'upcoming') {
+                    if (props.activity.type !== 'upcoming') {
                         updateActivityStatus('upcoming');
                     }
                 } else if (isAfter(current, startTime) && isBefore(current, endTime)) {
-                    if (props.activity.status !== 'ongoing') {
+                    if (props.activity.type !== 'ongoing') {
                         updateActivityStatus('ongoing');
                     }
                 } else if (isAfter(current, endTime)) {
-                    if (props.activity.status !== 'completed') {
+                    if (props.activity.type !== 'completed') {
                         updateActivityStatus('completed');
                     }
                 }
@@ -121,7 +122,7 @@ export default {
              * ? Like changing from ongoing to upcoming or ongoing to completed
              */
             else if (isBefore(current, activityDate)) {
-                if (props.activity.status !== 'upcoming') {
+                if (props.activity.type !== 'upcoming') {
                     updateActivityStatus('upcoming');
                 }
             }
@@ -129,7 +130,7 @@ export default {
              * * If all the above condition are not met, update status to completed
              */
             else {
-                if (props.activity.status !== 'completed') {
+                if (props.activity.type !== 'completed') {
                     updateActivityStatus('completed');
                 }
             }
@@ -193,16 +194,14 @@ export default {
 
         // Delete activity by id
         const deleteActivity = async () => {
-            let res = await fetch(`http://localhost:3000/activities/${props.activity.id}`, {
-                method: "DELETE"
-            });
-            console.log(res);
+            let res = await axios.delete(`http://localhost:1337/api/activities/${props.activity.documentId}`);
+            console.log(res, "deleted");
             /**
              * ? We need to emit an event to delete activity from parent component
              * ? if not, it will not be deleted in UI and we have to refresh UI to delete
              * ? That's goona be a problem for our SPA application.
              */
-            context.emit('deleteActivity', props.activity.id);
+            context.emit('deleteActivity', props.activity.documentId);
         };
 
         return { dynamicBorderClass, isShow, cutBodyDescription, deleteActivity, formatTime, formatDate };

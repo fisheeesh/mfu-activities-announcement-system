@@ -54,12 +54,12 @@ export default {
         load().then(() => loading.value = false)
 
         let handleDelete = (id) => {
-            activities.value = activities.value.filter(activity => activity.id !== id);
+            activities.value = activities.value.filter(activity => activity.documentId !== id);
         }
 
-        let handleUpdate = (id, status) => {
-            let findedActivity = activities.value.find(activity => activity.id === id)
-            findedActivity.status = status
+        let handleUpdate = (id, type) => {
+            let findedActivity = activities.value.find(activity => activity.documentId === id)
+            findedActivity.type = type
         }
         return { error, activities, loading, handleDelete, handleUpdate }
     }
