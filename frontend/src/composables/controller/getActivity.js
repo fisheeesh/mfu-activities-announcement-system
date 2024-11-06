@@ -1,5 +1,4 @@
 import { ref } from "vue"
-import { db } from "@/firebase/config"
 
 let getActivity = (id) =>{
     let error = ref(null)

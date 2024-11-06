@@ -52,7 +52,7 @@ export default {
 
         load().then(() => loading.value = false)
 
-        let filteredActivities = computed(() => activities.value.filter(activity => activity.status === 'ongoing'))
+        let filteredActivities = computed(() => activities.value.filter(activity => activity.type === 'ongoing'))
         let handleDelete = (id) => {
             activities.value = activities.value.filter(activity => activity.id !== id);
         }

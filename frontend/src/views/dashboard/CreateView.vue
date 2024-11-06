@@ -111,6 +111,7 @@ import { useRouter } from 'vue-router';
 import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue';
 import RiseLoader from 'vue-spinner/src/RiseLoader.vue';
 import { useToast } from 'vue-toastification';
+import axios from 'axios';
 
 export default {
     components: {
@@ -185,29 +186,32 @@ export default {
             if (title.value && description.value && school.value && start_time.value && end_time.value && location.value && date.value && isEndTimeValid.value) {
                 try {
                     isLoading.value = true
-                    /**
-                     * ? With json-server
-                     */
-                    await fetch('http://localhost:3000/activities', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            title: title.value,
-                            description: description.value,
-                            date: date.value,
-                            start_time: start_time.value,
-                            end_time: end_time.value,
-                            location: location.value,
-                            school: school.value,
-                            status: "upcoming"
-                        }),
-                    });
+                    // Format the date and times to ISO format
+                    const formattedDate = new Date(date.value).toISOString().split('T')[0]; // Format: YYYY-MM-DD
+                    const formattedStartTime = `${start_time.value}:00`; // Append seconds to the time
+                    const formattedEndTime = `${end_time.value}:00`; // Append seconds to the time
+                    
+                    const newActivity = {
+                        title: title.value,
+                        description: description.value,
+                        location: location.value,
+                        type: "upcoming",
+                        date: formattedDate, // formatted date (YYYY-MM-DD)
+                        start_time: formattedStartTime, // formatted start time (HH:mm:ss)
+                        end_time: formattedEndTime, // formatted end time (HH:mm:ss)
+                        school: school.value
+                    }
+
+                    await axios.post('http://localhost:1337/api/activities', {
+                        data: newActivity
+                    })
+
                     toast.success('Activity Created Successfully!');
                     router.push({ name: 'dashboard' });
                     isLoading.value = false
                 }
                 catch (err) {
-                    console.err('Error Creating Activity: ', err)
+                    console.error('Error Creating Activity: ', err)
                     toast.error('Error Creating Activity');
                     isLoading.value = false
                 }

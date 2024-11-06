@@ -9,8 +9,14 @@ import AdminLogin from '@/views/dashboard/AdminLoginView.vue'
 import NotFound from '@/views/404/NotFoundView.vue'
 import Edit from '@/views/dashboard/EditView.vue'
 import { auth } from '@/firebase/config'
+import Test from '@/views/Test.vue'
 
 const routes = [
+  {
+    path: '/test',
+    name: 'test',
+    component: Test
+  },
   {
     path: '/',
     name: 'login',

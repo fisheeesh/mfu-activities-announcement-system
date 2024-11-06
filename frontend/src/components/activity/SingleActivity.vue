@@ -34,8 +34,8 @@
             <!-- Activity details -->
             <div class="d-flex gap-2 mt-3 flex-wrap">
                 <div class="px-4 py-2 bg-secondary rounded-5">
-                    <i class="fas fa-clock text-black me-1"></i> {{ formattedDate }} | {{ formattedStartTime }} - {{
-                        formattedEndTime }}
+                    <i class="fas fa-clock text-black me-1"></i> {{ formatDate(activity.date) }} | {{
+                        formatTime(activity.start_time) }} - {{ formatTime(activity.end_time) }}
                 </div>
                 <div class="px-4 py-2 bg-white rounded-5 border border-1">
                     <i class="fas fa-map-marker-alt text-primary me-1"></i> {{ activity.location }}
@@ -68,8 +68,8 @@ export default {
 
         // Set dynamic border color class based on activity status
         const dynamicBorderClass = computed(() => {
-            if (props.activity.status === 'ongoing') return 'border-start border-5 border-info';
-            else if (props.activity.status === 'upcoming') return 'border-start border-5 border-warning';
+            if (props.activity.type === 'ongoing') return 'border-start border-5 border-info';
+            else if (props.activity.type === 'upcoming') return 'border-start border-5 border-warning';
             else return 'border-start border-5 border-success';
         });
 
@@ -77,12 +77,12 @@ export default {
          * ! @todo - Change Database with Firebase firestore
          */
         const updateActivityStatus = async (updatedStatus) => {
-            await fetch(`http://localhost:3000/activities/${props.activity.id}`, {
-                method: "PATCH",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ status: updatedStatus })
-            });
-            context.emit('updated', props.activity.id, updatedStatus);
+            // await fetch(`http://localhost:3000/activities/${props.activity.id}`, {
+            //     method: "PATCH",
+            //     headers: { "Content-Type": "application/json" },
+            //     body: JSON.stringify({ status: updatedStatus })
+            // });
+            // context.emit('updated', props.activity.id, updatedStatus);
         };
 
         /**
@@ -166,18 +166,30 @@ export default {
         });
 
         // format time in a format of AM/PM
-        const formatTime = (time) => {
-            const date = parse(time, 'HH:mm', new Date());
-            return format(date, 'h:mm a');
-        };
+        // const formatTime = (time) => {
+        //     const date = parse(time, 'HH:mm', new Date());
+        //     return format(date, 'h:mm a');
+        // };
 
         /**
          * ! We use computed property cus we want a new data based on original data 
          * ! which is formatted time in a format of AM/PM
          */
-        const formattedStartTime = computed(() => formatTime(props.activity.start_time));
-        const formattedEndTime = computed(() => formatTime(props.activity.end_time));
-        const formattedDate = format(new Date(props.activity.date), 'MMM d, yyyy');
+        // const formattedStartTime = computed(() => formatTime(props.activity.start_time));
+        // const formattedEndTime = computed(() => formatTime(props.activity.end_time));
+        // const formattedDate = format(new Date(props.activity.date), 'MMM d, yyyy');
+
+
+        // Helper function to format date
+        const formatDate = (dateStr) => {
+            return format(new Date(dateStr), 'MMM dd, yyyy');
+        }
+
+        // Helper function to format time
+        const formatTime = (timeStr) => {
+            const time = new Date(`1970-01-01T${timeStr}`); // Parse time as date object
+            return format(time, 'h:mm a');
+        }
 
         // Delete activity by id
         const deleteActivity = async () => {
@@ -193,7 +205,7 @@ export default {
             context.emit('deleteActivity', props.activity.id);
         };
 
-        return { dynamicBorderClass, isShow, cutBodyDescription, deleteActivity, formattedStartTime, formattedEndTime, formattedDate };
+        return { dynamicBorderClass, isShow, cutBodyDescription, deleteActivity, formatTime, formatDate };
     }
 };
 </script>

@@ -49,7 +49,7 @@ export default {
 
         load().then(() => loading.value = false)
 
-        let filteredActivities = computed(() => activities.value.filter(activity => activity.status === 'upcoming'))
+        let filteredActivities = computed(() => activities.value.filter(activity => activity.type === 'upcoming'))
 
         let handleDelete = (id) => {
             activities.value = activities.value.filter(activity => activity.id !== id);
