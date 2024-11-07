@@ -1,45 +1,37 @@
 <template>
     <h1>Test</h1>
-    <div v-for="(activity, index) in state.activities" :key="index">
-        <p>DocId - {{ activity.documentId }}</p>
-        <p>Title - {{ activity.title }}</p>
-        <p class="description">Description - {{ activity.description }}</p>
-        <p>Location - {{ activity.location }}</p>
-        <p>School - {{ activity.school }}</p>
-        <!-- Formatted date and time fields -->
-        <p>Date - {{ formatDate(activity.date) }}</p>
-        <p>Start Time - {{ formatTime(activity.start_time) }}</p>
-        <p>End Time - {{ formatTime(activity.end_time) }}</p>
-        <p>Type - {{ activity.type }}</p>
-        <hr><br>
-    </div>
+
 </template>
 
 <script setup>
-import axios from 'axios';
-import { onMounted, reactive } from 'vue';
-import { format } from 'date-fns';
+import { onMounted } from 'vue';
+import { format, isSameDay, isBefore, isAfter, parse } from 'date-fns';
 
-const state = reactive({
-    activities: []
-});
+onMounted(() => {
+    const current = new Date();
+    const activityDate = new Date('2024-11-07');
+    const startTime = parse('21:50:00.000'.substring(0, 4), 'HH:mm', activityDate);
+    const endTime = parse('22:00:00.000'.substring(0, 4), 'HH:mm', activityDate);
 
-onMounted(async () => {
-    let res = await axios.get('http://localhost:1337/api/activities');
-    console.log(res.data.data);
-    state.activities = res.data.data;
-});
+    if (isSameDay(current, activityDate)) {
+        if (isBefore(current, startTime)) {
+            console.log('Same day - upcoming')
 
-// Helper function to format date
-const formatDate = (dateStr) => {
-    return format(new Date(dateStr), 'MMM dd, yyyy');
-}
+        } else if (isAfter(current, startTime) && isBefore(current, endTime)) {
+            console.log('Same day - ongoing')
+        } else if (isAfter(current, endTime)) {
+            console.log('Same day - completed')
+        }
+    }
+    else if (isBefore(current, activityDate)) {
+        console.log('Not the same day - upcoming')
+    }
+    else {
+        console.log('Not the same day - completed')
+    }
 
-// Helper function to format time
-const formatTime = (timeStr) => {
-    const time = new Date(`1970-01-01T${timeStr}`); // Parse time as date object
-    return format(time, 'h:mm a');
-}
+})
+
 </script>
 
 <style></style>

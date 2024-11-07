@@ -8,7 +8,7 @@
             <h1 class="fs-4 fw-bold text-center mt-5">Create a new activity</h1>
             <form @submit.prevent="createActivity" novalidate>
                 <div class="row mt-4">
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         <!-- Title -->
                         <div class="mb-3">
                             <div class="form-label">Title <span class="text-danger">*</span></div>
@@ -79,11 +79,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <!-- Start Date -->
                         <div class="mb-3">
                             <div class="form-label">Date <span class="text-danger">*</span></div>
-                            <v-date-picker v-model="date" :class="{ 'is-invalid': showError('date') }" color="primary"
+                            <v-date-picker v-model="date" style="padding-bottom: 13.5px;" :class="{ 'is-invalid': showError('date') }" color="primary"
                                 elevation="1"></v-date-picker>
                             <div class="invalid-feedback">
                                 Please select a date.
@@ -190,14 +190,14 @@ export default {
                     // Format the date and times to ISO format
                     const formattedDate = new Date(date.value).toLocaleDateString('en-CA');
                     // Append seconds to the time
-                    const formattedStartTime = `${start_time.value}:00`;
+                    const formattedStartTime = `${start_time.value}:00.000`;
                     // Append seconds to the time
-                    const formattedEndTime = `${end_time.value}:00`;
+                    const formattedEndTime = `${end_time.value}:00.000`;
 
                     const current = new Date();
                     const activityDate = new Date(date.value);
-                    const startTime = parse(formattedStartTime.substring(0, 4), 'HH:mm', activityDate);
-                    const endTime = parse(formattedEndTime.substring(0, 4), 'HH:mm', activityDate);
+                    const startTime = parse(formattedStartTime.substring(0, 5), 'HH:mm', activityDate);
+                    const endTime = parse(formattedEndTime.substring(0, 5), 'HH:mm', activityDate);
                     const calculateType = ref(null)
 
                     if (isSameDay(current, activityDate)) {
