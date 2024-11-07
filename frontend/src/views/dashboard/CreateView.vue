@@ -112,6 +112,7 @@ import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue';
 import RiseLoader from 'vue-spinner/src/RiseLoader.vue';
 import { useToast } from 'vue-toastification';
 import axios from 'axios';
+import { format, isSameDay, isBefore, isAfter, parse } from 'date-fns';
 
 export default {
     components: {
@@ -188,14 +189,43 @@ export default {
                     isLoading.value = true
                     // Format the date and times to ISO format
                     const formattedDate = new Date(date.value).toLocaleDateString('en-CA');
-                    const formattedStartTime = `${start_time.value}:00`; // Append seconds to the time
-                    const formattedEndTime = `${end_time.value}:00`; // Append seconds to the time
+                    // Append seconds to the time
+                    const formattedStartTime = `${start_time.value}:00`;
+                    // Append seconds to the time
+                    const formattedEndTime = `${end_time.value}:00`;
+
+                    const current = new Date();
+                    const activityDate = new Date(date.value);
+                    const startTime = parse(formattedStartTime.substring(0, 4), 'HH:mm', activityDate);
+                    const endTime = parse(formattedEndTime.substring(0, 4), 'HH:mm', activityDate);
+                    const calculateType = ref(null)
+
+                    if (isSameDay(current, activityDate)) {
+                        if (isBefore(current, startTime)) {
+                            console.log('Same day - upcoming')
+                            calculateType.value = 'upcoming'
+
+                        } else if (isAfter(current, startTime) && isBefore(current, endTime)) {
+                            console.log('Same day - ongoing')
+                            calculateType.value = 'ongoing'
+                        } else if (isAfter(current, endTime)) {
+                            console.log('Same day - completed')
+                            calculateType.value = 'completed'
+                        }
+                    }
+                    else if (isBefore(current, activityDate)) {
+                        console.log('Not the same day - upcoming')
+                        calculateType.value = 'upcoming'
+                    }
+                    else {
+                        calculateType.value = 'completed'
+                    }
 
                     const newActivity = {
                         title: title.value,
                         description: description.value,
                         location: location.value,
-                        type: "upcoming",
+                        type: calculateType.value,
                         date: formattedDate, // formatted date (YYYY-MM-DD)
                         start_time: formattedStartTime, // formatted start time (HH:mm:ss)
                         end_time: formattedEndTime, // formatted end time (HH:mm:ss)
@@ -206,6 +236,7 @@ export default {
                         data: newActivity
                     })
 
+                    console.log(startTime, endTime, calculateType.value)
                     toast.success('Activity Created Successfully!');
                     router.push({ name: 'dashboard' });
                     isLoading.value = false
