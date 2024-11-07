@@ -74,16 +74,13 @@ export default {
             else return 'border-start border-5 border-success';
         });
 
-        /**
-         * ! @todo - Change Database with Firebase firestore
-         */
         const updateActivityStatus = async (updatedStatus) => {
-            // await fetch(`http://localhost:1337/api/activities/${props.activity.documentId}`, {
-            //     method: "PUT",
-            //     headers: { "Content-Type": "application/json" },
-            //     body: JSON.stringify({ type: updatedStatus })
-            // });
-            // context.emit('updated', props.activity.id, updatedStatus);
+            await axios.put(`http://localhost:1337/api/activities/${props.activity.documentId}`, {
+                data: {
+                    type: updatedStatus
+                }
+            })
+            context.emit('updated', props.activity.documentId, updatedStatus);
         };
 
         /**
@@ -92,9 +89,12 @@ export default {
          */
         const checkStatus = () => {
             const current = new Date();
+            // Create the date at midnight local time
+            // const [year, month, day] = props.activity.date.split('-').map(Number);
+            // const activityDate = new Date(year, month - 1, day, 0, 0, 0);
             const activityDate = new Date(props.activity.date);
-            const startTime = parse(props.activity.start_time, 'HH:mm', activityDate);
-            const endTime = parse(props.activity.end_time, 'HH:mm', activityDate);
+            const startTime = parse(props.activity.start_time.substring(0, 5), 'HH:mm', activityDate);
+            const endTime = parse(props.activity.end_time.substring(0, 5), 'HH:mm', activityDate);
 
             if (isSameDay(current, activityDate)) {
                 /**
@@ -188,7 +188,8 @@ export default {
 
         // Helper function to format time
         const formatTime = (timeStr) => {
-            const time = new Date(`1970-01-01T${timeStr}`); // Parse time as date object
+            // Parse time as date object
+            const time = new Date(`1970-01-01T${timeStr}`);
             return format(time, 'h:mm a');
         }
 
