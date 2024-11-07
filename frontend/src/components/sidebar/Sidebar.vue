@@ -17,7 +17,6 @@
                         <span class="mfu text-dark fw-bolder">MFU</span>
                         <span class="act text-dark">Activities Annoucement System</span>
                     </div>
-
                 </div>
             </h1>
 
