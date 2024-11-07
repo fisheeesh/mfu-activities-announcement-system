@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg fixed-top bg-white shadow-sm bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg fixed-top shadow-sm bg-body-tertiary-white">
         <div class="container-fluid px-4">
             <router-link to="/admin/dashboard" class="navbar-brand">
                 <div class="flexing ms-1 d-flex justify-content-start align-items-center overflow-hidden">
@@ -82,4 +82,6 @@ const handleSearch = () => {
 
 </script>
 
-<style></style>
+<style>
+
+</style>

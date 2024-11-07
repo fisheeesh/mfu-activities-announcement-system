@@ -1,18 +1,17 @@
 <template>
-    <router-link :to="to" class="link py-4 d-flex align-items-center position-relative user-select-none text-decoration-none overflow-hidden" :class="{ active: isActive }">
+    <router-link :to="to"
+        class="link py-4 d-flex align-items-center position-relative user-select-none text-decoration-none overflow-hidden"
+        :class="{ active: isActive }">
         <i class="icon flex-shrink-0 me-3" :class="icon"></i>
-        <transition name="fade">
-            <span v-if="!collapsed">
-                <slot />
-            </span>
-        </transition>
+        <span>
+            <slot />
+        </span>
     </router-link>
 </template>
 
 <script>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { collapsed } from './sidebarState'
 
 export default {
     props: {
@@ -23,21 +22,12 @@ export default {
         const route = useRoute()
         const isActive = computed(() => route.path === props.to)
 
-        return { collapsed, isActive }
+        return { isActive }
     }
 }
 </script>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 0.1s;
-}
-
-.fade-enter,
-.fade-leave-to {
-    opacity: 0;
-}
 
 .link {
     cursor: pointer;
@@ -51,7 +41,7 @@ export default {
 }
 
 /* .link:hover {
-    background-color:#ddd !important;
+    background-color: #ddd !important;
 } */
 
 .link.active {

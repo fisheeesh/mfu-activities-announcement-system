@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- Page Title -->
-        <h1 class="fs-4 fw-bold text-center mt-5">Upcoming Activities</h1>
+        <!-- <h1 class="fs-4 fw-bold text-center mt-5">Upcoming Activities</h1> -->
         <!-- Upcoming Activities -->
         <section class="activities mt-4">
             <div class="container">

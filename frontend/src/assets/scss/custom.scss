@@ -72,3 +72,43 @@ input, select {
     opacity: 0.5;
     cursor: not-allowed;
 }
+
+.navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+
+.navbar-nav .nav-item.dropdown:hover .nav-link {
+    color: #BA1E23;
+}
+
+.navbar-nav .nav-item .dropdown-menu {
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
+.navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+    opacity: 1;
+}
+
+.btn-group {
+    overflow: hidden;
+}
+
+.btn-group .link {
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+}
+
+.filter-nav {
+    background-color: #EBEEF2 !important;
+}
+
+.create-button {
+    position: fixed;
+    bottom: 20px; 
+    right: 20px;  
+    width: auto; 
+    z-index: 2;
+}

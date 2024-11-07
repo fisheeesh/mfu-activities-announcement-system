@@ -54,11 +54,6 @@ const routes = [
         component: Dashboard
       },
       {
-        path: 'create',
-        name: 'create',
-        component: Create
-      },
-      {
         path: 'ongoing',
         name: 'ongoing',
         component: Ongoing
@@ -80,6 +75,11 @@ const routes = [
         props : true
       }
     ]
+  },
+  {
+    path: '/admin/activity/create',
+    name: 'create',
+    component: Create
   },
   {
     path : '/:catchAll(.*)',

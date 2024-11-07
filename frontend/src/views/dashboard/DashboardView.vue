@@ -1,6 +1,6 @@
 <template>
   <section class="dashboard">
-    <div v-if="loading" class="text-center mt-8 py-7">
+    <div v-if="loading" class="text-center mt-6 py-7">
       <ScaleLoader :color="'#BA1E23'" />
     </div>
     <div v-else v class="container">

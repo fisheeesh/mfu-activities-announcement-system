@@ -1,9 +1,14 @@
 <template>
     <div class="dashboard-layout">
-        <Sidebar></Sidebar>
-        <div class="main w-100 me-2 overflow-hidden" :style="{ 'margin-left': `${parseInt(sidebarWidth) + 10}px` }">
-            <router-view />
-        </div>
+        <!-- With Side Bar -->
+        <!-- <Sidebar></Sidebar> -->
+        <!-- <div class="main w-100 me-2 overflow-hidden" :style="{ 'margin-left': `${parseInt(sidebarWidth) + 10}px` }"> -->
+        <!-- <router-view /> -->
+        <!-- </div> -->
+        <CreateButton/>
+        <Navbar />
+        <FilterNav />
+        <router-view />
     </div>
 </template>
 
@@ -13,8 +18,12 @@ import Sidebar from '../../components/sidebar/Sidebar'
 import getUser from '@/composables/auth/getUser';
 import { useRouter } from 'vue-router';
 import { watch } from 'vue';
+import Navbar from '@/components/navbar/Navbar.vue';
+import FilterNav from '@/components/navbar/FilterNav.vue';
+import CreateButton from '@/components/navbar/CreateButton.vue';
+
 export default {
-    components: { Sidebar },
+    components: { Sidebar, Navbar, FilterNav, CreateButton },
     setup() {
         const router = useRouter();
         const { user } = getUser();
@@ -34,11 +43,6 @@ export default {
 </script>
 
 <style scoped>
-.dashboard-layout {
-    display: flex;
-    height: 100vh;
-}
-
 .main {
     transition: 0.3s linear;
 }
