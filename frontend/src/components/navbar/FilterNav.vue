@@ -1,5 +1,5 @@
 <template>
-    <section class="mt-6 mb-3">
+    <section class="mt-6">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-10 offset-md-2 mt-3">

@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg fixed-top shadow-sm bg-body-tertiary-white">
+    <nav class="navbar navbar-expand-lg fixed-top shadow-sm bg-body-tertiary">
         <div class="container-fluid px-4">
             <router-link to="/admin/dashboard" class="navbar-brand">
                 <div class="flexing ms-1 d-flex justify-content-start align-items-center overflow-hidden">
@@ -54,19 +54,42 @@
                         </ul>
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
+                <form class="d-flex w-25" role="search">
                     <input @keydown.enter.prevent="handleSearch" v-model="query"
-                        class="form-control form-control-sm me-2" type="search" placeholder="Search"
+                        class="form-control form-control-sm me-2 rounded-5 px-4" type="search" placeholder="Search..."
                         aria-label="Search">
                 </form>
+
+
+                <button data-bs-toggle="modal" data-bs-target="#logoutModal"
+                    class="logout-button btn btn-primary rounded-5 px-3 fw-bold" style="padding: 8px 0;">
+                    <!-- <i class="icon fas fa-sign-out-alt"></i> -->
+                    LogOut
+                </button>
             </div>
         </div>
     </nav>
+    <!-- Logout Modal -->
+    <div class="modal fade" id="logoutModal">
+        <div class="modal-dialog mt-5">
+            <div class="modal-content p-4 shadow-sm bg-light">
+                <h2 class="modal-title fw-bolder text-primary fs-3">Confirm Logout</h2>
+                <hr>
+                <h6 class="text-muted">Are you sure you want to logout?</h6>
+                <div class="d-flex justify-content-end gap-2 mt-4">
+                    <button class="btn btn-outline-white rounded-5 border-1 border-dark text-dark"
+                        data-bs-dismiss="modal">Cancel</button>
+                    <button @click="logout" class="btn btn-primary rounded-5 px-4" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-
+import getUser from '@/composables/auth/getUser';
+import useSignOut from '@/composables/auth/useSignOut';
 
 const query = ref(null)
 
@@ -80,8 +103,14 @@ const handleSearch = () => {
     }
 }
 
+const { signOut } = useSignOut()
+const { user } = getUser()
+
+const logout = async () => {
+    await signOut()
+
+}
+
 </script>
 
-<style>
-
-</style>
+<style></style>

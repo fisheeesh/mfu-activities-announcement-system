@@ -18,22 +18,12 @@
   </section>
 </template>
 
-<script>
-import Spinner from '@/components/loaders/Spinner.vue';
+<script setup>
 import { onMounted, ref } from 'vue';
 import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue';
 
-export default {
-  components: {
-    Spinner,
-    ScaleLoader
-  },
-  setup() {
-    let loading = ref(true)
+let loading = ref(true)
 
-    onMounted(() => setTimeout(() => loading.value = false, 1000))
+onMounted(() => setTimeout(() => loading.value = false, 1000))
 
-    return { loading }
-  }
-}
 </script>

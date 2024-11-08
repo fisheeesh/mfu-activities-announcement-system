@@ -28,7 +28,6 @@ export default {
 </script>
 
 <style scoped>
-
 .link {
     cursor: pointer;
     font-weight: 400;
@@ -40,9 +39,9 @@ export default {
     white-space: nowrap;
 }
 
-/* .link:hover {
+.link:hover:not(.active) {
     background-color: #ddd !important;
-} */
+}
 
 .link.active {
     background-color: var(--sidebar-item-active);

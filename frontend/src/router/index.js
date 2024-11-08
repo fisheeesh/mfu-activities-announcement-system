@@ -67,19 +67,37 @@ const routes = [
         path: 'history',
         name: 'history',
         component: History
-      },
-      {
-        path : 'edit/:id',
-        name : 'edit',
-        component : Edit,
-        props : true
       }
     ]
   },
   {
     path: '/admin/activity/create',
     name: 'create',
-    component: Create
+    component: Create,
+    beforeEnter(to, from, next) {
+      let user = auth.currentUser
+      if (user) {
+        next()
+      }
+      else {
+        next('/')
+      }
+    },
+  },
+  {
+    path : '/admin/activity/edit/:id',
+    name : 'edit',
+    component : Edit,
+    props : true,
+    beforeEnter(to, from, next) {
+      let user = auth.currentUser
+      if (user) {
+        next()
+      }
+      else {
+        next('/')
+      }
+    },
   },
   {
     path : '/:catchAll(.*)',

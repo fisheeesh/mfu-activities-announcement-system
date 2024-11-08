@@ -5,14 +5,23 @@
         <!-- <div class="main w-100 me-2 overflow-hidden" :style="{ 'margin-left': `${parseInt(sidebarWidth) + 10}px` }"> -->
         <!-- <router-view /> -->
         <!-- </div> -->
-        <CreateButton/>
+
+        <!-- With Navbar -->
         <Navbar />
-        <FilterNav />
-        <router-view />
+
+        <!-- FilterNav stays in place at the top -->
+        <div class="content">
+            <FilterNav />
+
+            <!-- Scrollable area for router-view content -->
+            <div class="router-view-container">
+                <router-view />
+            </div>
+        </div>
     </div>
 </template>
 
-<script>
+<script setup>
 import { sidebarWidth } from '@/components/sidebar/sidebarState';
 import Sidebar from '../../components/sidebar/Sidebar'
 import getUser from '@/composables/auth/getUser';
@@ -20,30 +29,49 @@ import { useRouter } from 'vue-router';
 import { watch } from 'vue';
 import Navbar from '@/components/navbar/Navbar.vue';
 import FilterNav from '@/components/navbar/FilterNav.vue';
-import CreateButton from '@/components/navbar/CreateButton.vue';
 
-export default {
-    components: { Sidebar, Navbar, FilterNav, CreateButton },
-    setup() {
-        const router = useRouter();
-        const { user } = getUser();
+const router = useRouter();
+const { user } = getUser();
 
-        /**
-         * ? As soon as user logout, we want to redirect to login as for the user experience
-         * ? not let user to stay or show the dashboard page all the time, so we handled it by watcing user states
-         */
-        watch(user, () => {
-            !user.value && router.push({ name: 'login' })
-        })
+/**
+ * ? As soon as user logout, we want to redirect to login as for the user experience
+ * ? not let user to stay or show the dashboard page all the time, so we handled it by watcing user states
+ */
+watch(user, () => {
+    !user.value && router.push({ name: 'login' })
+})
 
-        return { sidebarWidth }
-    }
-
-};
 </script>
 
 <style scoped>
-.main {
-    transition: 0.3s linear;
+.dashboard-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+}
+
+.filter-nav {
+    position: sticky;
+    top: 0;
+    /* Keeps FilterNav at the top of its section */
+    z-index: 10;
+    background-color: white;
+    /* Match the background color */
+    padding: 1rem 0;
+}
+
+.router-view-container {
+    overflow-y: auto;
+    flex: 1;
+    padding: 1rem;
+    /* Adjust padding as needed */
 }
 </style>

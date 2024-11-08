@@ -3,7 +3,7 @@
         <!-- Page Title -->
         <!-- <h1 class="fs-4 fw-bold text-center mt-5">Upcoming Activities</h1> -->
         <!-- Upcoming Activities -->
-        <section class="activities mt-4">
+        <section class="activities">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -12,8 +12,10 @@
                         <!-- Show Placeholder durin data-fetching process, cuz it delays 1s -->
                         <div v-if="loading" class="mt-2">
                             <Placeholder></Placeholder>
+                            <CreateButton />
                         </div>
                         <div v-else>
+                            <CreateButton />
                             <!-- If there is no data, show this -->
                             <div v-if="filteredActivities.length === 0" class="mt-5 text-center fw-bolder">
                                 No Activity(s) yet
@@ -33,35 +35,27 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import Placeholder from '@/components/loaders/Placeholder.vue';
 import SingleActivity from '../../components/activity/SingleActivity.vue'
 import getActivities from '@/composables/controller/getActivities';
 import { computed, ref } from 'vue';
+import CreateButton from '@/components/navbar/CreateButton.vue';
 
-export default {
-    components: {
-        SingleActivity, Placeholder
-    },
-    setup() {
-        let { error, activities, load } = getActivities()
-        let loading = ref(true)
+let { error, activities, load } = getActivities()
+let loading = ref(true)
 
-        load().then(() => loading.value = false)
+load().then(() => loading.value = false)
 
-        let filteredActivities = computed(() => activities.value.filter(activity => activity.type === 'upcoming'))
+let filteredActivities = computed(() => activities.value.filter(activity => activity.type === 'upcoming'))
 
-        let handleDelete = (id) => {
-            activities.value = activities.value.filter(activity => activity.documentId !== id);
-        }
+let handleDelete = (id) => {
+    activities.value = activities.value.filter(activity => activity.documentId !== id);
+}
 
-        let handleUpdate = (id, type) => {
-            let findedActivity = activities.value.find(activity => activity.documentId === id)
-            findedActivity.type = type
-        }
-
-        return { error, activities, filteredActivities, loading, handleDelete, handleUpdate }
-    }
+let handleUpdate = (id, type) => {
+    let findedActivity = activities.value.find(activity => activity.documentId === id)
+    findedActivity.type = type
 }
 </script>
 

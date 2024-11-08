@@ -3,7 +3,7 @@
         <!-- Page Title -->
         <!-- <h1 class="fs-4 fw-bold text-center mt-5">Activities History</h1> -->
         <!-- Ongoing Activities -->
-        <section class="activities mt-4">
+        <section class="activities">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -12,9 +12,11 @@
                         <!-- Show Placeholder during data-fetching process -->
                         <div v-if="loading" class="mt-2">
                             <Placeholder></Placeholder>
+                            <CreateButton />
                         </div>
                         <!-- After we get data, show this -->
                         <div v-else>
+                            <CreateButton />
                             <!-- If there is no data, show this -->
                             <div v-if="activities.length === 0" class="mt-8 fs-4 text-center fw-bolder">
                                 No Activity(s) yet
@@ -36,34 +38,27 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import Placeholder from '@/components/loaders/Placeholder.vue';
 import SingleActivity from '@/components/activity/SingleActivity.vue';
 import getActivities from '@/composables/controller/getActivities';
 import { ref } from 'vue';
+import CreateButton from '@/components/navbar/CreateButton.vue';
 
-export default {
-    components: {
-        SingleActivity,
-        Placeholder,
-    },
-    setup() {
-        let { error, activities, load } = getActivities()
-        let loading = ref(true)
+let { error, activities, load } = getActivities()
+let loading = ref(true)
 
-        load().then(() => loading.value = false)
+load().then(() => loading.value = false)
 
-        let handleDelete = (id) => {
-            activities.value = activities.value.filter(activity => activity.documentId !== id);
-        }
-
-        let handleUpdate = (id, type) => {
-            let findedActivity = activities.value.find(activity => activity.documentId === id)
-            findedActivity.type = type
-        }
-        return { error, activities, loading, handleDelete, handleUpdate }
-    }
+let handleDelete = (id) => {
+    activities.value = activities.value.filter(activity => activity.documentId !== id);
 }
+
+let handleUpdate = (id, type) => {
+    let findedActivity = activities.value.find(activity => activity.documentId === id)
+    findedActivity.type = type
+}
+
 </script>
 
 <style></style>

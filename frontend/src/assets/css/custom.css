@@ -9,11 +9,6 @@ body {
   --button-color: #BA1E23;
 }
 
-.container {
-  max-height: 85vh;
-  overflow-y: auto;
-}
-
 .container-lg {
   max-height: 100vh;
   overflow-y: auto;
@@ -112,7 +107,8 @@ input, select {
 .create-button {
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  right: 12px;
   width: auto;
   z-index: 2;
+  padding: 10px 20px;
 }
