@@ -159,6 +159,7 @@ const isEndTimeValid = computed(() => {
 
 onMounted(async () => {
     try {
+        await new Promise((resolve) => setTimeout(resolve, 800));
         let res = await axios.get(`http://localhost:1337/api/activities/${props.id}`)
         console.log(res.data.data)
 
