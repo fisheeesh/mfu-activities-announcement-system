@@ -14,7 +14,7 @@
             <FilterNav />
 
             <!-- Scrollable area for router-view content -->
-            <div class="router-view-container">
+            <div class="router-view-container mt-3">
                 <router-view />
             </div>
         </div>

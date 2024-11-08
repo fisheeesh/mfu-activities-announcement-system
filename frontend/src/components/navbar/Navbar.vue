@@ -4,7 +4,7 @@
             <router-link to="/admin/dashboard" class="navbar-brand">
                 <div class="flexing ms-1 d-flex justify-content-start align-items-center overflow-hidden">
                     <div>
-                        <img src="@/assets/images/logo_mfu.png" alt="mfu.logo">
+                        <img src="@/assets/images/logo.png" width="45" alt="mfu.logo">
                     </div>
 
                     <div class="d-flex flex-column ms-2">
