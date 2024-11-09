@@ -8,11 +8,9 @@
 
         <!-- With Navbar -->
         <Navbar />
-
         <!-- FilterNav stays in place at the top -->
         <div class="content">
             <FilterNav />
-
             <!-- Scrollable area for router-view content -->
             <div class="router-view-container mt-3">
                 <router-view />

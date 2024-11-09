@@ -19,14 +19,15 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li style="width: 180px;" class="nav-item dropdown me-3">
+                    <li style="width: 180px;" class="nav-item dropdown me-3 w-md-100 w-sm-100">
                         <span class="nav-link dropdown-toggle d-flex justify-content-between align-items-center"
-                            href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            role="button" id="dropdownMenuBtn" data-bs-toggle="dropdown" aria-expanded="false">
                             All Schools
                         </span>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li @click="filterSch(school)" v-for="(school, index) in schLists" :key="index">
+                                <span class="dropdown-item">{{ school }}</span>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -62,7 +63,8 @@
 
 
                 <button data-bs-toggle="modal" data-bs-target="#logoutModal"
-                    class="logout-button btn btn-primary rounded-5 px-3 fw-bold" style="padding: 8px 0;">
+                    class="logout-button btn btn-primary rounded-5 px-3 fw-bold mt-lg-0 mb-lg-0 mt-md-3 mb-md-2"
+                    style="padding: 8px 0;">
                     <!-- <i class="icon fas fa-sign-out-alt"></i> -->
                     LogOut
                 </button>
@@ -87,8 +89,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import getUser from '@/composables/auth/getUser';
+import { onMounted, ref } from 'vue';
 import useSignOut from '@/composables/auth/useSignOut';
 
 const query = ref(null)
@@ -104,13 +105,43 @@ const handleSearch = () => {
 }
 
 const { signOut } = useSignOut()
-const { user } = getUser()
 
 const logout = async () => {
     await signOut()
-
 }
+
+const schLists = ref([
+    'School of Agro Industry',
+    'School of Anti-aging Regenerative Medicine',
+    'School of Cosmetic Science', 'School of Dentistry',
+    'School of Health Science',
+    'School of Applied Digital Technology',
+    'School of Integrated Medicine',
+    'School of Laws',
+    'School of Liberal Arts',
+    'School of Management',
+    'School of Medicine',
+    'School of Nursing',
+    'School of Science',
+    'School of Sinology',
+    'School of Social Innovation'
+])
+
+const filterSch = (school) => {
+    console.log(school)
+    document.getElementById('dropdownMenuBtn').textContent = school
+}
+
+onMounted(() => {
+    schLists.value.unshift('All Schools')
+})
 
 </script>
 
-<style></style>
+<style scoped>
+@media (max-width: 599px) {
+    .nav-item {
+        width: 100% !important;
+    }
+}
+</style>
