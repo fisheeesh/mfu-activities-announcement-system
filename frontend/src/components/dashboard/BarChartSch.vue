@@ -53,12 +53,14 @@ onMounted(() => {
                     '#FC9893',
                     '#FC9893',
                 ],
-                borderRadius: 5, // Set border-radius for rounded corners
+                borderRadius: 5,
             }]
         },
         options: {
-            responsive: true, // Make the chart responsive
-            maintainAspectRatio: false, // Allow chart to resize based on container size
+            // Make the chart responsive
+            responsive: true,
+            // Allow chart to resize based on container size
+            maintainAspectRatio: false,
             plugins: {
                 legend: {
                     display: false
@@ -68,35 +70,47 @@ onMounted(() => {
                 y: {
                     beginAtZero: true,
                     grid: {
-                        display: true // Show y-axis gridlines
+                        // Show y-axis gridlines
+                        display: true
                     },
                     ticks: {
-                        display: true, // Display y-axis ticks
-                        stepSize: 2,   // Set the step size for y-axis ticks (0, 2, 4, 6, 8, 10)
+                        // Display y-axis ticks
+                        display: true,
+                        // Set the step size for y-axis ticks (0, 2, 4, 6, 8, 10)
+                        stepSize: 2,
                     },
                     border: {
-                        display: false // Remove the y-axis line
+                        // Remove the y-axis line
+                        display: false
                     }
                 },
                 x: {
                     grid: {
-                        display: false // Hide x-axis gridlines
+                        // Hide x-axis gridlines
+                        display: false
                     },
                     ticks: {
-                        display: true, // Ensure x-axis ticks (labels) are displayed
-                        autoSkip: false, // Ensure all labels are shown without skipping
-                        maxRotation: 90, // Rotate labels to 90 degrees
-                        minRotation: 90  // Set the minimum rotation to 90 degrees
+                        // Ensure x-axis ticks (labels) are displayed
+                        display: true,
+                        // Ensure all labels are shown without skipping
+                        autoSkip: false,
+                        // Rotate labels to 90 degrees 
+                        maxRotation: 90,
+                        // Set the minimum rotation to 90 degrees
+                        minRotation: 90
                     },
                     border: {
-                        display: false // Remove the x-axis line
+                        // Remove the x-axis line
+                        display: false
                     }
                 }
             },
             elements: {
                 bar: {
-                    categoryPercentage: 0.6, // Control the space between bars (less than 1 for more space)
-                    barPercentage: 0.7 // Control the width of the bars (less than 1 for thinner bars)
+                    // Control the space between bars (less than 1 for more space)
+                    categoryPercentage: 0.6,
+                    // Control the width of the bars (less than 1 for thinner bars)
+                    barPercentage: 0.7
                 }
             }
         },
@@ -108,6 +122,5 @@ onMounted(() => {
 .chartCanvas {
     width: 100%;
     height: 600px;
-    /* Set a fixed height or use a responsive approach */
 }
 </style>

@@ -25,8 +25,8 @@ onMounted(() => {
                     '#FEC002',
                     '#B1E2FE'
                 ],
-                borderRadius: 5, // Set border-radius for rounded corners
-                barThickness: 50 // Adjust the bar width
+                borderRadius: 5, 
+                barThickness: 50
             }]
         },
         options: {
