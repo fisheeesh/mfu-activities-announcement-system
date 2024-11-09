@@ -7,7 +7,6 @@
         <!-- </div> -->
 
         <!-- With Navbar -->
-        <Navbar />
         <!-- FilterNav stays in place at the top -->
         <div class="content">
             <FilterNav />

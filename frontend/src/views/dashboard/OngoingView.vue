@@ -3,6 +3,7 @@
         <!-- Page Title -->
         <!-- <h1 class="fs-4 fw-bold text-center mt-5">Ongoing Activities</h1> -->
         <!-- Ongoing Activities -->
+        <Navbar />
         <section class="activities">
             <div class="container">
                 <div class="row">
@@ -43,6 +44,7 @@ import SingleActivity from '@/components/activity/SingleActivity.vue';
 import getActivities from '@/composables/controller/getActivities';
 import { computed, ref } from 'vue';
 import CreateButton from '@/components/navbar/CreateButton.vue';
+import Navbar from '@/components/navbar/Navbar.vue';
 
 let { error, activities, load } = getActivities()
 let loading = ref(true)

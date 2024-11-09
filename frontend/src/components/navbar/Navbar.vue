@@ -20,47 +20,42 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li style="width: 180px;" class="nav-item dropdown me-3 w-md-100 w-sm-100">
-                        <span class="nav-link dropdown-toggle d-flex justify-content-between align-items-center"
+                        <span class="nav-link dropdown-toggle d-flex gap-4 justify-content-between align-items-center"
                             role="button" id="dropdownMenuBtn" data-bs-toggle="dropdown" aria-expanded="false">
-                            All Schools
+                            All
                         </span>
                         <ul class="dropdown-menu">
-                            <li @click="filterSch(school)" v-for="(school, index) in schLists" :key="index">
+                            <li @click="filteredSch(school)" v-for="(school, index) in schLists" :key="index">
                                 <span class="dropdown-item">{{ school }}</span>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <button class="nav-link dropdown-toggle me-3" href="#" role="button" data-bs-toggle="dropdown"
+                        <button class="nav-link dropdown-toggle me-3" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             Category
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><span class="dropdown-item">Action</span></li>
+                            <li><span class="dropdown-item">Another action</span></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <span class="nav-link dropdown-toggle me-3" href="#" role="button" data-bs-toggle="dropdown"
+                        <span class="nav-link dropdown-toggle me-3" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             Host
                         </span>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><span class="dropdown-item">Action</span></li>
+                            <li><span class="dropdown-item">Another action</span></li>
                         </ul>
                     </li>
                 </ul>
                 <form class="d-flex w-25" role="search">
-                    <input @keydown.enter.prevent="handleSearch" v-model="query"
+                    <input @keydown.prevent.enter @input="handleSearch($event)" v-model="searchQuery"
                         class="form-control form-control-sm me-2 rounded-5 px-4" type="search" placeholder="Search..."
                         aria-label="Search">
                 </form>
-
 
                 <button data-bs-toggle="modal" data-bs-target="#logoutModal"
                     class="logout-button btn btn-primary rounded-5 px-3 fw-bold mt-lg-0 mb-lg-0 mt-md-3 mb-md-2"
@@ -89,20 +84,8 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import useSignOut from '@/composables/auth/useSignOut';
-
-const query = ref(null)
-
-const handleSearch = () => {
-    if (query.value.trim()) {
-        console.log(query.value)
-        query.value = ''
-    }
-    else {
-        query.value = ''
-    }
-}
 
 const { signOut } = useSignOut()
 
@@ -110,7 +93,11 @@ const logout = async () => {
     await signOut()
 }
 
+const query = ref('')
+const selectedSch = ref('')
+
 const schLists = ref([
+    'All',
     'School of Agro Industry',
     'School of Anti-aging Regenerative Medicine',
     'School of Cosmetic Science', 'School of Dentistry',
@@ -124,21 +111,29 @@ const schLists = ref([
     'School of Nursing',
     'School of Science',
     'School of Sinology',
-    'School of Social Innovation'
+    'School of Social Innovation',
+    'Mae-Fah-Luang University'
 ])
 
-const filterSch = (school) => {
-    console.log(school)
-    document.getElementById('dropdownMenuBtn').textContent = school
-}
+const emits = defineEmits(['search'])
 
-onMounted(() => {
-    schLists.value.unshift('All Schools')
-})
+const handleSearch = (event) => {
+    query.value = event.target.value;
+    emits('search', query.value.trim(), selectedSch.value); // Emit both query and selectedSch
+}
+const filteredSch = (school) => {
+    selectedSch.value = school;
+    document.getElementById('dropdownMenuBtn').textContent = school;
+    emits('search', query.value.trim(), selectedSch.value); // Emit selected school as well when it's changed
+}
 
 </script>
 
 <style scoped>
+.dropdown-item {
+    cursor: pointer ! important;
+}
+
 @media (max-width: 599px) {
     .nav-item {
         width: 100% !important;

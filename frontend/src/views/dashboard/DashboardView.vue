@@ -1,4 +1,5 @@
 <template>
+  <Navbar/>
   <section class="dashboard">
     <div v-if="loading" class="text-center mt-5 py-7">
       <ScaleLoader :color="'#BA1E23'" />
@@ -15,9 +16,9 @@
               2567/1
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><span class="dropdown-item" href="#">Action</span></li>
+              <li><span class="dropdown-item" href="#">Another action</span></li>
+              <li><span class="dropdown-item" href="#">Something else here</span></li>
             </ul>
           </div>
         </div>
@@ -28,8 +29,8 @@
         <div class="col-lg-2 mb-4">
           <div class="vstack gap-2">
             <Card to="/admin/upcoming" :total="upcoming.length" :color="'#ECECFD'" title="Upcoming" />
-            <Card to="/admin/ongoingg" :total="ongoing.length" :color="'#E6FFD1'" title="Ongoing" />
-            <Card to="/admin/history" :total="completed.length" :color="'#f3f6f9'" title="Completed" />
+            <Card to="/admin/ongoing" :total="ongoing.length" :color="'#E6FFD1'" title="Ongoing" />
+            <Card to="/admin/history" :total="completed.length" :color="'#FFEFEF'" title="Completed" />
           </div>
         </div>
         <div class="col-lg-4 mb-4">
@@ -55,10 +56,10 @@ import BarChartCate from '@/components/dashboard/BarChartCate.vue';
 import BarChartSch from '@/components/dashboard/BarChartSch.vue';
 import Card from '@/components/dashboard/Card.vue';
 import DoughnutChart from '@/components/dashboard/DoughnutChart.vue';
+import Navbar from '@/components/navbar/Navbar.vue';
 import getActivities from '@/composables/controller/getActivities';
 import { computed, onMounted, ref } from 'vue';
 import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue';
-
 
 let loading = ref(true)
 
