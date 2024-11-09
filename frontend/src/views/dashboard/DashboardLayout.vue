@@ -58,20 +58,9 @@ watch(user, () => {
     overflow: hidden;
 }
 
-.filter-nav {
-    position: sticky;
-    top: 0;
-    /* Keeps FilterNav at the top of its section */
-    z-index: 10;
-    background-color: white;
-    /* Match the background color */
-    padding: 1rem 0;
-}
-
 .router-view-container {
     overflow-y: auto;
     flex: 1;
     padding: 1rem;
-    /* Adjust padding as needed */
 }
 </style>

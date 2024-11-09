@@ -2,29 +2,47 @@
     <section class="mt-6">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-10 offset-md-2 mt-3">
-                    <div class="filter-nav btn-group rounded-5" role="group" aria-label="Basic example">
-                        <FilterNavLink class="p-4 rounded-end-5" to="/admin/dashboard" icon="fas fa-columns">Dashboard
+                <div class="col-lg-7 col-lg-6 mx-auto mt-3">
+                    <div class="filter-nav btn-group rounded-5 w-100" role="group" aria-label="Filter navigation">
+                        <FilterNavLink class="flex-fill p-3 rounded-end-5" to="/admin/dashboard" icon="fas fa-columns">
+                            Dashboard
                         </FilterNavLink>
-                        <FilterNavLink class="p-4 rounded-5" to="/admin/upcoming" icon="fas fa-calendar-alt">Upcoming
-                            Activities
+                        <FilterNavLink class="flex-fill p-3 rounded-5" to="/admin/upcoming" icon="fas fa-calendar-alt">
+                            Upcoming Activities
                         </FilterNavLink>
-                        <FilterNavLink class="p-4 rounded-5" to="/admin/ongoing" icon="fas fa-spinner">Ongoing
-                            Activities
+                        <FilterNavLink class="flex-fill p-3 rounded-5" to="/admin/ongoing" icon="fas fa-spinner">
+                            Ongoing Activities
                         </FilterNavLink>
-                        <FilterNavLink class="p-4 rounded-start-5" to="/admin/history" icon="fas fa-history">Activities
-                            History
+                        <FilterNavLink class="flex-fill p-3 rounded-start-5" to="/admin/history" icon="fas fa-history">
+                            Activities History
                         </FilterNavLink>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
 </template>
 
 <script setup>
 import FilterNavLink from './FilterNavLink.vue';
 </script>
 
-<style></style>
+<style scoped>
+.filter-nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: white;
+}
+
+@media (max-width: 768px) {
+    .filter-nav {
+        flex-direction: column;
+    }
+
+    .filter-nav .btn-group .p-3 {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+    }
+}
+</style>

@@ -71,6 +71,6 @@ onMounted(() => {
 
 <style scoped>
 .chartCanvas {
-    height: 237px !important;
+    height: 237.25px !important;
 }
 </style>

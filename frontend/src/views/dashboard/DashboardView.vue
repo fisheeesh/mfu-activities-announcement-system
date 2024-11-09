@@ -24,12 +24,12 @@
       </div>
 
       <!-- Second Row -->
-      <div class="row mt-1">
+      <div class="row mt-1 mb-4">
         <div class="col-lg-2 mb-4">
           <div class="vstack gap-2">
             <Card :total="upcoming.length" :color="'#ECECFD'" title="Upcoming" />
             <Card :total="ongoing.length" :color="'#E6FFD1'" title="Ongoing" />
-            <Card :total="activities.length" :color="'#FFEFEF'" title="Completed" />
+            <Card :total="activities.length" :color="'#f3f6f9'" title="Completed" />
           </div>
         </div>
         <div class="col-lg-4 mb-4">

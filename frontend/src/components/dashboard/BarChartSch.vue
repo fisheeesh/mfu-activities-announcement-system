@@ -2,7 +2,10 @@
     <div class="card border-0 shadow-sm rounded-4 bg-light">
         <h5 class="fw-bold ms-4 mt-4">Number of Activities by Schools</h5>
         <div class="card-body">
-            <canvas id="myCharrt" class="chartCanvas"></canvas>
+            <div class="card-content px-4">
+
+                <canvas id="myCharrt" class="chartCanvas"></canvas>
+            </div>
         </div>
     </div>
 </template>
@@ -51,10 +54,11 @@ onMounted(() => {
                     '#FC9893',
                 ],
                 borderRadius: 5, // Set border-radius for rounded corners
-                barThickness: 50 // Adjust the bar width
             }]
         },
         options: {
+            responsive: true, // Make the chart responsive
+            maintainAspectRatio: false, // Allow chart to resize based on container size
             plugins: {
                 legend: {
                     display: false
@@ -88,6 +92,12 @@ onMounted(() => {
                         display: false // Remove the x-axis line
                     }
                 }
+            },
+            elements: {
+                bar: {
+                    categoryPercentage: 0.6, // Control the space between bars (less than 1 for more space)
+                    barPercentage: 0.7 // Control the width of the bars (less than 1 for thinner bars)
+                }
             }
         },
     });
@@ -95,4 +105,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.chartCanvas {
+    width: 100%;
+    height: 600px;
+    /* Set a fixed height or use a responsive approach */
+}
 </style>

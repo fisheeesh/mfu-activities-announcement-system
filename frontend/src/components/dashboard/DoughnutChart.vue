@@ -1,11 +1,11 @@
 <template>
     <div class="card border-0 shadow-sm rounded-4 bg-light">
         <h5 class="fw-bold ms-4 mt-4">Activity Category</h5>
-        <div class="card-body d-flex justify-content-center align-items-center" style="padding: 44px 20px">
+        <div class="card-body d-flex justify-content-center align-items-center" style="padding: 44px 15px">
             <div class="chart-container">
                 <canvas id="myChart" class="chartCanvas"></canvas>
             </div>
-            <div class="legend-container ms-4 d-flex">
+            <div class="legend-container ms-3 d-flex">
                 <!-- Labels List -->
                 <ul id="chartLabels" class="chart-legend chart-labels"></ul>
                 <!-- Percentages List -->
@@ -106,5 +106,44 @@ onMounted(() => {
 .chart-percentages li {
     margin-bottom: 8px;
     font-size: 12px !important;
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    .chartCanvas {
+        width: 100px !important;
+        height: 100px !important;
+    }
+
+    .chart-labels li,
+    .chart-percentages li {
+        margin-bottom: 4px !important;
+        font-size: 6px !important;
+    }
+
+    .card-body {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center;
+        padding: 27px 20px !important;
+    }
+
+    .legend-container {
+        margin-top: 20px !important;
+    }
+}
+
+@media (min-width: 1201px) and (max-width: 1400px) {
+    .chartCanvas {
+        width: 150px !important;
+        height: 150px !important;
+    }
+
+    .chart-labels li,
+    .chart-percentages li {
+        font-size: 6px !important;
+    }
+    .card-body {
+        padding: 59.7px 10px !important;
+    }
 }
 </style>
