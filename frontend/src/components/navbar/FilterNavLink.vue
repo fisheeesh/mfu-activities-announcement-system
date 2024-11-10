@@ -3,7 +3,7 @@
         class="link py-4 d-flex align-items-center position-relative user-select-none text-decoration-none overflow-hidden"
         :class="{ active: isActive }">
         <i class="icon flex-shrink-0 me-3" :class="icon"></i>
-        <span>
+        <span class="text">
             <slot />
         </span>
     </router-link>
@@ -51,5 +51,13 @@ export default {
 .link .icon {
     font-size: 1.2rem;
     width: 1.2rem;
+}
+@media (max-width : 559px) {
+    .text{
+        display: none;
+    }
+    .link .icon{
+        margin-left: 4px !important;
+    }
 }
 </style>

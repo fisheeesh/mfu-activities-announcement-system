@@ -2,7 +2,7 @@
     <section class="mt-6">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-7 col-lg-6 mx-auto mt-3">
+                <div class="col-lg-7 col-lg-6 mx-auto mt-3 main-nav">
                     <div class="filter-nav btn-group rounded-5 w-100" role="group" aria-label="Filter navigation">
                         <FilterNavLink class="flex-fill p-3 rounded-end-5" to="/admin/dashboard" icon="fas fa-columns">
                             Dashboard
@@ -36,8 +36,14 @@ import FilterNavLink from './FilterNavLink.vue';
 }
 
 @media (max-width: 768px) {
+    .main-nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     .filter-nav {
-        flex-direction: column;
+        width: 50% ! important;
     }
 
     .filter-nav .btn-group .p-3 {
