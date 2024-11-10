@@ -11,6 +11,7 @@
 </template>
 
 <script setup>
+import getActivities from '@/composables/controller/getActivities';
 import { Chart } from 'chart.js/auto';
 import { onMounted } from 'vue';
 
@@ -116,6 +117,14 @@ onMounted(() => {
         },
     });
 })
+
+
+const { error, activities, load } = getActivities();
+
+load();
+
+console.log('gg',activities.value.length)
+
 </script>
 
 <style scoped>

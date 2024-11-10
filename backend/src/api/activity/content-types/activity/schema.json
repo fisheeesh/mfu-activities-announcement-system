@@ -23,6 +23,12 @@
     "type": {
       "type": "string"
     },
+    "school": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
     "date": {
       "type": "date"
     },
@@ -31,9 +37,6 @@
     },
     "end_time": {
       "type": "time"
-    },
-    "school": {
-      "type": "string"
     }
   }
 }

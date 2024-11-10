@@ -33,7 +33,7 @@
                                 </div>
                                 <!-- School -->
                                 <div class="mb-3">
-                                    <div class="form-label">School <span class="text-danger">*</span></div>
+                                    <div class="form-label">Host <span class="text-danger">*</span></div>
                                     <select required v-model="school" :class="{ 'is-invalid': showError('school') }"
                                         class="form-select border-1 bg-light">
                                         <option value="" selected disabled>Choose School</option>
@@ -57,6 +57,7 @@
                                         <option value="School of Sinology">School of Sinology</option>
                                         <option value="School of Social Innovation">School of Social Innovation</option>
                                         <option value="Mae-Fah-Luang University">Mae-Fah-Luang University</option>
+                                        <option value="Other">Other...</option>
                                     </select>
                                     <div class="invalid-feedback">
                                         Please select a school.

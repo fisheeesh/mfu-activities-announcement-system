@@ -40,16 +40,6 @@
                             <li><span class="dropdown-item">Another action</span></li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown">
-                        <span class="nav-link dropdown-toggle me-3" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Host
-                        </span>
-                        <ul class="dropdown-menu">
-                            <li><span class="dropdown-item">Action</span></li>
-                            <li><span class="dropdown-item">Another action</span></li>
-                        </ul>
-                    </li>
                 </ul>
                 <form class="d-flex w-25" role="search">
                     <input @keydown.prevent.enter @input="handleSearch($event)" v-model="searchQuery"

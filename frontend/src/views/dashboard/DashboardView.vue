@@ -1,5 +1,5 @@
 <template>
-  <Navbar/>
+  <Navbar />
   <section class="dashboard">
     <div v-if="loading" class="text-center mt-5 py-7">
       <ScaleLoader :color="'#BA1E23'" />
@@ -16,9 +16,8 @@
               2567/1
             </button>
             <ul class="dropdown-menu">
-              <li><span class="dropdown-item" href="#">Action</span></li>
-              <li><span class="dropdown-item" href="#">Another action</span></li>
-              <li><span class="dropdown-item" href="#">Something else here</span></li>
+              <li><span class="dropdown-item" href="#">2567/1</span></li>
+              <li><span class="dropdown-item" href="#">2567/2</span></li>
             </ul>
           </div>
         </div>
@@ -63,18 +62,17 @@ import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue';
 
 let loading = ref(true)
 
-onMounted(() => setTimeout(() => loading.value = false, 1000))
-
 const { error, activities, load } = getActivities()
 
 load()
 
+
+onMounted(() => {
+  setTimeout(() => loading.value = false, 1000)
+})
+
+
 const upcoming = computed(() => activities.value.filter(activity => activity.type === 'upcoming'))
 const ongoing = computed(() => activities.value.filter(activity => activity.type === 'ongoing'))
 const completed = computed(() => activities.value.filter(activity => activity.type === 'completed'))
-
-console.log(activities.length)
-
-
-
 </script>
