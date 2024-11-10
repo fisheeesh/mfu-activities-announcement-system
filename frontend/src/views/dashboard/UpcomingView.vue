@@ -1,7 +1,6 @@
 <template>
     <div>
         <!-- Upcoming Activities -->
-        <Navbar @search="searchQuery = $event" @school="selectedSch = $event" />
         <section class="activities">
             <div class="container">
                 <div class="row">
@@ -38,14 +37,16 @@ import { ref, computed } from 'vue';
 import Placeholder from '@/components/loaders/Placeholder.vue';
 import SingleActivity from '@/components/activity/SingleActivity.vue';
 import CreateButton from '@/components/navbar/CreateButton.vue';
-import Navbar from '@/components/navbar/Navbar.vue';
 import getActivities from '@/composables/controller/getActivities';
+import { useActivityFilterStore } from '@/store/activityFilter';
 
 let { error, activities, load } = getActivities();
 let loading = ref(true);
 
-const searchQuery = ref('');
-const selectedSch = ref('');
+const store = useActivityFilterStore();
+
+const searchQuery = computed(() => store.searchQuery);
+const selectedSch = computed(() => store.selectedSch);
 
 load().then(() => loading.value = false);
 

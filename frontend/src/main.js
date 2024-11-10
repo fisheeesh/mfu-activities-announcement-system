@@ -4,6 +4,9 @@ import router from './router'
 import PrimeVue from 'primevue/config';
 import Toast from 'vue-toastification';
 import 'vue-toastification/dist/index.css';
+import { createPinia } from 'pinia';
+
+const pinia = createPinia();
 
 // Vuetify
 import 'vuetify/styles'
@@ -51,5 +54,5 @@ let app;
  * ? So the system wlll push the user to login page
  */
 auth.onAuthStateChanged(() => {
-    if (!app) app = createApp(App).use(vuetify).use(PrimeVue).use(router).use(Toast).mount('#app')
+    if (!app) app = createApp(App).use(vuetify).use(PrimeVue).use(router).use(Toast).use(pinia).mount('#app')
 })

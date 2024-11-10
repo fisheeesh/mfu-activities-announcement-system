@@ -3,7 +3,6 @@
         <!-- Page Title -->
         <!-- <h1 class="fs-4 fw-bold text-center mt-5">Ongoing Activities</h1> -->
         <!-- Ongoing Activities -->
-        <Navbar @search="searchQuery = $event" @school="selectedSch = $event" />
         <section class="activities">
             <div class="container">
                 <div class="row">
@@ -45,24 +44,27 @@ import getActivities from '@/composables/controller/getActivities';
 import { computed, ref } from 'vue';
 import CreateButton from '@/components/navbar/CreateButton.vue';
 import Navbar from '@/components/navbar/Navbar.vue';
+import { useActivityFilterStore } from '@/store/activityFilter';
 
 let { error, activities, load } = getActivities()
 let loading = ref(true)
 
-const searchQuery = ref('')
-const selectedSch = ref('')
+const store = useActivityFilterStore();
+
+const searchQuery = computed(() => store.searchQuery);
+const selectedSch = computed(() => store.selectedSch);
 
 load().then(() => loading.value = false)
 
 let filteredActivities = computed(() => activities.value.filter(activity => activity.type === 'ongoing'))
 
 const searchActivities = computed(() => {
-    if(!searchQuery.value && !selectedSch.value) {
+    if (!searchQuery.value && !selectedSch.value) {
         return filteredActivities.value
     }
 
     let filteredBySchool = filteredActivities.value
-    if(selectedSch.value && selectedSch.value !== 'All'){
+    if (selectedSch.value && selectedSch.value !== 'All') {
         filteredBySchool = filteredBySchool.filter(activity => activity.school === selectedSch.value)
     }
 

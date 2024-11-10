@@ -1,5 +1,4 @@
 <template>
-  <Navbar />
   <section class="dashboard">
     <div v-if="loading" class="text-center mt-5 py-7">
       <ScaleLoader :color="'#BA1E23'" />
@@ -55,7 +54,6 @@ import BarChartCate from '@/components/dashboard/BarChartCate.vue';
 import BarChartSch from '@/components/dashboard/BarChartSch.vue';
 import Card from '@/components/dashboard/Card.vue';
 import DoughnutChart from '@/components/dashboard/DoughnutChart.vue';
-import Navbar from '@/components/navbar/Navbar.vue';
 import getActivities from '@/composables/controller/getActivities';
 import { computed, onMounted, ref } from 'vue';
 import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue';

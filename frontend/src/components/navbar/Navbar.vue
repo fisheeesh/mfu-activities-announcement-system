@@ -76,6 +76,7 @@
 <script setup>
 import { ref } from 'vue';
 import useSignOut from '@/composables/auth/useSignOut';
+import { useActivityFilterStore } from '@/store/activityFilter';
 
 const { signOut } = useSignOut()
 
@@ -83,8 +84,6 @@ const logout = async () => {
     await signOut()
 }
 
-const query = ref('')
-const selectedSch = ref('')
 
 const schLists = ref([
     'All',
@@ -105,17 +104,17 @@ const schLists = ref([
     'Mae-Fah-Luang University'
 ])
 
-const emits = defineEmits(['search', 'school'])
+
+const store = useActivityFilterStore();
 
 const handleSearch = (event) => {
-    query.value = event.target.value;
-    emits('search', query.value.trim());
-}
+    store.searchQuery = event.target.value.trim();
+};
+
 const filteredSch = (school) => {
-    selectedSch.value = school;
+    store.selectedSch = school;
     document.getElementById('dropdownMenuBtn').textContent = school;
-    emits('school', selectedSch.value);
-}
+};
 
 </script>
 
