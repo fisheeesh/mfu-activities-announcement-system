@@ -115,16 +115,16 @@ const schLists = ref([
     'Mae-Fah-Luang University'
 ])
 
-const emits = defineEmits(['search'])
+const emits = defineEmits(['search', 'school'])
 
 const handleSearch = (event) => {
     query.value = event.target.value;
-    emits('search', query.value.trim(), selectedSch.value); // Emit both query and selectedSch
+    emits('search', query.value.trim());
 }
 const filteredSch = (school) => {
     selectedSch.value = school;
     document.getElementById('dropdownMenuBtn').textContent = school;
-    emits('search', query.value.trim(), selectedSch.value); // Emit selected school as well when it's changed
+    emits('school', selectedSch.value);
 }
 
 </script>

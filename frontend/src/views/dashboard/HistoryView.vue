@@ -3,7 +3,7 @@
         <!-- Page Title -->
         <!-- <h1 class="fs-4 fw-bold text-center mt-5">Activities History</h1> -->
         <!-- Ongoing Activities -->
-        <Navbar />
+        <Navbar @search="searchQuery = $event" @school="selectedSch = $event" />
         <section class="activities">
             <div class="container">
                 <div class="row">
@@ -19,13 +19,13 @@
                         <div v-else>
                             <CreateButton />
                             <!-- If there is no data, show this -->
-                            <div v-if="activities.length === 0" class="mt-8 fs-4 text-center fw-bolder">
+                            <div v-if="searchActivities.length === 0" class="mt-8 fs-4 text-center fw-bolder">
                                 No Activity(s) yet
                             </div>
                             <!-- If not, that means we got data -->
                             <div v-else>
                                 <!-- Activity List -->
-                                <div v-for="activity in activities" :key="activity.id">
+                                <div v-for="activity in searchActivities" :key="activity.id">
                                     <SingleActivity @updated="handleUpdate" :isEditable="true"
                                         @deleteActivity="handleDelete" :activity="activity">
                                     </SingleActivity>
@@ -43,14 +43,30 @@
 import Placeholder from '@/components/loaders/Placeholder.vue';
 import SingleActivity from '@/components/activity/SingleActivity.vue';
 import getActivities from '@/composables/controller/getActivities';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import CreateButton from '@/components/navbar/CreateButton.vue';
 import Navbar from '@/components/navbar/Navbar.vue';
 
 let { error, activities, load } = getActivities()
 let loading = ref(true)
 
+const searchQuery = ref('')
+const selectedSch = ref('')
+
 load().then(() => loading.value = false)
+
+const searchActivities = computed(() => {
+    if (!searchQuery.value && !selectedSch.value) {
+        return activities.value
+    }
+
+    let filteredBySchool = activities.value
+    if (selectedSch.value && selectedSch.value !== 'All') {
+        filteredBySchool = filteredBySchool.filter(activity => activity.school === selectedSch.value)
+    }
+
+    return filteredBySchool.filter(activity => activity.title.toLowerCase().includes(searchQuery.value.toLowerCase()))
+})
 
 let handleDelete = (id) => {
     activities.value = activities.value.filter(activity => activity.documentId !== id);

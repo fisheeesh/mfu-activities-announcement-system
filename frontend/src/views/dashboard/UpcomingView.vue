@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- Upcoming Activities -->
-        <Navbar @search="handleSearch" />
+        <Navbar @search="searchQuery = $event" @school="selectedSch = $event" />
         <section class="activities">
             <div class="container">
                 <div class="row">
@@ -19,8 +19,7 @@
                             <div v-else>
                                 <!-- <TransitionGroup tag="div" :css="false" @before-enter="onBeforeEnter" @enter="onEnter"
                                     @leave="onLeave"> -->
-                                <div v-for="(activity, index) in searchActivities" :key="index"
-                                    :data-index="index">
+                                <div v-for="(activity, index) in searchActivities" :key="index" :data-index="index">
                                     <SingleActivity @updated="handleUpdate" :isEditable="true"
                                         @deleteActivity="handleDelete" :activity="activity"></SingleActivity>
                                 </div>
@@ -40,7 +39,6 @@ import Placeholder from '@/components/loaders/Placeholder.vue';
 import SingleActivity from '@/components/activity/SingleActivity.vue';
 import CreateButton from '@/components/navbar/CreateButton.vue';
 import Navbar from '@/components/navbar/Navbar.vue';
-import gsap from 'gsap';
 import getActivities from '@/composables/controller/getActivities';
 
 let { error, activities, load } = getActivities();
@@ -49,28 +47,32 @@ let loading = ref(true);
 const searchQuery = ref('');
 const selectedSch = ref('');
 
-const handleSearch = (query, sch) => {
-    searchQuery.value = query;
-    selectedSch.value = sch;
-};
-
 load().then(() => loading.value = false);
 
 let filteredActivities = computed(() => activities.value.filter(activity => activity.type === 'upcoming'));
 
 let searchActivities = computed(() => {
-    // If there's no search query and no selected school, return all filtered activities
+    /**
+     * ! If there's no search query and no selected school, return all filtered activities
+     */
     if (!searchQuery.value && !selectedSch.value) {
         return filteredActivities.value;
     }
 
-    // Filter by school first if one is selected
+    /**
+     * ! If user selected a school, that is not 'All' and there's no search query, return filtered activities by school
+     * ! We set All as a default option for user to see all activities from all schools by ingoring 
+     * ! school property of activities
+     * * If user selected 'All', below condition will be false and filteredBySchool will be remain as filteredActivities
+     */
     let filteredBySchool = filteredActivities.value;
     if (selectedSch.value && selectedSch.value !== 'All') {
         filteredBySchool = filteredBySchool.filter(activity => activity.school === selectedSch.value);
     }
 
-    // Then filter by search query
+    /**
+     * ! Then filter activities from recent filteredBySchool by search query
+     */
     return filteredBySchool.filter(activity => activity.title.toLowerCase().includes(searchQuery.value.toLowerCase()));
 });
 

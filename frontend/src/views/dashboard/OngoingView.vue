@@ -3,7 +3,7 @@
         <!-- Page Title -->
         <!-- <h1 class="fs-4 fw-bold text-center mt-5">Ongoing Activities</h1> -->
         <!-- Ongoing Activities -->
-        <Navbar />
+        <Navbar @search="searchQuery = $event" @school="selectedSch = $event" />
         <section class="activities">
             <div class="container">
                 <div class="row">
@@ -19,12 +19,12 @@
                         <div v-else>
                             <CreateButton />
                             <!-- If there is no data, show this -->
-                            <div v-if="filteredActivities.length === 0" class="mt-8 fs-4 text-center fw-bolder">
+                            <div v-if="searchActivities.length === 0" class="mt-8 fs-4 text-center fw-bolder">
                                 No Activity(s) yet
                             </div>
                             <!-- If not, that means we got data -->
                             <div v-else>
-                                <div v-for="activity in filteredActivities" :key="activity.id">
+                                <div v-for="activity in searchActivities" :key="activity.id">
                                     <SingleActivity @updated="handleUpdate" :isEditable="true"
                                         @deleteActivity="handleDelete" :activity="activity">
                                     </SingleActivity>
@@ -49,9 +49,26 @@ import Navbar from '@/components/navbar/Navbar.vue';
 let { error, activities, load } = getActivities()
 let loading = ref(true)
 
+const searchQuery = ref('')
+const selectedSch = ref('')
+
 load().then(() => loading.value = false)
 
 let filteredActivities = computed(() => activities.value.filter(activity => activity.type === 'ongoing'))
+
+const searchActivities = computed(() => {
+    if(!searchQuery.value && !selectedSch.value) {
+        return filteredActivities.value
+    }
+
+    let filteredBySchool = filteredActivities.value
+    if(selectedSch.value && selectedSch.value !== 'All'){
+        filteredBySchool = filteredBySchool.filter(activity => activity.school === selectedSch.value)
+    }
+
+    return filteredBySchool.filter(activity => activity.title.toLowerCase().includes(searchQuery.value.toLowerCase()))
+})
+
 let handleDelete = (id) => {
     activities.value = activities.value.filter(activity => activity.documentId !== id);
 }
