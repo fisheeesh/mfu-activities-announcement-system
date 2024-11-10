@@ -3,7 +3,6 @@
         <h5 class="fw-bold ms-4 mt-4">Number of Activities by Schools</h5>
         <div class="card-body">
             <div class="card-content px-4">
-
                 <canvas id="myCharrt" class="chartCanvas"></canvas>
             </div>
         </div>
@@ -13,118 +12,107 @@
 <script setup>
 import getActivities from '@/composables/controller/getActivities';
 import { Chart } from 'chart.js/auto';
-import { onMounted } from 'vue';
+import { onMounted, watchEffect } from 'vue';
 
+// Load activities and check when the data is available
+const { error, activities, load } = getActivities();
+
+// Fetch activities data when the component is mounted
 onMounted(() => {
-    const ctx = document.getElementById('myCharrt');
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: [
-                'School of Agro Industry',
-                'School of Anti-aging Regenerative Medicine',
-                'School of Cosmetic Science', 'School of Dentistry',
-                'School of Health Science',
-                'School of Applied Digital Technology',
-                'School of Integrated Medicine',
-                'School of Laws',
-                'School of Liberal Arts',
-                'School of Management',
-                'School of Medicine',
-                'School of Nursing',
-                'School of Science',
-                'School of Sinology',
-                'School of Social Innovation'
-            ],
-            datasets: [{
-                data: [5.6, 9.4, 7.1, 4.3, 5.9, 7.9, 5.7, 9.3, 5.4, 7.6, 4, 6, 5.5, 4.9, 5.2],
-                backgroundColor: [
-                    '#FC9893',
-                    '#FC9893',
-                    '#FC9893',
-                    '#FC9893',
-                    '#FC9893',
-                    '#FC9893',
-                    '#FC9893',
-                    '#FC9893',
-                    '#FC9893',
-                    '#FC9893',
-                    '#FC9893',
-                    '#FC9893',
-                    '#FC9893',
-                    '#FC9893',
-                ],
-                borderRadius: 5,
-            }]
-        },
-        options: {
-            // Make the chart responsive
-            responsive: true,
-            // Allow chart to resize based on container size
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                }
+    load(); // Ensure that activities are fetched when the component mounts
+});
+
+// Use a watchEffect to react to the activities change
+watchEffect(() => {
+    if (activities.value.length > 0) {
+        // Map data to get the number of activities per school
+        const activityCounts = [
+            'School of Agro Industry',
+            'School of Anti-aging Regenerative Medicine',
+            'School of Cosmetic Science',
+            'School of Dentistry',
+            'School of Health Science',
+            'School of Applied Digital Technology',
+            'School of Integrated Medicine',
+            'School of Laws',
+            'School of Liberal Arts',
+            'School of Management',
+            'School of Medicine',
+            'School of Nursing',
+            'School of Science',
+            'School of Sinology',
+            'School of Social Innovation'
+        ];
+
+        // Initialize a count for each school (assuming activities.value is an array of activity objects)
+        const activityData = activityCounts.map(school => {
+            // Filter activities for each school and count them
+            const schoolActivities = activities.value.filter(activity => activity.school === school);
+            return schoolActivities.length;  // Number of activities for this school
+        });
+
+        // Proceed to render the chart
+        const ctx = document.getElementById('myCharrt');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: activityCounts,  // Use the school names as labels
+                datasets: [{
+                    data: activityData,  // Use the number of activities per school
+                    backgroundColor: '#FC9893',
+                    borderRadius: 5,
+                }]
             },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    grid: {
-                        // Show y-axis gridlines
-                        display: true
-                    },
-                    ticks: {
-                        // Display y-axis ticks
-                        display: true,
-                        // Set the step size for y-axis ticks (0, 2, 4, 6, 8, 10)
-                        stepSize: 2,
-                    },
-                    border: {
-                        // Remove the y-axis line
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
                         display: false
                     }
                 },
-                x: {
-                    grid: {
-                        // Hide x-axis gridlines
-                        display: false
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 10,  // Set a fixed maximum value for the y-axis
+                        stepSize: 2,  // Step size for y-axis ticks (0, 2, 4, 6, 8, 10)
+                        grid: {
+                            display: true
+                        },
+                        ticks: {
+                            display: true,
+                            stepSize: 2,  // Ensure y-axis increments by 2
+                            maxTicksLimit: 6  // Ensure there are no too many ticks
+                        },
+                        border: {
+                            display: false
+                        }
                     },
-                    ticks: {
-                        // Ensure x-axis ticks (labels) are displayed
-                        display: true,
-                        // Ensure all labels are shown without skipping
-                        autoSkip: false,
-                        // Rotate labels to 90 degrees 
-                        maxRotation: 90,
-                        // Set the minimum rotation to 90 degrees
-                        minRotation: 90
-                    },
-                    border: {
-                        // Remove the x-axis line
-                        display: false
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            display: true,
+                            autoSkip: false,
+                            maxRotation: 90,
+                            minRotation: 90
+                        },
+                        border: {
+                            display: false
+                        }
+                    }
+                },
+                elements: {
+                    bar: {
+                        categoryPercentage: 0.6,
+                        barPercentage: 0.7
                     }
                 }
             },
-            elements: {
-                bar: {
-                    // Control the space between bars (less than 1 for more space)
-                    categoryPercentage: 0.6,
-                    // Control the width of the bars (less than 1 for thinner bars)
-                    barPercentage: 0.7
-                }
-            }
-        },
-    });
-})
-
-
-const { error, activities, load } = getActivities();
-
-load();
-
-console.log('gg',activities.value.length)
-
+        });
+    }
+});
 </script>
 
 <style scoped>
