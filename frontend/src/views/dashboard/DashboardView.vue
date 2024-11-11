@@ -10,13 +10,13 @@
         <div class="col-12 d-flex justify-content-between align-items-center">
           <h4 class="fw-bold">Overview</h4>
           <div class="dropdown">
-            <button class="btn btn-light border border-1 dropdown-toggle" type="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
+            <button id="dropdownBtn" class="btn btn-light border border-1 dropdown-toggle" type="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
               2567/1
             </button>
             <ul class="dropdown-menu">
-              <li><span class="dropdown-item" href="#">2567/1</span></li>
-              <li><span class="dropdown-item" href="#">2567/2</span></li>
+              <li v-for="(semester, index) in semesters" :key="index"><span @click="filteredSemester(semester)"
+                  class="dropdown-item" href="#">{{ semester }}</span></li>
             </ul>
           </div>
         </div>
@@ -25,10 +25,15 @@
       <!-- Second Row -->
       <div class="row mt-1 mb-4">
         <div class="col-lg-2 mb-4">
-          <div class="vstack gap-2">
-            <Card to="/admin/upcoming" :total="upcoming.length" :color="'#ECECFD'" title="Upcoming" />
-            <Card to="/admin/ongoing" :total="ongoing.length" :color="'#E6FFD1'" title="Ongoing" />
-            <Card to="/admin/history" :total="completed.length" :color="'#FFEFEF'" title="Completed" />
+          <div v-if="currentSemester === '2567/1'" class="vstack gap-2">
+            <Card to="/admin/upcoming" :total="firstUpcoming.length" :color="'#ECECFD'" title="Upcoming" />
+            <Card to="/admin/ongoing" :total="firstOngoing.length" :color="'#E6FFD1'" title="Ongoing" />
+            <Card to="/admin/history" :total="firstCompleted.length" :color="'#FFEFEF'" title="Completed" />
+          </div>
+          <div v-else class="vstack gap-2">
+            <Card to="/admin/upcoming" :total="secondUpcoming.length" :color="'#ECECFD'" title="Upcoming" />
+            <Card to="/admin/ongoing" :total="secondOngoing.length" :color="'#E6FFD1'" title="Ongoing" />
+            <Card to="/admin/history" :total="secondCompleted.length" :color="'#FFEFEF'" title="Completed" />
           </div>
         </div>
         <div class="col-lg-4 mb-4">
@@ -42,7 +47,12 @@
       <!-- Third Row -->
       <div class="row">
         <div class="col-12">
-          <BarChartSch />
+          <div v-if="currentSemester === '2567/1'">
+            <BarChartSch :activities="firstSemester" />
+          </div>
+          <div v-else>
+            <BarChartSch :activities="secondSemester" />
+          </div>
         </div>
       </div>
     </div>
@@ -55,22 +65,47 @@ import BarChartSch from '@/components/dashboard/BarChartSch.vue';
 import Card from '@/components/dashboard/Card.vue';
 import DoughnutChart from '@/components/dashboard/DoughnutChart.vue';
 import getActivities from '@/composables/controller/getActivities';
-import { computed, onMounted, ref } from 'vue';
+import { isBefore, isAfter } from 'date-fns';
+import { computed, onMounted, ref, watchEffect } from 'vue';
 import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue';
 
 let loading = ref(true)
 
 const { error, activities, load } = getActivities()
 
-load()
+const firstSemester = ref([])
+const secondSemester = ref([])
+const currentSemester = ref('2567/1')
 
+const semesters = ref(['2567/1', '2567/2'])
 
 onMounted(() => {
-  setTimeout(() => loading.value = false, 1000)
+  setTimeout(() => loading.value = false, 1200)
+  load()
 })
 
+watchEffect(() => {
+  if (activities.value.length > 0) {
+    activities.value.forEach(activity => {
+      if (isAfter(new Date(activity.date), new Date("2024-08-05")) && isBefore(new Date(activity.date), new Date("2024-12-20"))) {
+        firstSemester.value.push(activity)
+      }
+      else secondSemester.value.push(activity)
+    })
+  }
+})
 
-const upcoming = computed(() => activities.value.filter(activity => activity.type === 'upcoming'))
-const ongoing = computed(() => activities.value.filter(activity => activity.type === 'ongoing'))
-const completed = computed(() => activities.value.filter(activity => activity.type === 'completed'))
+const filteredSemester = (semester) => {
+  currentSemester.value = semester
+  document.getElementById('dropdownBtn').textContent = semester;
+  console.log(currentSemester.value)
+}
+
+const firstUpcoming = computed(() => firstSemester.value.filter(activity => activity.type === 'upcoming'))
+const firstOngoing = computed(() => firstSemester.value.filter(activity => activity.type === 'ongoing'))
+const firstCompleted = computed(() => firstSemester.value.filter(activity => activity.type === 'completed'))
+
+const secondUpcoming = computed(() => secondSemester.value.filter(activity => activity.type === 'upcoming'))
+const secondOngoing = computed(() => secondSemester.value.filter(activity => activity.type === 'ongoing'))
+const secondCompleted = computed(() => secondSemester.value.filter(activity => activity.type === 'completed'))
 </script>
