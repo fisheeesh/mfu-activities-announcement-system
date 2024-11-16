@@ -1,5 +1,5 @@
 <template>
-    <router-link to="/admin/activity/create" class="btn btn-primary rounded-5 create-button fw-bold">
+    <router-link to="/admin/activity/create" class="btn btn-primary rounded-5 create-button fw-bold shadow-sm">
         <i class="fas fa-add"></i> Create
     </router-link>
 </template>

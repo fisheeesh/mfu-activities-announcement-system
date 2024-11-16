@@ -11,7 +11,7 @@
 
 <script setup>
 import { Chart } from 'chart.js/auto';
-import { onMounted, watchEffect, defineProps } from 'vue';
+import { onMounted, watch, defineProps, ref } from 'vue';
 
 const props = defineProps({
     activities: {
@@ -20,96 +20,107 @@ const props = defineProps({
     }
 })
 
-// Use a watchEffect to react to the activities change
-onMounted(() => {
-    watchEffect(() => {
-        if (props.activities.length > 0) {
-            const activityCounts = [
-                'School of Agro Industry',
-                'School of Anti-aging Regenerative Medicine',
-                'School of Cosmetic Science',
-                'School of Dentistry',
-                'School of Health Science',
-                'School of Applied Digital Technology',
-                'School of Integrated Medicine',
-                'School of Laws',
-                'School of Liberal Arts',
-                'School of Management',
-                'School of Medicine',
-                'School of Nursing',
-                'School of Science',
-                'School of Sinology',
-                'School of Social Innovation'
-            ];
+// Track the current chart instance
+let chartInstance = ref(null);
 
+const createChart = () => {
+    // Clear the previous chart instance if it exists
+    if (chartInstance.value) {
+        chartInstance.value.destroy();
+    }
 
-            const activityData = activityCounts.map(school => {
-                const schoolActivities = props.activities.filter(activity => activity.school === school);
-                return schoolActivities.length;
-            });
+    const activityCounts = [
+        'School of Agro Industry',
+        'School of Applied Digital Technology',
+        'School of Cosmetic Science',
+        'School of Dentistry',
+        'School of Health Science',
+        'School of Laws',
+        'School of Liberal Arts',
+        'School of Management',
+        'School of Medicine',
+        'School of Nursing',
+        'School of Sinology',
+        'School of Public Health',
+    ];
 
-            const ctx = document.getElementById('myCharrt');
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: activityCounts,
-                    datasets: [{
-                        data: activityData,
-                        backgroundColor: '#FC9893',
-                        borderRadius: 5,
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
+    const activityData = activityCounts.map(school => {
+        const schoolActivities = props.activities.filter(activity => activity.school === school);
+        return schoolActivities.length;
+    });
+
+    const ctx = document.getElementById('myCharrt');
+    chartInstance.value = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: activityCounts,
+            datasets: [{
+                data: activityData,
+                backgroundColor: '#FC9893',
+                borderRadius: 5,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 10,
+                    stepSize: 2,
+                    grid: {
+                        display: true
                     },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 10,  // Set a fixed maximum value for the y-axis
-                            stepSize: 2,  // Step size for y-axis ticks (0, 2, 4, 6, 8, 10)
-                            grid: {
-                                display: true
-                            },
-                            ticks: {
-                                display: true,
-                                stepSize: 2,  // Ensure y-axis increments by 2
-                                maxTicksLimit: 6  // Ensure there are no too many ticks
-                            },
-                            border: {
-                                display: false
-                            }
-                        },
-                        x: {
-                            grid: {
-                                display: false
-                            },
-                            ticks: {
-                                display: true,
-                                autoSkip: false,
-                                maxRotation: 90,
-                                minRotation: 90
-                            },
-                            border: {
-                                display: false
-                            }
-                        }
+                    ticks: {
+                        display: true,
+                        stepSize: 2,
+                        maxTicksLimit: 6
                     },
-                    elements: {
-                        bar: {
-                            categoryPercentage: 0.6,
-                            barPercentage: 0.7
-                        }
+                    border: {
+                        display: false
                     }
                 },
-            });
-        }
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        display: true,
+                        autoSkip: false,
+                        maxRotation: 90,
+                        minRotation: 90
+                    },
+                    border: {
+                        display: false
+                    }
+                }
+            },
+            elements: {
+                bar: {
+                    categoryPercentage: 0.6,
+                    barPercentage: 0.7
+                }
+            }
+        },
     });
-})
+}
+
+watch(() => props.activities, () => {
+    if (props.activities.length > 0) {
+        createChart();
+    }
+}, { immediate: true });
+
+onMounted(() => {
+    if (props.activities.length > 0) {
+        createChart();
+    }
+});
 </script>
 
 <style scoped>

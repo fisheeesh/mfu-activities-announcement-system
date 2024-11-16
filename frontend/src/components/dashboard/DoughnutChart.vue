@@ -17,15 +17,28 @@
 
 <script setup>
 import { Chart } from 'chart.js/auto';
-import { onMounted } from 'vue';
+import { onMounted, watch, ref } from 'vue';
 
-onMounted(() => {
-    const ctx = document.getElementById('myChart').getContext('2d');
-    const data = {
-        labels: ['University', 'School', 'Major', 'Free'],
+const props = defineProps({
+    activities: Array,
+});
+
+const chartData = ref(null);
+
+const prepareChartData = () => {
+    const labels = ['University', 'School', 'Major', 'Other'];
+    const data = [
+        props.activities.filter(activity => activity.category === 'University').length,
+        props.activities.filter(activity => activity.category === 'School').length,
+        props.activities.filter(activity => activity.category === 'Major').length,
+        props.activities.filter(activity => activity.category === 'Other').length,
+    ];
+
+    return {
+        labels: labels,
         datasets: [{
-            label: 'Percentage',
-            data: [11.2, 52.1, 13.9, 22.8],
+            label: 'Activity Type',
+            data: data,
             backgroundColor: [
                 '#A8C5D9',
                 '#1F1F20',
@@ -36,10 +49,15 @@ onMounted(() => {
             borderRadius: 5
         }]
     };
+};
+
+onMounted(() => {
+    const ctx = document.getElementById('myChart').getContext('2d');
+    chartData.value = prepareChartData();
 
     new Chart(ctx, {
         type: 'doughnut',
-        data: data,
+        data: chartData.value,
         options: {
             plugins: {
                 legend: {
@@ -63,17 +81,17 @@ onMounted(() => {
     // Custom Legends with Separate Labels and Percentages
     const labelsContainer = document.getElementById('chartLabels');
     const percentagesContainer = document.getElementById('chartPercentages');
-    const totalData = data.datasets[0].data.reduce((a, b) => a + b, 0);
+    const totalData = chartData.value.datasets[0].data.reduce((a, b) => a + b, 0);
 
-    data.labels.forEach((label, index) => {
-        const percentage = ((data.datasets[0].data[index] / totalData) * 100).toFixed(1);
+    chartData.value.labels.forEach((label, index) => {
+        const percentage = ((chartData.value.datasets[0].data[index] / totalData) * 100).toFixed(1);
 
         // Create label item
         const labelItem = document.createElement('li');
         labelItem.innerHTML = `
-            <i class="fas fa-circle me-2" style="color: ${data.datasets[0].backgroundColor[index]}; font-size: 8px;"></i>
-            ${label}
-        `;
+      <i class="fas fa-circle me-2" style="color: ${chartData.value.datasets[0].backgroundColor[index]}; font-size: 8px;"></i>
+      ${label}
+    `;
         labelsContainer.appendChild(labelItem);
 
         // Create percentage item
@@ -82,6 +100,12 @@ onMounted(() => {
         percentagesContainer.appendChild(percentageItem);
     });
 });
+
+// Watch for changes to activities and update chart
+watch(() => props.activities, () => {
+    chartData.value = prepareChartData();
+}, { immediate: true });
+
 </script>
 
 <style scoped>
@@ -142,6 +166,7 @@ onMounted(() => {
     .chart-percentages li {
         font-size: 6px !important;
     }
+
     .card-body {
         padding: 59.7px 10px !important;
     }

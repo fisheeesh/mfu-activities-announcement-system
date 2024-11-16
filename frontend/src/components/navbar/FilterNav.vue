@@ -2,7 +2,7 @@
     <section class="mt-6">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-7 col-lg-6 mx-auto mt-3 main-nav">
+                <div class="col-lg-10 offset-lg-1 col-md-8 offset-md-2 mt-3 main-nav">
                     <div class="filter-nav btn-group rounded-5 w-100" role="group" aria-label="Filter navigation">
                         <FilterNavLink class="flex-fill p-3 rounded-end-5" to="/admin/dashboard" icon="fas fa-columns">
                             Dashboard

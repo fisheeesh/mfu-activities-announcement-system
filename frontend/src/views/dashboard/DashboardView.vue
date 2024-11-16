@@ -15,7 +15,7 @@
               2567/1
             </button>
             <ul class="dropdown-menu">
-              <li v-for="(semester, index) in semesters" :key="index"><span @click="filteredSemester(semester)"
+              <li style="cursor: pointer;" v-for="(semester, index) in semesters" :key="index"><span @click="filteredSemester(semester)"
                   class="dropdown-item" href="#">{{ semester }}</span></li>
             </ul>
           </div>
@@ -37,10 +37,20 @@
           </div>
         </div>
         <div class="col-lg-4 mb-4">
-          <DoughnutChart />
+          <div v-if="currentSemester === '2567/1'">
+            <DoughnutChart :activities="firstSemester" />
+          </div>
+          <div v-else>
+            <DoughnutChart :activities="secondSemester" />
+          </div>
         </div>
         <div class="col-lg-6">
-          <BarChartCate />
+          <div v-if="currentSemester === '2567/1'">
+            <BarChartCate :activities="firstSemester" />
+          </div>
+          <div v-else>
+            <BarChartCate :activities="secondSemester" />
+          </div>
         </div>
       </div>
 
@@ -66,7 +76,7 @@ import Card from '@/components/dashboard/Card.vue';
 import DoughnutChart from '@/components/dashboard/DoughnutChart.vue';
 import getActivities from '@/composables/controller/getActivities';
 import { isBefore, isAfter } from 'date-fns';
-import { computed, onMounted, ref, watchEffect } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import ScaleLoader from 'vue-spinner/src/ScaleLoader.vue';
 
 let loading = ref(true)
@@ -84,15 +94,15 @@ onMounted(() => {
   load()
 })
 
-watchEffect(() => {
-  if (activities.value.length > 0) {
-    activities.value.forEach(activity => {
-      if (isAfter(new Date(activity.date), new Date("2024-08-05")) && isBefore(new Date(activity.date), new Date("2024-12-20"))) {
-        firstSemester.value.push(activity)
-      }
-      else secondSemester.value.push(activity)
-    })
-  }
+watch(activities, () => {
+  firstSemester.value = activities.value.filter(activity =>
+    isAfter(new Date(activity.date), new Date("2024-08-05")) &&
+    isBefore(new Date(activity.date), new Date("2024-12-20"))
+  )
+  secondSemester.value = activities.value.filter(activity =>
+    !(isAfter(new Date(activity.date), new Date("2024-08-05")) &&
+      isBefore(new Date(activity.date), new Date("2024-12-20")))
+  )
 })
 
 const filteredSemester = (semester) => {

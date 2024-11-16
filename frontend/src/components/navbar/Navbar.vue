@@ -19,8 +19,12 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li style="width: 180px;" class="nav-item dropdown me-3 w-md-100 w-sm-100">
-                        <span class="nav-link dropdown-toggle d-flex gap-4 justify-content-between align-items-center"
+                    <li class="nav-item d-flex align-items-center">
+                        <span class="nav-link" style="width: 100px; color: grey;">Hosted By</span>
+                    </li>
+                    <li class="nav-item dropdown me-3 w-md-100 w-sm-100">
+                        <span
+                            class="nav-link dropdown-toggle text-dark d-flex gap-4 justify-content-between align-items-center"
                             role="button" id="dropdownMenuBtn" data-bs-toggle="dropdown" aria-expanded="false">
                             All
                         </span>
@@ -30,25 +34,31 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item d-flex align-items-center">
+                        <span class="nav-link" style="width: 100px; color: grey;">Category</span>
+                    </li>
                     <li class="nav-item dropdown">
-                        <button class="nav-link dropdown-toggle me-3" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Category
-                        </button>
+                        <span
+                            class="nav-link dropdown-toggle text-dark d-flex gap-4 justify-content-between align-items-center"
+                            role="button" id="dropdownMenuBtN" data-bs-toggle="dropdown" aria-expanded="false">
+                            All
+                        </span>
                         <ul class="dropdown-menu">
-                            <li><span class="dropdown-item">Action</span></li>
-                            <li><span class="dropdown-item">Another action</span></li>
+                            <li v-for="(category, index) in categoryLists" :key="index">
+                                <span @click="filteredCategory(category)" class="dropdown-item">{{ category }}</span>
+                            </li>
                         </ul>
                     </li>
                 </ul>
-                <form class="d-flex w-25" role="search">
-                    <input @keydown.prevent.enter @input="handleSearch($event)" v-model="searchQuery"
+                <form class="d-flex ms-2" role="search">
+                    <input style="transition: border-color 0.4s ease-in-out;" @keydown.prevent.enter
+                        @input="handleSearch($event)" v-model="searchQuery"
                         class="form-control form-control-sm me-2 rounded-5 px-4" type="search" placeholder="Search..."
                         aria-label="Search">
                 </form>
 
                 <button data-bs-toggle="modal" data-bs-target="#logoutModal"
-                    class="logout-button btn btn-primary rounded-5 px-3 fw-bold mt-lg-0 mb-lg-0 mt-md-3 mb-md-2"
+                    class="logout-button btn btn-primary rounded-5 px-3 fw-bold mt-lg-0 mb-lg-0"
                     style="padding: 8px 0;">
                     <!-- <i class="icon fas fa-sign-out-alt"></i> -->
                     LogOut
@@ -84,26 +94,29 @@ const logout = async () => {
     await signOut()
 }
 
-
 const schLists = ref([
     'All',
     'School of Agro Industry',
-    'School of Anti-aging Regenerative Medicine',
+    'School of Applied Digital Technology',
     'School of Cosmetic Science', 'School of Dentistry',
     'School of Health Science',
-    'School of Applied Digital Technology',
-    'School of Integrated Medicine',
     'School of Laws',
     'School of Liberal Arts',
     'School of Management',
     'School of Medicine',
     'School of Nursing',
-    'School of Science',
     'School of Sinology',
-    'School of Social Innovation',
+    'School of Public Health',
     'Mae-Fah-Luang University'
 ])
 
+const categoryLists = ref([
+    'All',
+    'University',
+    'Major',
+    'School',
+    'Other'
+])
 
 const store = useActivityFilterStore();
 
@@ -113,8 +126,18 @@ const handleSearch = (event) => {
 
 const filteredSch = (school) => {
     store.selectedSch = school;
-    document.getElementById('dropdownMenuBtn').textContent = school;
+    if (school.length > 15) {
+        document.getElementById('dropdownMenuBtn').textContent = school.substring(0, 15) + '...';
+    }
+    else {
+        document.getElementById('dropdownMenuBtn').textContent = school;
+    }
 };
+
+const filteredCategory = (category) => {
+    console.log(category)
+    document.getElementById('dropdownMenuBtN').textContent = category;
+}
 
 </script>
 
@@ -123,9 +146,13 @@ const filteredSch = (school) => {
     cursor: pointer ! important;
 }
 
-@media (max-width: 599px) {
+@media (max-width: 1000px) {
     .nav-item {
         width: 100% !important;
+    }
+    .form-control{
+        width: 100% !important;
+        margin: 10px 0px !important;
     }
 }
 </style>

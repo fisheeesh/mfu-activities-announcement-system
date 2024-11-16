@@ -38,16 +38,12 @@
                                         class="form-select border-1 bg-light">
                                         <option value="" selected disabled>Choose School</option>
                                         <option value="School of Agro Industry">School of Agro Industry</option>
-                                        <option value="School of Anti-aging Regenerative Medicine">School of Anti-aging
-                                            Regenerative Medicine</option>
-                                        <option value="School of Cosmetic Science">School of Cosmetic Science</option>
-                                        <option value="School of Dentistry">School of Dentistry</option>
-                                        <option value="School of Health Science">School of Health Science</option>
                                         <option value="School of Applied Digital Technology">School of Applied Digital
                                             Technology
                                         </option>
-                                        <option value="School of Integrated Medicine">School of Integrated Medicine
-                                        </option>
+                                        <option value="School of Cosmetic Science">School of Cosmetic Science</option>
+                                        <option value="School of Dentistry">School of Dentistry</option>
+                                        <option value="School of Health Science">School of Health Science</option>
                                         <option value="School of Laws">School of Laws</option>
                                         <option value="School of Liberal Arts">School of Liberal Arts</option>
                                         <option value="School of Management">School of Management</option>
@@ -55,9 +51,8 @@
                                         <option value="School of Nursing">School of Nursing</option>
                                         <option value="School of Science">School of Science</option>
                                         <option value="School of Sinology">School of Sinology</option>
-                                        <option value="School of Social Innovation">School of Social Innovation</option>
+                                        <option value="School of Public Health">School of Public Health</option>
                                         <option value="Mae-Fah-Luang University">Mae-Fah-Luang University</option>
-                                        <option value="Other">Other...</option>
                                     </select>
                                     <div class="invalid-feedback">
                                         Please select a school.

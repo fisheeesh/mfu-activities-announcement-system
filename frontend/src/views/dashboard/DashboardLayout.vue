@@ -1,5 +1,5 @@
 <template>
-    <div class="dashboard-layout">
+    <div v-if="user" class="dashboard-layout">
         <!-- With Side Bar -->
         <!-- <Sidebar></Sidebar> -->
         <!-- <div class="main w-100 me-2 overflow-hidden" :style="{ 'margin-left': `${parseInt(sidebarWidth) + 10}px` }"> -->
@@ -32,7 +32,7 @@ const router = useRouter();
 const { user } = getUser();
 
 /**
- * ? As soon as user logout, we want to redirect to login as for the user experience
+ * ? As soon as user logout, we want to redirect to login page for the user experience
  * ? not let user to stay or show the dashboard page all the time, so we handled it by watcing user states
  */
 watch(user, () => {
