@@ -55,7 +55,7 @@ let filteredActivities = computed(() => activities.value.filter(activity => acti
 
 let searchActivities = computed(() => {
     /**
-     * ! If there's no search query and no selected school, return all filtered activities
+     * ! If there's no search query, no selected school and no selected category, return all filtered activities
      */
     if (!searchQuery.value && !selectedSch.value && !selectedCate.value) {
         return filteredActivities.value;

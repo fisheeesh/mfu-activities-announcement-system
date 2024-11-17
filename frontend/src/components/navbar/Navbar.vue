@@ -26,7 +26,8 @@
                         <span
                             class="nav-link dropdown-toggle text-dark d-flex gap-4 justify-content-between align-items-center"
                             role="button" id="dropdownMenuBtn" data-bs-toggle="dropdown" aria-expanded="false">
-                            All
+                            {{ store.selectedSch.length > 15 ? store.selectedSch.substring(0, 15) + '...' :
+                                store.selectedSch }}
                         </span>
                         <ul class="dropdown-menu">
                             <li @click="filteredSch(school)" v-for="(school, index) in schLists" :key="index">
@@ -41,7 +42,7 @@
                         <span
                             class="nav-link dropdown-toggle text-dark d-flex gap-4 justify-content-between align-items-center"
                             role="button" id="dropdownMenuBtN" data-bs-toggle="dropdown" aria-expanded="false">
-                            All
+                            {{ store.selectedCate }}
                         </span>
                         <ul class="dropdown-menu">
                             <li v-for="(category, index) in categoryLists" :key="index">
@@ -87,6 +88,7 @@
 import { ref } from 'vue';
 import useSignOut from '@/composables/auth/useSignOut';
 import { useActivityFilterStore } from '@/store/activityFilter';
+import { onBeforeRouteLeave } from 'vue-router';
 
 const { signOut } = useSignOut()
 
@@ -139,6 +141,17 @@ const filteredCategory = (category) => {
     document.getElementById('dropdownMenuBtN').textContent = category;
 }
 
+/**
+ * ! Reset the state data when user go to other route to avoid bug and enhance user experience
+ */
+onBeforeRouteLeave((to, from) => {
+    if (to.name !== from.name) {
+        store.searchQuery = '';
+        store.selectedSch = 'All';
+        store.selectedCate = 'All';
+    }
+});
+
 </script>
 
 <style scoped>
@@ -146,7 +159,8 @@ const filteredCategory = (category) => {
     cursor: pointer ! important;
 }
 
-#dropdownMenuBtn:hover , #dropdownMenuBtN:hover{
+#dropdownMenuBtn:hover,
+#dropdownMenuBtN:hover {
     color: #BA1E23 !important;
 }
 
@@ -154,7 +168,8 @@ const filteredCategory = (category) => {
     .nav-item {
         width: 100% !important;
     }
-    .form-control{
+
+    .form-control {
         width: 100% !important;
         margin: 10px 0px !important;
     }
