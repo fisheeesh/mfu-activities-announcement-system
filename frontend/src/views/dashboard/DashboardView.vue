@@ -26,14 +26,14 @@
       <div class="row mt-1 mb-4">
         <div class="col-lg-2 mb-4">
           <div v-if="currentSemester === '2567/1'" class="vstack gap-2">
-            <Card to="/admin/upcoming" :total="firstUpcoming.length" :color="'#ECECFD'" title="Upcoming" />
-            <Card to="/admin/ongoing" :total="firstOngoing.length" :color="'#E6FFD1'" title="Ongoing" />
-            <Card to="/admin/history" :total="firstCompleted.length" :color="'#FFEFEF'" title="Completed" />
+            <Card to="/admin/upcoming" :total="firstUpcoming.length" :color="'#DEDFFD'" title="Upcoming" />
+            <Card to="/admin/ongoing" :total="firstOngoing.length" :color="'#CCFFB5'" title="Ongoing" />
+            <Card to="/admin/history" :total="firstCompleted.length" :color="'#FFC5C2'" title="Completed" />
           </div>
           <div v-else class="vstack gap-2">
-            <Card to="/admin/upcoming" :total="secondUpcoming.length" :color="'#ECECFD'" title="Upcoming" />
-            <Card to="/admin/ongoing" :total="secondOngoing.length" :color="'#E6FFD1'" title="Ongoing" />
-            <Card to="/admin/history" :total="secondCompleted.length" :color="'#FFEFEF'" title="Completed" />
+            <Card to="/admin/upcoming" :total="secondUpcoming.length" :color="'#DEDFFD'" title="Upcoming" />
+            <Card to="/admin/ongoing" :total="secondOngoing.length" :color="'#CCFFB5'" title="Ongoing" />
+            <Card to="/admin/history" :total="secondCompleted.length" :color="'#FFC5C2'" title="Completed" />
           </div>
         </div>
         <div class="col-lg-4 mb-4">

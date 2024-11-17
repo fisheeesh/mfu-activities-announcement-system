@@ -135,7 +135,7 @@ const filteredSch = (school) => {
 };
 
 const filteredCategory = (category) => {
-    console.log(category)
+    store.selectedCate = category
     document.getElementById('dropdownMenuBtN').textContent = category;
 }
 
@@ -144,6 +144,10 @@ const filteredCategory = (category) => {
 <style scoped>
 .dropdown-item {
     cursor: pointer ! important;
+}
+
+#dropdownMenuBtn:hover , #dropdownMenuBtN:hover{
+    color: #BA1E23 !important;
 }
 
 @media (max-width: 1000px) {

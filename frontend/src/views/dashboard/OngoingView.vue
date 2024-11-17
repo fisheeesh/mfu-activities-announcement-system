@@ -53,6 +53,7 @@ const store = useActivityFilterStore();
 
 const searchQuery = computed(() => store.searchQuery);
 const selectedSch = computed(() => store.selectedSch);
+const selectedCate = computed(() => store.selectedCate)
 
 load().then(() => loading.value = false)
 
@@ -66,6 +67,16 @@ const searchActivities = computed(() => {
     let filteredBySchool = filteredActivities.value
     if (selectedSch.value && selectedSch.value !== 'All') {
         filteredBySchool = filteredBySchool.filter(activity => activity.school === selectedSch.value)
+        if (selectedCate.value && selectedCate.value !== 'All') {
+            filteredBySchool = filteredBySchool.filter(activity => activity.category === selectedCate.value)
+        }
+    }
+
+    if (selectedCate.value && selectedCate.value !== 'All') {
+        filteredBySchool = filteredBySchool.filter(activity => activity.category === selectedCate.value)
+        if (selectedSch.value && selectedSch.value !== 'All') {
+            filteredBySchool = filteredBySchool.filter(activity => activity.school === selectedSch.value)
+        }
     }
 
     return filteredBySchool.filter(activity => activity.title.toLowerCase().includes(searchQuery.value.toLowerCase()))

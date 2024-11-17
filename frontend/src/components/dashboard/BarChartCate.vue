@@ -40,7 +40,12 @@ const createChart = () => {
                     labels: categoryCounts,
                     datasets: [{
                         data: categoryData,
-                        backgroundColor: ['#95A4FB', '#BAECBD', '#FEC002', '#B1E2FE'],
+                        backgroundColor: [
+                            '#95A4FB',
+                            '#FC9893',
+                            '#A6E0FE',
+                            '#8EE193',
+                        ],
                         borderRadius: 5,
                         barThickness: 50
                     }]

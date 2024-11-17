@@ -27,12 +27,10 @@ const chartData = ref(null);
 
 const prepareChartData = () => {
     const labels = ['University', 'School', 'Major', 'Other'];
-    const data = [
-        props.activities.filter(activity => activity.category === 'University').length,
-        props.activities.filter(activity => activity.category === 'School').length,
-        props.activities.filter(activity => activity.category === 'Major').length,
-        props.activities.filter(activity => activity.category === 'Other').length,
-    ];
+    const data = labels.map(label => {
+        const count = props.activities.filter(activity => activity.category === label)
+        return count.length
+    })
 
     return {
         labels: labels,
@@ -40,10 +38,10 @@ const prepareChartData = () => {
             label: 'Activity Type',
             data: data,
             backgroundColor: [
-                '#A8C5D9',
-                '#1F1F20',
-                '#A1E2CB',
-                '#B1E2FE',
+                '#95A4FB',
+                '#FC9893',
+                '#A6E0FE',
+                '#8EE193',
             ],
             hoverOffset: 4,
             borderRadius: 5

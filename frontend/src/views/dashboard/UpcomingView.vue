@@ -47,6 +47,7 @@ const store = useActivityFilterStore();
 
 const searchQuery = computed(() => store.searchQuery);
 const selectedSch = computed(() => store.selectedSch);
+const selectedCate = computed(() => store.selectedCate)
 
 load().then(() => loading.value = false);
 
@@ -56,7 +57,7 @@ let searchActivities = computed(() => {
     /**
      * ! If there's no search query and no selected school, return all filtered activities
      */
-    if (!searchQuery.value && !selectedSch.value) {
+    if (!searchQuery.value && !selectedSch.value && !selectedCate.value) {
         return filteredActivities.value;
     }
 
@@ -69,6 +70,16 @@ let searchActivities = computed(() => {
     let filteredBySchool = filteredActivities.value;
     if (selectedSch.value && selectedSch.value !== 'All') {
         filteredBySchool = filteredBySchool.filter(activity => activity.school === selectedSch.value);
+        if(selectedCate.value && selectedCate.value !== 'All') {
+            filteredBySchool = filteredBySchool.filter(activity => activity.category === selectedCate.value);
+        }
+    }
+
+    if(selectedCate.value && selectedCate.value !== 'All'){
+        filteredBySchool = filteredBySchool.filter(activity => activity.category === selectedCate.value)
+        if(selectedSch.value && selectedSch.value !== 'All') {
+            filteredBySchool = filteredBySchool.filter(activity => activity.school === selectedSch.value)
+        }
     }
 
     /**
