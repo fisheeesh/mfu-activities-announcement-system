@@ -44,6 +44,7 @@ const createChart = () => {
         'School of Public Health',
     ];
 
+
     const activityData = activityCounts.map(school => {
         const schoolActivities = props.activities.filter(activity => activity.school === school);
         return schoolActivities.length;
