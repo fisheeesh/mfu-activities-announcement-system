@@ -6,7 +6,7 @@
         <div class="container-lg">
             <div class="row">
                 <div class="col-md-10 offset-md-1">
-                    <h1 class="fs-4 fw-bold text-center mt-5">Edit activity</h1>
+                    <h1 class="fs-4 fw-bold text-center mt-4">Edit activity</h1>
                     <form @submit.prevent="editActivity" novalidate>
                         <div class="row mt-4">
                             <div class="col-md-6">
@@ -31,31 +31,54 @@
                                         Please provide a description.
                                     </div>
                                 </div>
-                                <!-- School -->
+                                <!-- Host & Category -->
                                 <div class="mb-3">
-                                    <div class="form-label">Host <span class="text-danger">*</span></div>
-                                    <select required v-model="school" :class="{ 'is-invalid': showError('school') }"
-                                        class="form-select border-1 bg-light">
-                                        <option value="" selected disabled>Choose School</option>
-                                        <option value="School of Agro Industry">School of Agro Industry</option>
-                                        <option value="School of Applied Digital Technology">School of Applied Digital
-                                            Technology
-                                        </option>
-                                        <option value="School of Cosmetic Science">School of Cosmetic Science</option>
-                                        <option value="School of Dentistry">School of Dentistry</option>
-                                        <option value="School of Health Science">School of Health Science</option>
-                                        <option value="School of Laws">School of Laws</option>
-                                        <option value="School of Liberal Arts">School of Liberal Arts</option>
-                                        <option value="School of Management">School of Management</option>
-                                        <option value="School of Medicine">School of Medicine</option>
-                                        <option value="School of Nursing">School of Nursing</option>
-                                        <option value="School of Science">School of Science</option>
-                                        <option value="School of Sinology">School of Sinology</option>
-                                        <option value="School of Public Health">School of Public Health</option>
-                                        <option value="Mae-Fah-Luang University">Mae-Fah-Luang University</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        Please select a school.
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-label">Host <span class="text-danger">*</span></div>
+                                            <select v-model="school" :class="{ 'is-invalid': showError('school') }"
+                                                class="form-select border-1 bg-light" required>
+                                                <option value="" selected disabled>Choose School</option>
+                                                <option value="School of Agro Industry">School of Agro Industry</option>
+                                                <option value="School of Applied Digital Technology">School of Applied
+                                                    Digital
+                                                    Technology
+                                                </option>
+                                                <option value="School of Cosmetic Science">School of Cosmetic Science
+                                                </option>
+                                                <option value="School of Dentistry">School of Dentistry</option>
+                                                <option value="School of Health Science">School of Health Science
+                                                </option>
+                                                <option value="School of Laws">School of Laws</option>
+                                                <option value="School of Liberal Arts">School of Liberal Arts</option>
+                                                <option value="School of Management">School of Management</option>
+                                                <option value="School of Medicine">School of Medicine</option>
+                                                <option value="School of Nursing">School of Nursing</option>
+                                                <option value="School of Science">School of Science</option>
+                                                <option value="School of Sinology">School of Sinology</option>
+                                                <option value="School of Public Health">School of Public Health</option>
+                                                <option value="Mae-Fah-Luang University">Mae-Fah-Luang University
+                                                </option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Please select a school.
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-label">Category <span class="text-danger">*</span></div>
+                                            <select v-model="category" :class="{ 'is-invalid': showError('category') }"
+                                                class="form-select border-1 bg-light" required>
+                                                <option value="" selected disabled>Choose Category</option>
+                                                <option value="University">University</option>
+                                                <option value="Major">Major</option>
+                                                <option value="School">School</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Please select a category.
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- Time -->
@@ -138,6 +161,7 @@ let end_time = ref(null)
 let location = ref(null)
 let date = ref(null)
 let type = ref(null)
+let category = ref(null)
 
 const delay = ref(true)
 const isLoading = ref(false)
@@ -167,6 +191,7 @@ onMounted(async () => {
         location.value = res.data.data.location
         date.value = new Date(res.data.data.date);
         type.value = res.data.data.type
+        category.value = res.data.data.category
     }
     catch (err) {
         console.error('Error Fetcing Specific Activity', err)
@@ -184,7 +209,8 @@ let editActivity = async () => {
         location: true,
         date: true,
         start_time: true,
-        end_time: true
+        end_time: true,
+        category : true
     };
 
     if (title.value && description.value && school.value && start_time.value && end_time.value && location.value && date.value && isEndTimeValid.value) {
@@ -233,7 +259,8 @@ let editActivity = async () => {
                     date: formattedDate, // Date in YYYY-MM-DD
                     start_time: `${start_time.value}:00.000`, // Start time in HH:mm:ss.SSS
                     end_time: `${end_time.value}:00.000`, // End time in HH:mm:ss.SSS
-                    school: school.value
+                    school: school.value,
+                    category: category.value
                 }
             });
 

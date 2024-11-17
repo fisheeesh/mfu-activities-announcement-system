@@ -7,7 +7,7 @@
         <div v-else class="container-lg">
             <div class="row">
                 <div class="col-md-10 offset-md-1">
-                    <h1 class="fs-4 fw-bold text-center mt-5">Create a new activity</h1>
+                    <h1 class="fs-4 fw-bold text-center mt-4">Create a new activity</h1>
                     <form @submit.prevent="createActivity" novalidate>
                         <div class="row mt-4">
                             <div class="col-md-7">
@@ -32,31 +32,54 @@
                                         Please provide a description.
                                     </div>
                                 </div>
-                                <!-- School -->
+                                <!-- Host & Category -->
                                 <div class="mb-3">
-                                    <div class="form-label">Host <span class="text-danger">*</span></div>
-                                    <select v-model="school" :class="{ 'is-invalid': showError('school') }"
-                                        class="form-select border-1 bg-light" required>
-                                        <option value="" selected disabled>Choose School</option>
-                                        <option value="School of Agro Industry">School of Agro Industry</option>
-                                        <option value="School of Applied Digital Technology">School of Applied Digital
-                                            Technology
-                                        </option>
-                                        <option value="School of Cosmetic Science">School of Cosmetic Science</option>
-                                        <option value="School of Dentistry">School of Dentistry</option>
-                                        <option value="School of Health Science">School of Health Science</option>
-                                        <option value="School of Laws">School of Laws</option>
-                                        <option value="School of Liberal Arts">School of Liberal Arts</option>
-                                        <option value="School of Management">School of Management</option>
-                                        <option value="School of Medicine">School of Medicine</option>
-                                        <option value="School of Nursing">School of Nursing</option>
-                                        <option value="School of Science">School of Science</option>
-                                        <option value="School of Sinology">School of Sinology</option>
-                                        <option value="School of Public Health">School of Public Health</option>
-                                        <option value="Mae-Fah-Luang University">Mae-Fah-Luang University</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        Please select a school.
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-label">Host <span class="text-danger">*</span></div>
+                                            <select v-model="school" :class="{ 'is-invalid': showError('school') }"
+                                                class="form-select border-1 bg-light" required>
+                                                <option value="" selected disabled>Choose School</option>
+                                                <option value="School of Agro Industry">School of Agro Industry</option>
+                                                <option value="School of Applied Digital Technology">School of Applied
+                                                    Digital
+                                                    Technology
+                                                </option>
+                                                <option value="School of Cosmetic Science">School of Cosmetic Science
+                                                </option>
+                                                <option value="School of Dentistry">School of Dentistry</option>
+                                                <option value="School of Health Science">School of Health Science
+                                                </option>
+                                                <option value="School of Laws">School of Laws</option>
+                                                <option value="School of Liberal Arts">School of Liberal Arts</option>
+                                                <option value="School of Management">School of Management</option>
+                                                <option value="School of Medicine">School of Medicine</option>
+                                                <option value="School of Nursing">School of Nursing</option>
+                                                <option value="School of Science">School of Science</option>
+                                                <option value="School of Sinology">School of Sinology</option>
+                                                <option value="School of Public Health">School of Public Health</option>
+                                                <option value="Mae-Fah-Luang University">Mae-Fah-Luang University
+                                                </option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Please select a school.
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-label">Category <span class="text-danger">*</span></div>
+                                            <select v-model="category" :class="{ 'is-invalid': showError('category') }"
+                                                class="form-select border-1 bg-light" required>
+                                                <option value="" selected disabled>Choose Category</option>
+                                                <option value="University">University</option>
+                                                <option value="Major">Major</option>
+                                                <option value="School">School</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Please select a category.
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- Time -->
@@ -137,6 +160,7 @@ let location = ref(null);
 let date = ref(null);
 let start_time = ref(null);
 let end_time = ref(null);
+let category = ref(null)
 
 let delay = ref(true)
 const isLoading = ref(false)
@@ -182,7 +206,8 @@ let createActivity = async () => {
         location: true,
         date: true,
         start_time: true,
-        end_time: true
+        end_time: true,
+        category : true
     };
 
     // Check if all fields are filled and end time is valid
@@ -231,7 +256,8 @@ let createActivity = async () => {
                 date: formattedDate, // formatted date (YYYY-MM-DD)
                 start_time: formattedStartTime, // formatted start time (HH:mm:ss)
                 end_time: formattedEndTime, // formatted end time (HH:mm:ss)
-                school: school.value
+                school: school.value,
+                category: category.value
             }
 
             await axios.post('http://localhost:1337/api/activities', {
