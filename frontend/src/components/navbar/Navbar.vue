@@ -147,8 +147,8 @@ const filteredCategory = (category) => {
 onBeforeRouteLeave((to, from) => {
     if (to.name !== from.name) {
         store.searchQuery = '';
-        store.selectedSch = 'All';
-        store.selectedCate = 'All';
+        // store.selectedSch = 'All';
+        // store.selectedCate = 'All';
     }
 });
 
