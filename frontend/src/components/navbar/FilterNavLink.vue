@@ -57,7 +57,7 @@ export default {
         display: none;
     }
     .link .icon{
-        margin-left: 4px !important;
+        margin-left: 4.5px !important;
     }
 }
 </style>
