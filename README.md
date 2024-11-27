@@ -1,4 +1,4 @@
-# Centralized Activities Announcement System  
+# Centralized Activities Announcement System (Dashboard)
 
 ## Overview  
 The Centralized Activities Announcement System is designed to streamline activity and event management for MFU students, staff, and faculty. This platform provides a unified, secure, and user-friendly system to announce events, visualize data, and engage participants in real time.  
