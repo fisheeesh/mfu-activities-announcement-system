@@ -8,26 +8,45 @@ The Centralized Activities Announcement System is designed to streamline activit
 ## Features  
 
 ### Web Application  
-![User Interface](frontend/public/screen.png) 
-- **Single Page Application (SPA):** Seamless navigation with no unnecessary loading.  
+![User Interface](frontend/public/screen.png)
+
+- **Single Page Application (SPA):** Seamless navigation with no unnecessary loading.
 - **Login Security:**  
   - Users log in with correct credentials.  
   - Failed attempts invoke increasing timers (1 min, 3 min, 5 min, and 30 min) with no bypass options.  
-  - Route guards prevent unauthorized URL-based access.  
-- **Navbar:**  
-  - Dropdowns for filtering by school and category.  
-  - Search functionality for quick activity discovery.  
+  - Route guards prevent unauthorized URL-based access.
+- **Navbar State Management with Pinia:**  
+  - The **Navbar** leverages **Pinia** for state management, ensuring smooth handling of user interactions such as selecting a school, category, or inputting a search query.  
+  - **Pinia** enables real-time updates by storing the state of the filters (school and category) and the search query, allowing the application to dynamically adjust content based on user selection.  
+  - This state is shared across components, ensuring consistency and immediate updates, making the user experience seamless and responsive.
+
 - **Dashboard Visualizations:**  
-  - Doughnut Chart: Percentage of activities by category.  
-  - Bar Charts: Number of activities by category and school.  
+  - **Doughnut Chart:** Percentage of activities by category.  
+  - **Bar Charts:** Number of activities by category and school.  
   - Filters update charts dynamically in real time.  
 - **Activity Management:**  
   - Create, edit, and delete activities with real-time updates.  
   - Role-based restrictions for activity editing.  
 - **Real-Time Updates:**  
   - Activities automatically move between **Upcoming**, **Ongoing**, and **History** tabs based on their timings.  
-  - Persistent user login prevents unnecessary logins unless manually logged out or inactive.  
+  - Persistent user login prevents unnecessary logins unless manually logged out or inactive.
+ 
+## Tech Stack  
 
+### Frontend  
+- **Vue.js**: Framework for building the web interface.  
+- **Bootstrap & Sass**: Styling and responsive design.  
+- **Pinia**: State management.  
+- **Vue-Toastification**: Notifications and alerts.  
+- **FontAwesome**: Icons for UI elements.  
+
+### Backend  
+- **Strapi**: Headless CMS for API management.  
+
+### Authentication  
+- **Firebase Authentication**: Secure login and user management.  
+
+---
 ## Supporting Documents  
 
 ### 1. Business Model Canvas (BMC)  
