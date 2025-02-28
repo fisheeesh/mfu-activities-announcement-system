@@ -4,6 +4,19 @@
 The Centralized Activities Announcement System is designed to streamline activity and event management for MFU students, staff, and faculty. This platform provides a unified, secure, and user-friendly system to announce events, visualize data, and engage participants in real time.  
 
 ---
+## Table of Contents  
+- [Features](#features)  
+  - [Web Application](#web-application)  
+- [Tech Stack](#tech-stack)  
+  - [Frontend](#frontend)  
+  - [Backend](#backend)  
+  - [Authentication](#authentication)  
+- [Supporting Documents](#supporting-documents)  
+  - [Business Model Canvas (BMC)](#1-business-model-canvas-bmc)  
+  - [UI/UX Design](#2-uiux-design)  
+  - [Architecture Design](#3-architecture-design)  
+- [Installation and Setup](#installation-and-setup)  
+- [License](#license) 
 
 ## Features  
 
@@ -97,3 +110,11 @@ More Information : https://drive.google.com/drive/folders/1jAG8-DQukddiW7rFqlANd
    ```bash
    cd backend
    npm run develop
+
+## License
+
+This project is licensed under the **MIT License**.  
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
+
+You can view the full license [here](LICENSE).
